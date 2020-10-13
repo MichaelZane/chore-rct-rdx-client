@@ -6,8 +6,8 @@ const initialState = {
   error: ''
 };
 
-export const getChoresReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const getChoresReducer = (state = initialState, action) => {
+  switch (action.type) {
     case FETCH_CHORES_START:
       return {
         ...state,
@@ -18,12 +18,12 @@ export const getChoresReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         fetchingChoresList: false,
-        choresList: payload
+        choresList: action.payload
       };
     case FETCH_CHORES_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
 
     default:

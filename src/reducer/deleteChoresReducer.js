@@ -1,4 +1,6 @@
-import {DELETE_CHORES_START, DELETE_CHORES_SUCCESS} from '../action';
+import {
+  DELETE_CHORES_START, DELETE_CHORES_SUCCESS
+} from '../action';
 
 const initialState = {
   choresList: [],
@@ -6,8 +8,8 @@ const initialState = {
   error: ''
 };
 
-export const deleteChoresReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const deleteChoresReducer = (state = initialState, action) => {
+  switch (action.type) {
     case DELETE_CHORES_START:
       return {
         ...state,
@@ -17,7 +19,7 @@ export const deleteChoresReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         deletingChore: false,
-        choresList: state.choresList.filter(chore => chore.id !== payload)
+        choresList: state.choresList.filter(chore => chore.id !== action.payload)
       };
 
     default:

@@ -1,15 +1,22 @@
-import axios from 'axios';
-import {CHILD_LOGIN_START, CHILD_LOGIN_SUCCESS} from '.';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import {
+  CHILD_LOGIN_START, 
+  CHILD_LOGIN_SUCCESS,
+  CHILD_LOGIN_ERROR
+} from '.';
 
-const childLogin = user => dispatch => {
+const childLogin = child => async dispatch => {
   dispatch({type: CHILD_LOGIN_START});
-  return axios
-    .post('//https://chore-tracker1.herokuapp.com/api/auth/login/child')
+  await axiosWithAuth()
+    .post('/api/auth/login/child', child)
     .then(res => {
-      console.log(res);
-      dispatch({type: CHILD_LOGIN_SUCCESS, payload: res.data});
+      localStorage.setItem('token', res.data.user.token)
+      localStorage.setItem('userId', res.data.user.id)
+      dispatch({ type: CHILD_LOGIN_SUCCESS, payload: res.data.user });
     })
-    .catch();
+    .catch(err => {
+      dispatch({ type: CHILD_LOGIN_ERROR, payload: err.res });
+    });
 };
 
 export default childLogin; 

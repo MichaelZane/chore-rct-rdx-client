@@ -1,26 +1,48 @@
-import axios from 'axios';
 
-import {LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR} from './index';
+import { 
+  LOGIN_START, 
+  LOGIN_SUCCESS, 
+  LOGIN_ERROR, 
+  USER_SIGNIN_GOOGLE_SUCCESS, 
+  USER_SIGNIN_GOOGLE 
+} from './index';
+
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const login = (user, history) => dispatch => {
-  console.log('I am coming from action!!');
-  dispatch({type: LOGIN_START});
-  return axiosWithAuth()
-    .post('/api/auth/login', user)
+const login = form => async (dispatch) => {
+  dispatch({type: LOGIN_START})
+  await axiosWithAuth()
+    .post('/api/auth/login', form)
     .then(res => {
-      // console.log('I am ')
-      // console.log('I am token: ', res.data.token);
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('id', res.data.id);
 
-      // localStorage.getItem('token');
-      dispatch({type: LOGIN_SUCCESS, payload: res.data});
-      history.push('/home');
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userId', res.data.user_id)
+      
+
     })
     .catch(err => {
-      dispatch({type: 'LOGIN_ERROR', payload: err});
+      dispatch({type: LOGIN_ERROR, payload: err.res });
     });
 };
 
 export default login;
+
+export const signUpGoogle = (signUpData) => async   (dispatch) => {
+  dispatch({ 
+    type: USER_SIGNIN_GOOGLE, 
+    payload: signUpData 
+  })
+  await axiosWithAuth()
+    .post("/api/oath/login", {
+      token: localStorage.getItem("token")
+    })
+    .then((response) => {
+      localStorage.setItem("token", response.data.token)
+
+      return dispatch({
+        type: USER_SIGNIN_GOOGLE_SUCCESS,
+        payload: response.data
+      })
+    }) 
+}

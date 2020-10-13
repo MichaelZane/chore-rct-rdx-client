@@ -64,14 +64,11 @@ const Register = props => {
 
   const changeHandler = event => {
     setState({ ...state, [event.target.name]: event.target.value });
-    // console.log(event.target.name, event.target.value);
+
   };
 
   const submitHandler = event => {
-    console.log(state);
     event.preventDefault();
-
-    console.log("I have been submitted!!");
 
     props.register(state);
 

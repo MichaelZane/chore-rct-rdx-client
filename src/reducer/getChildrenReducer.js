@@ -3,11 +3,12 @@ import {GET_CHILDREN_ERROR, GET_CHILDREN_START, GET_CHILDREN_SUCCESS} from '../a
 const initialState = {
   fetchingChildren: false,
   error: '',
-  children: []
+  children: [],
+  id: ""
 };
 
-export const getChildrenReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const getChildrenReducer = (state = initialState, action) => {
+  switch (action.type) {
     case GET_CHILDREN_START:
       return {
         ...state,
@@ -18,12 +19,12 @@ export const getChildrenReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         fetchingChildren: false,
-        children: payload
+        children: action.payload
       };
     case GET_CHILDREN_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
 
     default:

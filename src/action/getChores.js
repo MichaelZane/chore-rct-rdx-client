@@ -1,10 +1,10 @@
 import {FETCH_CHORES_START, FETCH_CHORES_SUCCESS, FETCH_CHORES_ERROR} from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChores = id => dispatch => {
+const getChores = id => async dispatch => {
   dispatch({type: FETCH_CHORES_START});
 
-  return axiosWithAuth()
+  await axiosWithAuth()
     .get(`/api/auth/child/${id}`)
     .then(res => {
       console.log(res.data.chore);

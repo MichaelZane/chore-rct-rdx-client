@@ -23,6 +23,6 @@ const mapStateToProps = ({getChoresReducer}) => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   {getChores}
 )(ChoreList);

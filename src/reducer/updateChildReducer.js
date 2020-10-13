@@ -1,4 +1,6 @@
-import {UPDATE_CHILD_START, UPDATE_CHILD_SUCCESS, UPDATE_CHILD_ERROR} from '../action';
+import {
+  UPDATE_CHILD_START, UPDATE_CHILD_SUCCESS, UPDATE_CHILD_ERROR
+} from '../action';
 
 const initialState = {
   child: {},
@@ -6,8 +8,8 @@ const initialState = {
   error: ''
 };
 
-export const updateChildReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const updateChildReducer = (state = initialState, action) => {
+  switch (action.type) {
     case UPDATE_CHILD_START:
       return {
         ...state,
@@ -18,12 +20,12 @@ export const updateChildReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         updatingChild: false,
-        child: payload
+        child: action.payload
       };
     case UPDATE_CHILD_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
 
     default:

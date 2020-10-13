@@ -1,19 +1,20 @@
-import {GET_CHILDREN_START, GET_CHILDREN_ERROR, GET_CHILDREN_SUCCESS} from '.';
+import {
+  GET_CHILDREN_START, GET_CHILDREN_ERROR, GET_CHILDREN_SUCCESS
+} from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChildren = id => dispatch => {
-  console.log('This is from actions: ', id);
+const getChildren = id => async dispatch => {
+
   dispatch({type: GET_CHILDREN_START});
 
-  return axiosWithAuth()
-    .get(`/api/auth/parent/${id}`)
+  await axiosWithAuth()
+    .get(`/api/auth/parent/${localStorage.getItem('userId')}`, id)
     .then(res => {
-      console.log(res);
-      dispatch({type: GET_CHILDREN_SUCCESS, payload: res.data.child});
+      dispatch({ type: GET_CHILDREN_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err);
-      dispatch({type: GET_CHILDREN_ERROR, payload: err});
+
+      dispatch({type: GET_CHILDREN_ERROR, payload: err.res });
     });
 };
 

@@ -1,4 +1,8 @@
-import {ADD_CHILD_START, ADD_CHILD_SUCCESS, ADD_CHILD_ERROR} from '../action';
+import {
+  ADD_CHILD_START, 
+  ADD_CHILD_SUCCESS, 
+  ADD_CHILD_ERROR
+} from '../action';
 
 const initialState = {
   children: [],
@@ -6,8 +10,8 @@ const initialState = {
   error: ''
 };
 
-export const addChildReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const addChildReducer = (state = initialState, action) => {
+  switch (action.type) {
     case ADD_CHILD_START:
       return {
         ...state,
@@ -19,13 +23,13 @@ export const addChildReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         fetchingChildren: false,
-        children: payload
+        children: action.payload
       };
 
     case ADD_CHILD_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
 
     default:

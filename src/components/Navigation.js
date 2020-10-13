@@ -31,7 +31,9 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link style={{ textDecoration: "none", color: "black" }}>
+        <Link 
+          to="/home"
+          style={{ textDecoration: "none", color: "black" }}>
           <MenuItem onClick={handleClose}>Home</MenuItem>
         </Link>
         <MenuItem onClick={handleClose}>About</MenuItem>

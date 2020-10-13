@@ -49,24 +49,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ChildLogin = props => {
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     username: "",
     password: ""
-  });
+  })
 
   const changeHandler = event => {
-    setState({ ...state, [event.target.name]: event.target.value });
-    // console.log(event.target.name, event.target.value);
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   const submitHandler = event => {
     event.preventDefault();
 
-    props.childLogin(state);
+    props.childLogin(form);
 
-    console.log("I have been submitted!!");
+    props.history.push("/home")
 
-    setState({
+    setForm({
       username: "",
       password: ""
     });
@@ -86,8 +85,10 @@ const ChildLogin = props => {
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
+            onChange={changeHandler}
             variant="outlined"
             margin="normal"
+            value={form.username}
             required
             fullWidth
             id="username"
@@ -99,6 +100,8 @@ const ChildLogin = props => {
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={changeHandler}
+            value={form.password}
             required
             fullWidth
             name="password"
@@ -137,8 +140,10 @@ const ChildLogin = props => {
   );
 };
 
-// const mapStateToProps = state => {
-//   return {};
-// };
+const mapStateToProps = state => {
+  return {
+    userData: state.userData,
+  };
+};
 
-export default ChildLogin;
+export default connect(mapStateToProps, {childLogin})(ChildLogin);

@@ -6,8 +6,8 @@ const initialState = {
   error: ''
 };
 
-export const childLoginReducer = (state = initialState, {type, payload}) => {
-  switch (type) {
+export const childLoginReducer = (state = initialState, action) => {
+  switch (action.type) {
     case CHILD_LOGIN_START:
       return {
         ...state,
@@ -20,13 +20,14 @@ export const childLoginReducer = (state = initialState, {type, payload}) => {
         ...state,
         isLogin: false,
         error: null,
-        user: payload
+        user: action.payload,
+        chores: action.payload
       };
 
     case CHILD_LOGIN_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
 
     default:

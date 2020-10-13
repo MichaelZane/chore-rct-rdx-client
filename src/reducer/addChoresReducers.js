@@ -6,8 +6,8 @@ const initialStates = {
   error: ''
 };
 
-export const addChoresReducers = (state = initialStates, {type, payload}) => {
-  switch (type) {
+export const addChoresReducers = (state = initialStates, action) => {
+  switch (action.type) {
     case ADD_CHORES_START:
       return {
         ...state,
@@ -18,12 +18,12 @@ export const addChoresReducers = (state = initialStates, {type, payload}) => {
       return {
         ...state,
         addingChores: false,
-        choresList: payload
+        choresList: action.payload
       };
     case ADD_CHORES_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload
       };
   }
 };

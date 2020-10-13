@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUpChild = props => {
   const [state, setState] = useState({
-    parent_id: props.id,
+    parent_id: '',
     fstname: '',
     lstname: '',
     username: '',
@@ -65,24 +65,23 @@ const SignUpChild = props => {
 
   const changeHandler = event => {
     setState({...state, [event.target.name]: event.target.value});
-    // console.log([event.target.name], event.target.value);
+
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
-
-    console.log('I have been submitted!!', props.id);
-
+  const submitHandler = e => {
+    e.preventDefault();
     props.addChild(state);
+    props.history.push('/home');
 
     setState({
       fstname: '',
       lstname: '',
       username: '',
-      password: ''
+      password: '',
+      parent_id: ""
     });
 
-    props.history.push('/home');
+    
   };
 
   const classes = useStyles();
@@ -181,14 +180,14 @@ const SignUpChild = props => {
   );
 };
 
-const mapStateToProps = ({loginReducer}) => {
-  console.log(loginReducer.userID);
-  return {
-    id: loginReducer.userID
-  };
-};
+// const mapStateToProps = ({loginReducer}) => {
+//   console.log(loginReducer.userID);
+//   return {
+//     id: loginReducer.userID
+//   };
+// };
 
 export default connect(
-  mapStateToProps,
+  null,
   {addChild}
 )(SignUpChild);

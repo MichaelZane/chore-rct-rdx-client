@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+// Redux
 import { connect } from "react-redux";
+// Router
 import { Link } from "react-router-dom";
+// Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,7 +18,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import login from "../action/login";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import { signUpGoogle } from "../action/login"
+import GoogleLogin, { GoogleLogout } from "react-google-login"
 
 // Styling Starts Here
 
@@ -52,102 +56,120 @@ const useStyles = makeStyles(theme => ({
 /* LogIn */
 
 const Login = props => {
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     username: "",
     password: ""
   });
 
   const changeHandler = event => {
-    setState({ ...state, [event.target.name]: event.target.value });
-    // console.log(event.target.name, event.target.value);
+    setForm({ ...form, [event.target.name]: event.target.value });
+
   };
 
-  const submitHandler = () => {
-    axiosWithAuth()
-      .post("api/")
+  const submitHandler = (e, res) => {
+    e.preventDefault()
+    props.login(form)
+    props.history.push("/home")
+    setForm({ username: "", password: "" })
     
-    
-
-    props.login(state, props.history);
-    // props.history.push('/home');
-
-    console.log("I have been submitted!!");
-
-    setState({
-      username: "",
-      password: ""
-    });
   };
 
   const classes = useStyles();
 
+  /* OATH GOOGLE */
+
+  const responseGoogle = res => {
+    const { tokenId } = res
+    localStorage.setItem("token", tokenId)
+    localStorage.setItem("image", res.profileObj.imageUrl)
+    props.signUpGoogle()
+    props.history.push("/")
+  }
+
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
-          <TextField
-            variant="outlined"
-            onChange={changeHandler}
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            onChange={changeHandler}
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/">Forgot password?</Link>
+
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} onSubmit={submitHandler} noValidate>
+            <TextField
+              variant="outlined"
+              onChange={changeHandler}
+              margin="normal"
+              value={form.username}
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              onChange={changeHandler}
+              margin="normal"
+              required
+              value={form.password}
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link to="/">Forgot password?</Link>
+              </Grid>
+              <Grid item>
+                <Link to="/">{"Don't have an account? Sign Up"}</Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link to="/">{"Don't have an account? Sign Up"}</Link>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </div>
+        <div style={{ display: localStorage.token ? "none" : "block" }}>
+        <GoogleLogin
+          className="google-btn"
+          clientId={process.env.REACT_APP_CLIENT_ID}
+          buttonText="Log In with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          />
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+      <div>
+        <p>or</p>
+      </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
     </Container>
   );
 };
 
-// const mapStateToProps = state => {
-//   return {};
-// };
+const mapStateToProps = state => {
+  return {
+    userData: state.userData,
+  };
+};
 
-export default connect(null, { login })(Login);
+export default connect(mapStateToProps, { login, signUpGoogle })(Login);

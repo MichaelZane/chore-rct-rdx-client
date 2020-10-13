@@ -1,9 +1,13 @@
-import {REGISTER_START, REGISTER_SUCCESS} from '../action/index.js';
+import { 
+  REGISTER_START, 
+  REGISTER_SUCCESS, 
+  REGISTER_ERROR 
+} from '../action/index.js';
 
 const initialState = {
-  users: {},
+  user: {},
   isRegistering: false,
-  error: ''
+  error: null
 };
 
 export const registerReducer = (state = initialState, action) => {
@@ -12,15 +16,22 @@ export const registerReducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistering: true,
-        error: null
+        
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         isRegistering: false,
-        error: null,
         user: action.payload
       };
+
+    case REGISTER_ERROR:
+      return {
+        ...state,
+        isRegistering: false,
+        error: action.payload
+      }
+
     default:
       return state;
   }

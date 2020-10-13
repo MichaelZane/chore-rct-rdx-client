@@ -1,18 +1,35 @@
-import React from 'react';
-import {useParams} from 'react-router-dom';
-import children from './dummydata';
+import React, { useEffect } from 'react';
+import addChild from '../action/addChild'
+import { connect } from 'react-redux'
 
-function Child({item}) {
-  // const { childID } = useParams();
 
-  // const childInfo = children.find(child => Number(childID) === child.id);
+
+function Child(props) {
+  
+  useEffect(() => {
+    props.addChild()
+  }, [])
 
   return (
     <div>
-      <h2>{item.fstname}</h2>
-      <h2>{item.lstname}</h2>
+      <h2>{}</h2>
+      <h2></h2>
     </div>
   );
 }
 
-export default Child;
+const mapDispatchToProps = { 
+   
+  addChild 
+}
+
+export default connect(
+  null, mapDispatchToProps,
+
+)(Child);
+
+/* fstname,
+      lstname, 
+      username,
+      password,
+      parent_id */

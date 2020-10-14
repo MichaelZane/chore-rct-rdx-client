@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
-
+import Loader from 'react-loader-spinner'
 import login from '../action/login';
 import Child from './Child';
 
-const ChildList = (props) => {
+const ChildList = ( props ) => {
 
-  const [child, setChild] = useState()
+  
   
   const exit = () => {
     props.history.goBack()
   }
 
   useEffect(() => {
-    props.getChildren(setChild)
-  }, [])
+    props.getChildren()
+  }, [getChildren])
 
   const deleteChild = id => {
     props.deleteChild(id);
   };
-  console.log(getChildren())
+  console.log("xxxxxxxxxxxxx",props.children)
+  
   return (
-    <div>
-      <h3>These are your kids </h3>
-      <div className='children-list'>
-
-        <Child />
+    <div className="children-wrap">     
+      <div>
+        <h3>These are your kids </h3>
+        <div>
+          <p> {console.log("jsx >>>>>>>>>>",props.children)} </p>
+        </div>
+               
           <button onClick={() => deleteChild()}>delete</button>
-       
+        
         <Link to={`/updateChild`}>
           <button>Update</button>
         </Link>
@@ -45,9 +48,9 @@ const ChildList = (props) => {
   );
 };
 
-const mapStateToProps = state => { 
+const mapStateToProps = (state) => { 
   return {
-    child: state.child
+    children: state.children
   } 
    
 }

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR } from './index';
+import { 
+  REGISTER_START, 
+  REGISTER_SUCCESS, 
+  REGISTER_ERROR 
+} from './index';
 
 const register = user => async dispatch => {
   dispatch({type: REGISTER_START});

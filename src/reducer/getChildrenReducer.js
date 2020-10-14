@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export const getChildrenReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case GET_CHILDREN_START:
       return {
@@ -21,6 +22,7 @@ export const getChildrenReducer = (state = initialState, action) => {
         fetchingChildren: false,
         children: action.payload
       };
+      
     case GET_CHILDREN_ERROR:
       return {
         ...state,

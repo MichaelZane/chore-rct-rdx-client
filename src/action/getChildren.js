@@ -1,10 +1,12 @@
 import {
-  GET_CHILDREN_START, GET_CHILDREN_ERROR, GET_CHILDREN_SUCCESS
+  GET_CHILDREN_START, 
+  GET_CHILDREN_ERROR, 
+  GET_CHILDREN_SUCCESS
 } from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const getChildren = id => async dispatch => {
-
+  
   dispatch({type: GET_CHILDREN_START});
 
   await axiosWithAuth()

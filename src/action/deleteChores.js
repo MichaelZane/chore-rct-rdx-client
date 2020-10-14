@@ -1,4 +1,8 @@
-import {DELETE_CHORES_START, DELETE_CHORES_SUCCESS, DELETE_CHORES_ERROR} from '.';
+import {
+  DELETE_CHORES_START, 
+  DELETE_CHORES_SUCCESS, 
+  DELETE_CHORES_ERROR
+} from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const deleteChores = id => async dispatch => {

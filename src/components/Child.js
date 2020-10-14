@@ -4,29 +4,20 @@ import { connect } from 'react-redux'
 
 
 
-function Child(props) {
+export default function Child(props) {
   
-  useEffect(() => {
-    props.addChild()
-  }, [])
+ 
 
   return (
     <div>
-      <h2>{}</h2>
-      <h2></h2>
-    </div>
+      {/* <Img src={props.url} alt={`photo of: ${props.name}`} /> */}
+          <p>Name: {props.fstname} </p>
+          <p>Username: {props.username} </p>
+    </div>   
   );
 }
 
-const mapDispatchToProps = { 
-   
-  addChild 
-}
 
-export default connect(
-  null, mapDispatchToProps,
-
-)(Child);
 
 /* fstname,
       lstname, 

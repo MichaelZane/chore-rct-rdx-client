@@ -1,4 +1,8 @@
-import {FETCH_CHORES_START, FETCH_CHORES_SUCCESS, FETCH_CHORES_ERROR} from '.';
+import {
+  FETCH_CHORES_START, 
+  FETCH_CHORES_SUCCESS, 
+  FETCH_CHORES_ERROR
+} from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const getChores = id => async dispatch => {

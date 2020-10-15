@@ -1,26 +1,20 @@
-import React, { useEffect } from 'react';
-import addChild from '../action/addChild'
+import React, { useEffect, useState } from 'react';
+
 import { connect } from 'react-redux'
 
 
 
-export default function Child(props) {
-  
- 
 
+
+
+
+export default function Child(  ) {
+  
   return (
-    <div>
-      {/* <Img src={props.url} alt={`photo of: ${props.name}`} /> */}
-          <p>Name: {props.fstname} </p>
-          <p>Username: {props.username} </p>
-    </div>   
-  );
+    <div></div>
+    
+  )
 }
 
 
 
-/* fstname,
-      lstname, 
-      username,
-      password,
-      parent_id */

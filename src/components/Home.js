@@ -7,18 +7,11 @@ import TodoList from './TodoList';
 import ChildList from './ChildList';
 import ChoreList from './ChoreList';
 const Home = ( props ) => {
-
-
-
-
-
-  
-
     
 
   return (
     <div>
-      <h4>Welcome to your Home</h4>
+      <h4>Welcome to your  Track'em Dashboard </h4>
        
       <ChildList />
       {/* <TodoList /> */}

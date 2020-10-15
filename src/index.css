@@ -17,3 +17,8 @@ code {
   justify-content: center;
   
 }
+
+.child-card-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}

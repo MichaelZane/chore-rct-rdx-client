@@ -8,6 +8,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 const deleteChild = id => async dispatch => {
   dispatch({type: DELETE_CHILD_START});
   return await axiosWithAuth()
+    
     .delete(`/api/auth/child/${id}`)
     .then(res => {
       console.log(res);

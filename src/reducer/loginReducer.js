@@ -35,7 +35,7 @@ export const loginReducer = (state = initialState, action) => {
         isFetching: false,
         error: "",
         user: action.payload,
-        children: action.payload
+
         
       };
 

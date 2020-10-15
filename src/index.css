@@ -15,12 +15,9 @@ code {
 .children-wrap {
   display: flex;
   justify-content: center;
-}
-
-.childlist {
   
 }
 
 .children {
-  
+  border: 1px solid blue;
 }

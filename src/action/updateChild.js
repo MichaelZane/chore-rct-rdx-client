@@ -7,7 +7,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 const updateChild = item => async dispatch => {
   dispatch({type: UPDATE_CHILD_START});
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .put(`/api/auth/child/${item.id}`, item)
     .then(res => {
 

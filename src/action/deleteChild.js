@@ -2,12 +2,12 @@ import {
   DELETE_CHILD_START, 
   DELETE_CHILD_SUCCESS, 
   DELETE_CHILD_ERROR
-} from '.';
+} from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const deleteChild = id => async dispatch => {
   dispatch({type: DELETE_CHILD_START});
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .delete(`/api/auth/child/${id}`)
     .then(res => {
       console.log(res);

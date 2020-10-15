@@ -1,10 +1,13 @@
-import {GET_CHILDREN_ERROR, GET_CHILDREN_START, GET_CHILDREN_SUCCESS} from '../action';
+import {
+  GET_CHILDREN_ERROR, 
+  GET_CHILDREN_START, 
+  GET_CHILDREN_SUCCESS
+} from '../action';
 
 const initialState = {
   fetchingChildren: false,
   error: '',
-  children: [],
-  id: ""
+  child: null
 };
 
 export const getChildrenReducer = (state = initialState, action) => {
@@ -17,10 +20,11 @@ export const getChildrenReducer = (state = initialState, action) => {
         fetchingChildren: true
       };
     case GET_CHILDREN_SUCCESS:
+
       return {
         ...state,
         fetchingChildren: false,
-        children: action.payload
+        child: action.payload
       };
       
     case GET_CHILDREN_ERROR:

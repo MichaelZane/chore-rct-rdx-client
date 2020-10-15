@@ -66,7 +66,7 @@ const Login = props => {
 
   };
 
-  const submitHandler = (e, res) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     props.login(form)
     props.history.push("/home")

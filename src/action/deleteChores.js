@@ -2,13 +2,13 @@ import {
   DELETE_CHORES_START, 
   DELETE_CHORES_SUCCESS, 
   DELETE_CHORES_ERROR
-} from '.';
+} from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const deleteChores = id => async dispatch => {
   dispatch({type: DELETE_CHORES_START});
 
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .delete(`/api/chore/${id}`)
     .then(res => {
       console.log(res);

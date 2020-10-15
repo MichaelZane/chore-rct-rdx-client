@@ -8,28 +8,38 @@ import login from '../action/login';
 import Child from './Child';
 
 const ChildList = ( props ) => {
-
-  
-  
-  const exit = () => {
-    props.history.goBack()
-  }
+  // console.log("props >>>>>",props)
+  // const exit = () => {
+  //   props.history.goBack()
+  // }
 
   useEffect(() => {
     props.getChildren()
-  }, [getChildren])
+    
+  }, [])
+
+  console.log(props)
 
   const deleteChild = id => {
     props.deleteChild(id);
   };
-  console.log("xxxxxxxxxxxxx",props.children)
+
+
+  // if(!props.children) return <p>Loading....</p>
   
   return (
-    <div className="children-wrap">     
+    
+    <div className="children-wrap"> 
+        
       <div>
         <h3>These are your kids </h3>
-        <div>
-          <p> {console.log("jsx >>>>>>>>>>",props.children)} </p>
+        <div className="children" >
+          {/* {props.child.map(chd =>{
+            return (
+              <p> {chd.username} </p>
+            )
+          })}  */}
+          {/* <p> {props.child.username} </p> */}
         </div>
                
           <button onClick={() => deleteChild()}>delete</button>
@@ -42,20 +52,23 @@ const ChildList = ( props ) => {
           <button>Add child </button>
         </Link>
       
-        <button onClick={() => exit()}>Exit</button>
+        {/* <button onClick={() => exit()}>Exit</button> */}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {   
   return {
-    children: state.children
-  } 
-   
+    child : state.child
+  }    
+}
+
+const mapDispatchToProps = {
+  getChildren
 }
 
 export default connect(
   mapStateToProps, 
-  { getChildren },
+  { getChildren }
 )(ChildList);

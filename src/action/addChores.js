@@ -2,14 +2,14 @@ import {
   ADD_CHORES_START, 
   ADD_CHORES_SUCCESS, 
   ADD_CHORES_ERROR
-} from '.';
+} from './index';
 
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const addChores = item => async dispatch => {
   dispatch({type: ADD_CHORES_START});
 
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .post(`/api/chore/${item.id}`, item)
     .then(res => {
       console.log(res);

@@ -3,11 +3,11 @@ import {
   ADD_CHILD_START, 
   ADD_CHILD_ERROR, 
   ADD_CHILD_SUCCESS
-} from '.';
+} from './index';
 
 const addChild = child => async dispatch => {
   dispatch({type: ADD_CHILD_START});
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .post('/api/auth/register/child', child)
     .then(res => {
       localStorage.setItem('token', res.data.token)

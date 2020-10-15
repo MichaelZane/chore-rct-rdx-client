@@ -11,7 +11,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 const login = form => async (dispatch) => {
   dispatch({type: LOGIN_START})
-  await axiosWithAuth()
+  return await axiosWithAuth()
     .post('/api/auth/login', form)
     .then(res => {
 

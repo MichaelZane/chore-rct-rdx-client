@@ -2,7 +2,7 @@ import {
   GET_CHILDREN_START, 
   GET_CHILDREN_ERROR, 
   GET_CHILDREN_SUCCESS
-} from '.';
+} from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const getChildren = id => async dispatch => {
@@ -16,7 +16,7 @@ const getChildren = id => async dispatch => {
     })
     .catch(err => {
 
-      dispatch({type: GET_CHILDREN_ERROR, payload: err.res });
+      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res.status} ${err.res.data}` });
     });
 };
 

@@ -5,18 +5,18 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChildren = id => async dispatch => {
+const getChildren = () => async dispatch => {
   
   dispatch({type: GET_CHILDREN_START});
 
   await axiosWithAuth()
-    .get(`/api/auth/parent/${localStorage.getItem('userId')}`, id)
+    .get(`/api/auth/parent/${localStorage.getItem('userId')}`)
     .then(res => {
       dispatch({ type: GET_CHILDREN_SUCCESS, payload: res.data });
     })
     .catch(err => {
 
-      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res.status} ${err.res.data}` });
+      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res} ${err.res}` });
     });
 };
 

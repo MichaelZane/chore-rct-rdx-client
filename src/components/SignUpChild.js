@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUpChild = props => {
   const [state, setState] = useState({
-    parent_id: '',
+    parent_id: localStorage.getItem("userId"),
     fstname: '',
     lstname: '',
     username: '',
@@ -78,10 +78,10 @@ const SignUpChild = props => {
       lstname: '',
       username: '',
       password: '',
-      parent_id: ""
+      
     });
 
-    
+  console.log("<<<<<child sign up state>>>>>>", state.parent_id)
   };
 
   const classes = useStyles();
@@ -179,13 +179,6 @@ const SignUpChild = props => {
     </Container>
   );
 };
-
-// const mapStateToProps = ({loginReducer}) => {
-//   console.log(loginReducer.userID);
-//   return {
-//     id: loginReducer.userID
-//   };
-// };
 
 export default connect(
   null,

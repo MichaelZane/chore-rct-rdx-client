@@ -5,7 +5,7 @@ import {
 } from '../action';
 
 const initialState = {
-  children: [],
+  child: [],
   fetchingChildren: false,
   error: ''
 };
@@ -20,10 +20,12 @@ export const addChildReducer = (state = initialState, action) => {
       };
 
     case ADD_CHILD_SUCCESS:
+      localStorage.getItem("userId", action.payload.user_id)
+      console.log("from actions>>>", action.payload)
       return {
         ...state,
         fetchingChildren: false,
-        children: action.payload
+        child: action.payload
       };
 
     case ADD_CHILD_ERROR:

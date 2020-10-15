@@ -10,8 +10,7 @@ const addChild = child => async dispatch => {
   return await axiosWithAuth()
     .post('/api/auth/register/child', child)
     .then(res => {
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('userId', res.data.user_id)
+            
       dispatch({ type: ADD_CHILD_SUCCESS, payload: res.data });
      
     })
@@ -19,6 +18,7 @@ const addChild = child => async dispatch => {
     .catch(err => {
 
       dispatch({type: ADD_CHILD_ERROR, payload: err.res });
+      
     });
 };
 

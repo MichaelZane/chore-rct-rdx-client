@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-
 import getChores from '../action/getChores';
 
 function ChoreList(props) {
+  
   console.log(props);
   useEffect(() => {
     getChoresList();
@@ -16,9 +16,9 @@ function ChoreList(props) {
   return <div></div>;
 }
 
-const mapStateToProps = ({getChoresReducer}) => {
+const mapStateToProps = (state) => {
   return {
-    choresList: getChoresReducer
+    choresList: state.choresList
   };
 };
 

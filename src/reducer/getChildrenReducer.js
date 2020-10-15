@@ -7,7 +7,7 @@ import {
 const initialState = {
   fetchingChildren: false,
   error: '',
-  child: null
+  child: []
 };
 
 export const getChildrenReducer = (state = initialState, action) => {

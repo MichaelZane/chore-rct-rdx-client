@@ -1,12 +1,25 @@
 import React from 'react';
+
+
+
 import TodoList from './TodoList';
 
 import ChildList from './ChildList';
 import ChoreList from './ChoreList';
-const Home = () => {
+const Home = ( props ) => {
+
+
+
+
+
+  
+
+    
+
   return (
     <div>
       <h4>Welcome to your Home</h4>
+       
       <ChildList />
       {/* <TodoList /> */}
       {/* <ChoreList /> */}
@@ -14,4 +27,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+
+export default Home

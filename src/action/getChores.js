@@ -16,7 +16,7 @@ const getChores = id => async dispatch => {
     })
     .catch(err => {
       console.log(err);
-      dispatch({type: FETCH_CHORES_ERROR, payload: err});
+      dispatch({type: FETCH_CHORES_ERROR, payload: err.res });
     });
 };
 

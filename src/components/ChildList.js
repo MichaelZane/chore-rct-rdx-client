@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import { connect } from 'react-redux';
-
+        /* Router */
 import { Link } from 'react-router-dom';
+
+         /* Redux */
+import { connect } from 'react-redux';
+import Chores from '../action/deleteChild';
+import addChores from '../action/deleteChild';
 import deleteChores from '../action/deleteChild';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
-import login from '../action/login';
+import addChild from '../action/getChildren';
+
 import Child from './Child';
 
 /* MUI */
@@ -30,9 +35,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CircularProgress } from '@material-ui/core';
 import { deleteChoresReducer } from '../reducer/deleteChoresReducer';
 
+           /* Styles */
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    margin: 10,
   },
   media: {
     height: 0,
@@ -52,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[500],
   },
 }));
+
+          /* ChildList */
 
 const ChildList = ( props ) => {
 
@@ -86,7 +96,10 @@ const ChildList = ( props ) => {
     ? childProps.map(chld => (
       
     
-        <Card className={classes.root}>
+        <Card 
+        className={classes.root}
+        
+        >
           <CardHeader
             avatar={
               <Avatar 
@@ -97,33 +110,25 @@ const ChildList = ( props ) => {
                 M
               </Avatar>
             }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
             title={chld.fstname}
             subheader={chld.username}
           />
-          
-          {/* <CardMedia
-            className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="child image"
-          /> */}
+
           <CardContent>
-            {/* <Typography variant="body2" color="textSecondary" component="p"> */}
+
             <Button 
             onClick={() => deleteChild()}
             variant="outlined"
-            >Remove</Button>      
-            {/* </Typography> */}
+            >Remove</Button>
+               
           </CardContent>
+          
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
             <span>Show Chores</span>
+
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -151,8 +156,8 @@ const ChildList = ( props ) => {
               <Link to={`/updateChild`}>
               <Button>Update</Button>
               </Link>
-              <Link to='/signUpChild'>
-              <Button>Add child </Button>
+              <Link to='/addChore'>
+              <Button>Add chore </Button>
               </Link>
             </CardContent>
           </Collapse>          

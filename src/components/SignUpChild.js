@@ -16,6 +16,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import addChild from '../action/addChild';
+import { AccountCircle } from '@material-ui/icons';
 
 // Styling Sign Up Form
 
@@ -24,7 +25,7 @@ function Copyright() {
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' to='/'>
-        HomeChoreTracker
+        Track `Em
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -80,8 +81,6 @@ const SignUpChild = props => {
       password: '',
       
     });
-
-  console.log("<<<<<child sign up state>>>>>>", state.parent_id)
   };
 
   const classes = useStyles();
@@ -91,10 +90,10 @@ const SignUpChild = props => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          < AccountCircle />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Sign up child
+          Add Your Child
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
           <Grid container spacing={2}>
@@ -164,13 +163,9 @@ const SignUpChild = props => {
             color='primary'
             className={classes.submit}
           >
-            Sign Up
+            Add Child
           </Button>
-          <Grid container justify='flex-end'>
-            <Grid item>
-              <Link to='/childLogin'>Already have an account? Sign in</Link>
-            </Grid>
-          </Grid>
+          
         </form>
       </div>
       <Box mt={5}>

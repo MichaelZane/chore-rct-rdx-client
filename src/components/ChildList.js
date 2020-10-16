@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
         /* Router */
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
          /* Redux */
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import addChores from '../action/deleteChild';
 import deleteChores from '../action/deleteChild';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
-import addChild from '../action/getChildren';
+import ChoreList from './ChoreList';
 
 import Child from './Child';
 
@@ -20,7 +20,6 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { Button } from '@material-ui/core';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -28,18 +27,17 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CircularProgress } from '@material-ui/core';
-import { deleteChoresReducer } from '../reducer/deleteChoresReducer';
+
+
 
            /* Styles */
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    
+    width: 225,
     margin: 10,
   },
   media: {
@@ -84,7 +82,9 @@ const ChildList = ( props ) => {
     props.history.goBack()
   }
 
-  const deleteChild = id => {
+  
+
+  const deleteChild = ( id ) => {
     props.deleteChild(id);
   };
 
@@ -93,10 +93,11 @@ const ChildList = ( props ) => {
   return (
     <div className="child-card-wrap">
     {childProps && childProps.length > 0 
-    ? childProps.map(chld => (
+    ? childProps.map((chld, index) => (
       
     
         <Card 
+        key={chld.id}
         className={classes.root}
         
         >
@@ -117,17 +118,21 @@ const ChildList = ( props ) => {
           <CardContent>
 
             <Button 
-            onClick={() => deleteChild()}
-            variant="outlined"
+            onClick={() => deleteChild(chld.id)}
+            variant="text"
             >Remove</Button>
+
+            <Link to={`/updateChild/`}>
+                <Button
+                variant="text"
+                >Edit</Button>
+            </Link>
                
           </CardContent>
           
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <span>Show Chores</span>
+            
+            <Typography>Show Chores</Typography>
 
             <IconButton
               className={clsx(classes.expand, {
@@ -136,7 +141,7 @@ const ChildList = ( props ) => {
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show chore"
-              size="large"
+              
             >
               <ExpandMoreIcon />
             </IconButton>
@@ -147,7 +152,7 @@ const ChildList = ( props ) => {
             unmountOnExit>
             <CardContent>
               <Typography >Chores:</Typography>
-              
+              <ChoreList />
               <Button 
               onClick={() => deleteChores()}
               icon=""
@@ -179,7 +184,12 @@ const mapStateToProps = (state) => {
   }    
 }
 
+const mapDispatchToProps = {
+  getChildren, 
+  deleteChild
+}
+
 
 export default connect(
   mapStateToProps, 
-  { getChildren })(ChildList);
+  mapDispatchToProps)(ChildList);

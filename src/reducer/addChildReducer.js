@@ -21,7 +21,8 @@ export const addChildReducer = (state = initialState, action) => {
 
     case ADD_CHILD_SUCCESS:
       localStorage.getItem("userId", action.payload.user_id)
-      console.log("from actions>>>", action.payload)
+      localStorage.setItem("Id", action.payload.user_id)
+
       return {
         ...state,
         fetchingChildren: false,

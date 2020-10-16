@@ -22,3 +22,7 @@ code {
   display: flex;
   flex-wrap: wrap;
 }
+
+.MuiCardContent-root {
+  text-align: center;
+}

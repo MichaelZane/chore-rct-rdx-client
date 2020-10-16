@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {loginReducer} from './loginReducer';
 import {registerReducer} from './registerReducer';
+import {getChoresReducer} from './getChoresReducer';
 import {childLoginReducer} from './childLoginReducer';
 import {addChildReducer} from './addChildReducer';
 import {deleteChildReducer} from './deleteChildReducer';
@@ -13,8 +14,9 @@ export default combineReducers({
   registerReducer,
   childLoginReducer,
   child: addChildReducer,
-  deleteChildReducer,
+  children: deleteChildReducer,
   child: getChildrenReducer,
   updateChildReducer,
+  choreslist: getChoresReducer,
   deleteChoresReducer
 });

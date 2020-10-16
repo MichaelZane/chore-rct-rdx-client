@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
        /* MUI */
-import { Button } from '@material-ui/core';
-import { Popover } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+
 
        /* Redux */
 import TodoList from './TodoList';
 import ChildList from './ChildList';
 import ChoreList from './ChoreList';
+
 
        /* Router */
 import { Link } from "react-router-dom"
@@ -16,12 +17,9 @@ import { Link } from "react-router-dom"
 
 const Home = () => {
 
-
-  
-
   return (
     <div>
-      <h4>Welcome to your  Track'em Dashboard </h4>
+      <Typography>Welcome to your Track'em Dashboard </Typography>
       
         <Link to={"/signupChild"}>
         <Button

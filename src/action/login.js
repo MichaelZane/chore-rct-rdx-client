@@ -9,15 +9,17 @@ import {
 
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const login = form => async (dispatch) => {
+const login = (logForm) => async (dispatch) => {
   dispatch({type: LOGIN_START})
-  return await axiosWithAuth()
-    .post('/api/auth/login', form)
+  await axiosWithAuth()
+    .post('/api/auth/login', logForm)
     .then(res => {
 
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.user_id)
+
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
+
       
 
     })

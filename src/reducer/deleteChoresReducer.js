@@ -3,7 +3,7 @@ import {
 } from '../action';
 
 const initialState = {
-  choresList: [],
+  chore: [],
   deletingChore: false,
   error: ''
 };
@@ -19,7 +19,7 @@ export const deleteChoresReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingChore: false,
-        choresList: state.choresList.filter(chore => chore.id !== action.payload)
+        chore: state.choresList.filter(chores => chores.id !== action.payload)
       };
 
     default:

@@ -17,18 +17,28 @@ import { Link } from "react-router-dom"
 
 const Home = () => {
 
+  const logout = (e) => {
+    e.preventDefault()
+    localStorage.removeItem("token")
+    window.location.reload("/")
+
+  }
+
   return (
     <div>
       <Typography>Welcome to your Track'em Dashboard </Typography>
       
-        <Link to={"/signupChild"}>
+        {/* <Link to={"/signupChild"}>
         <Button
           variant="outlined"
         >Add Child</Button>
-        </Link>
-      
+        </Link> */}
+        <Button
+        onClick={logout}
+        variant="outlined"
+        >LogOut</Button>
         
-        <ChildList />
+        {/* <ChildList /> */}
       {/* <TodoList /> */}
       {/* <ChoreList /> */}
     </div>

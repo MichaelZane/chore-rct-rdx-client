@@ -17,6 +17,6 @@ export default combineReducers({
   children: deleteChildReducer,
   child: getChildrenReducer,
   updateChildReducer,
-  choreslist: getChoresReducer,
+  chore: getChoresReducer,
   deleteChoresReducer
 });

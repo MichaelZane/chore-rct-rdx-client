@@ -1,7 +1,11 @@
-import {FETCH_CHORES_START, FETCH_CHORES_SUCCESS, FETCH_CHORES_ERROR} from '../action';
+import {
+  FETCH_CHORES_START, 
+  FETCH_CHORES_SUCCESS, 
+  FETCH_CHORES_ERROR
+} from '../action';
 
 const initialState = {
-  choresList: [],
+  chore: [],
   fetchingChoresList: false,
   error: ''
 };
@@ -15,11 +19,11 @@ export const getChoresReducer = (state = initialState, action) => {
         error: null
       };
     case FETCH_CHORES_SUCCESS:
-      console.log(action.payload)
+      console.log("<<<<<ACTION>>>>>", action.payload)
       return {
         ...state,
         fetchingChoresList: false,
-        choresList: action.payload
+        chore: action.payload
       };
     case FETCH_CHORES_ERROR:
       return {

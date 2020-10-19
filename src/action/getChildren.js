@@ -13,10 +13,11 @@ const getChildren = () => async dispatch => {
     .get(`/api/auth/parent/${localStorage.getItem('userId')}`)
     .then(res => {
       dispatch({ type: GET_CHILDREN_SUCCESS, payload: res.data });
+      console.log(res.data)
     })
     .catch(err => {
 
-      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res} ${err.res}` });
+      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res}` });
     });
 };
 

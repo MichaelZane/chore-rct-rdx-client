@@ -4,15 +4,15 @@ import getChores from '../action/getChores';
 import { CircularProgress } from '@material-ui/core';
 
 const ChoreList = (props) => {
-
-  const fetchChores = props.getChores
   
-  console.log("I AM PROPS>>>>>", props);
+  const fetchChores = props.getChores
+
   useEffect(() => {
-    fetchChores();
+    fetchChores(props.id);
   }, [fetchChores]);
 
-  const chores = props.choresList
+  console.log(props.id)
+  const chores = props.chore.chore.chore
 
   return (
     <div>
@@ -40,11 +40,14 @@ const ChoreList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    choresList: state.choresList
+    chore: state.chore
   };
 };
 
+const mapDispatchToProps = {
+  getChores
+}
+
 export default connect(
-  mapStateToProps,
-  {getChores}
+  mapStateToProps, mapDispatchToProps
 )(ChoreList);

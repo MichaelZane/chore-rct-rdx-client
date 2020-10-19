@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   userId: "",
+  child_id: "",
   isFetching: false,
   userData: {},
   googleData: {},
@@ -29,7 +30,7 @@ export const loginReducer = (state = initialState, action) => {
       };
 
     case LOGIN_SUCCESS:
-      localStorage.setItem("userId", action.payload.user_id)
+      
       return {
         ...state,
         isFetching: false,
@@ -38,7 +39,7 @@ export const loginReducer = (state = initialState, action) => {
 
         
       };
-
+      
     case LOGIN_ERROR:
       return {
         ...state,

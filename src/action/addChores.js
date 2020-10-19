@@ -12,7 +12,9 @@ const addChores = item => async dispatch => {
   return await axiosWithAuth()
     .post(`/api/chore/${item.id}`, item)
     .then(res => {
+      localStorage.getItem('childId')
       console.log(res);
+      localStorage.getItem('userId')
       dispatch({type: ADD_CHORES_SUCCESS, payload: res.data.item });
     })
     .catch(err => {

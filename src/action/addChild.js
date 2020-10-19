@@ -10,8 +10,11 @@ const addChild = child => async dispatch => {
   return await axiosWithAuth()
     .post('/api/auth/register/child', child)
     .then(res => {
-            
+          
       dispatch({ type: ADD_CHILD_SUCCESS, payload: res.data });
+
+      localStorage.getItem('parent_id', res.data.userId)
+      localStorage.setItem('childId', res.data.id) 
      
     })
 

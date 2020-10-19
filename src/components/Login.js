@@ -56,22 +56,23 @@ const useStyles = makeStyles(theme => ({
 /* LogIn */
 
 const Login = props => {
-  const [form, setForm] = useState({
+  const [logForm, setLogForm] = useState({
     username: "",
     password: ""
   });
 
   const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+    setLogForm({ ...logForm, [event.target.name]: event.target.value });
 
   };
 
   const submitHandler = (e) => {
     e.preventDefault()
-    props.login(form)
+    props.login(logForm)
     props.history.push("/home")
-    setForm({ username: "", password: "" })
-    
+    setLogForm({ username: "", password: "" })
+
+
   };
 
   const classes = useStyles();
@@ -102,7 +103,7 @@ const Login = props => {
               variant="outlined"
               onChange={changeHandler}
               margin="normal"
-              value={form.username}
+              value={logForm.username}
               required
               fullWidth
               id="username"
@@ -116,7 +117,7 @@ const Login = props => {
               onChange={changeHandler}
               margin="normal"
               required
-              value={form.password}
+              value={logForm.password}
               fullWidth
               name="password"
               label="Password"
@@ -169,7 +170,10 @@ const Login = props => {
 const mapStateToProps = state => {
   return {
     userData: state.userData,
+    
+  
+
   };
 };
 
-export default connect(mapStateToProps, { login, signUpGoogle })(Login);
+export default connect(mapStateToProps, {login, signUpGoogle })(Login);

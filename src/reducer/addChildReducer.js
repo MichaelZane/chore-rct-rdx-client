@@ -21,7 +21,7 @@ export const addChildReducer = (state = initialState, action) => {
 
     case ADD_CHILD_SUCCESS:
       localStorage.getItem("userId", action.payload.user_id)
-      localStorage.setItem("Id", action.payload.user_id)
+      localStorage.setItem("childId", action.payload.child_id)
 
       return {
         ...state,

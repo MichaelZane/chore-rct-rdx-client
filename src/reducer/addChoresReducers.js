@@ -1,7 +1,7 @@
 import {ADD_CHORES_START, ADD_CHORES_SUCCESS, ADD_CHORES_ERROR} from '../action';
 
 const initialStates = {
-  choresList: [],
+  chore: [],
   addingChores: false,
   error: ''
 };
@@ -15,10 +15,11 @@ export const addChoresReducers = (state = initialStates, action) => {
         error: null
       };
     case ADD_CHORES_SUCCESS:
+      console.log("<<<<<ACTION>>>>>", action.payload)
       return {
         ...state,
         addingChores: false,
-        choresList: action.payload
+        chore: action.payload
       };
     case ADD_CHORES_ERROR:
       return {

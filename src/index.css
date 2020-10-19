@@ -16,13 +16,23 @@ code {
   display: flex;
   justify-content: center;
   
+  
 }
 
 .child-card-wrap {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  width: 225px;
+  padding: 16px;
+  
+
 }
 
 .MuiCardContent-root {
   text-align: center;
+}
+
+.MuiCardActions-root {
+
 }

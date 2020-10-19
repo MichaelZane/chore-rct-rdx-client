@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
         /* Router */
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
          /* Redux */
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Chores from '../action/deleteChild';
 import addChores from '../action/deleteChild';
 import deleteChores from '../action/deleteChild';
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     
     width: 225,
     margin: 10,
+    
   },
   media: {
     height: 0,
@@ -59,7 +60,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
           /* ChildList */
+
+
 
 const ChildList = ( props ) => {
 
@@ -84,7 +88,7 @@ const ChildList = ( props ) => {
 
   
 
-  const deleteChild = ( id ) => {
+  const deleteChild = id => {
     props.deleteChild(id);
   };
 
@@ -127,7 +131,13 @@ const ChildList = ( props ) => {
                 variant="text"
                 >Edit</Button>
             </Link>
-               
+            
+            <Link to={`/chorelist/`}>
+                <Button
+                variant="text"
+                >Chores</Button>
+            </Link>
+
           </CardContent>
           
           <CardActions disableSpacing>
@@ -152,7 +162,7 @@ const ChildList = ( props ) => {
             unmountOnExit>
             <CardContent>
               <Typography >Chores:</Typography>
-              <ChoreList />
+              {/* <ChoreList /> */}
               <Button 
               onClick={() => deleteChores()}
               icon=""

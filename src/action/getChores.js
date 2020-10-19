@@ -5,14 +5,17 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChores = id => async dispatch => {
+const getChores = () => async dispatch => {
   dispatch({type: FETCH_CHORES_START});
 
   return await axiosWithAuth()
-    .get(`/api/auth/child/${id}`)
+    .get(`/api/auth/child/${localStorage.getItem('childId')}`)
     .then(res => {
-      console.log(res.data.chore);
+
       dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data});
+
+      
+      
     })
     .catch(err => {
       console.log(err);

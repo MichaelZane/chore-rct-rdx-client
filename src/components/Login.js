@@ -65,16 +65,17 @@ const Login = props => {
     setLogForm({ ...logForm, [event.target.name]: event.target.value });
 
   };
-
+  
   const submitHandler = (e) => {
+   
     e.preventDefault()
-    props.login(logForm)
-    props.history.push("/home")
-    setLogForm({ username: "", password: "" })
+    props.login(logForm, props.history)
+    
+   
 
 
   };
-
+ 
   const classes = useStyles();
 
   /* OATH GOOGLE */
@@ -170,6 +171,7 @@ const Login = props => {
 const mapStateToProps = state => {
   return {
     userData: state.userData,
+    
     
   
 

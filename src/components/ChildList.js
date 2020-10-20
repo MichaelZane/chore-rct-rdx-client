@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
          /* Redux */
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import Chores from '../action/deleteChild';
 import addChores from '../action/deleteChild';
 import deleteChores from '../action/deleteChild';
@@ -86,7 +86,7 @@ const ChildList = ( props ) => {
     props.history.goBack()
   }
 
-  
+
 
   const deleteChild = id => {
     props.deleteChild(id);
@@ -194,9 +194,12 @@ const mapStateToProps = (state) => {
   }    
 }
 
-const mapDispatchToProps = {
-  getChildren, 
-  deleteChild
+const mapDispatchToProps = dispatch => {
+  return { 
+    getChildren,
+    
+
+  }
 }
 
 

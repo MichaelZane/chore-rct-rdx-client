@@ -13,7 +13,7 @@ const addChild = child => async dispatch => {
           
       dispatch({ type: ADD_CHILD_SUCCESS, payload: res.data });
 
-      localStorage.getItem('parent_id', res.data.userId)
+      localStorage.getItem('parent_id')
       localStorage.setItem('childId', res.data.id) 
      
     })

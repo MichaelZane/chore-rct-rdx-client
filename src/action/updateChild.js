@@ -8,9 +8,9 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 const updateChild = item => async dispatch => {
   dispatch({type: UPDATE_CHILD_START});
   return await axiosWithAuth()
-    .put(`/api/auth/child/${item.id}`, item)
+    .put(`/api/auth/child/justchild${item.id}`, item)
     .then(res => {
-
+      
       dispatch({type: UPDATE_CHILD_SUCCESS, payload: res.data});
     })
     .catch(err => {

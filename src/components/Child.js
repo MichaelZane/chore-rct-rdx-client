@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 
 
-export default function Child(  ) {
+export default function Child() {
   
   return (
     <div></div>

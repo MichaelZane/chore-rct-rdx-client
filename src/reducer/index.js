@@ -10,7 +10,7 @@ import {updateChildReducer} from './updateChildReducer';
 import {deleteChoresReducer} from './deleteChoresReducer';
 
 export default combineReducers({
-  loginReducer,
+  user: loginReducer,
   registerReducer,
   childLoginReducer,
   child: addChildReducer,

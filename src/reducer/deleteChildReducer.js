@@ -3,8 +3,8 @@ import {
 } from '../action';
 
 const initialState = {
-  children: [],
-  id: "",
+  child: [],
+  child_id: "",
   deletingChildern: false,
   error: ''
 };
@@ -22,7 +22,7 @@ export const deleteChildReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingChildren: false,
-        children: state.children.filter(child =>    child.id !== action.payload)
+        child: state.child.filter(child =>    child.id !== action.payload)
       };
 
     case DELETE_CHILD_ERROR: {

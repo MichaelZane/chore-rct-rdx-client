@@ -10,7 +10,6 @@ import {
 
 const initialState = {
   userId: "",
-  child_id: "",
   isFetching: false,
   userData: {},
   googleData: {},

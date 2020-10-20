@@ -12,7 +12,7 @@ const ChoreList = (props) => {
   }, [fetchChores]);
 
   console.log(props.id)
-  const chores = props.chore.chore.chore
+  const chores = props.chore.chore
 
   return (
     <div>

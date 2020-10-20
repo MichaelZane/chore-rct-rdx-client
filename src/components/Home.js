@@ -28,11 +28,11 @@ const Home = () => {
     <div>
       <Typography>Welcome to your Track'em Dashboard </Typography>
       
-        {/* <Link to={"/signupChild"}>
+        <Link to={"/signupChild"}>
         <Button
           variant="outlined"
         >Add Child</Button>
-        </Link> */}
+        </Link>
         <Button
         onClick={logout}
         variant="outlined"

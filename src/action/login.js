@@ -9,20 +9,19 @@ import {
 
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const login = (logForm) => async (dispatch) => {
+const login = (user, history) => async (dispatch) => {
   dispatch({type: LOGIN_START})
   await axiosWithAuth()
-    .post('/api/auth/login', logForm)
+    .post('/api/auth/login', user)
     .then(res => {
 
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userId', res.data.user_id)
 
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
-
-      
-
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      history.push("/home")
     })
+    
     .catch(err => {
       dispatch({type: LOGIN_ERROR, payload: err.res });
     });

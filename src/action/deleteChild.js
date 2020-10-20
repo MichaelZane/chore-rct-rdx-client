@@ -12,7 +12,7 @@ const deleteChild = id => dispatch => {
     .delete(`/api/auth/child/${id}`)
     .then(res => {
       console.log(res);
-      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data});
+      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data.id});
     })
     .catch(err => {
       console.log(err);

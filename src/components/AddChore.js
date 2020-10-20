@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-export default function Form() {
+export default function AddChore() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     chore_score: 0,
-    child_id: 0,
-    parent_id: 0
+    child_id: localStorage.getItem("child_id"),
+    parent_id: localStorage.getItem("userId"),
   });
 
   const handleChanges = e => {

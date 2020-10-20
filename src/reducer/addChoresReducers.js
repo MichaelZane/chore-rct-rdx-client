@@ -15,7 +15,7 @@ export const addChoresReducers = (state = initialStates, action) => {
         error: null
       };
     case ADD_CHORES_SUCCESS:
-      console.log("<<<<<ACTION>>>>>", action.payload)
+
       return {
         ...state,
         addingChores: false,

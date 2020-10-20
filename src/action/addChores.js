@@ -6,19 +6,21 @@ import {
 
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const addChores = item => async dispatch => {
+const addChores = (chore, history) => async dispatch => {
   dispatch({type: ADD_CHORES_START});
 
   return await axiosWithAuth()
-    .post(`/api/chore/${item.id}`, item)
+    .post(`/api/chore/`, chore)
     .then(res => {
+
       localStorage.getItem('childId')
-      console.log(res);
       localStorage.getItem('userId')
-      dispatch({type: ADD_CHORES_SUCCESS, payload: res.data.item });
+      localStorage.setItem('choreId', res.data)
+      dispatch({type: ADD_CHORES_SUCCESS, payload: res.data});
+      history.push("/home")
     })
     .catch(err => {
-      console.log(err);
+
       dispatch({ type: ADD_CHORES_ERROR, payload: err.res });
     });
 };

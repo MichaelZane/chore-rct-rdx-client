@@ -38,7 +38,7 @@ const Home = () => {
         variant="outlined"
         >LogOut</Button>
         
-        {/* <ChildList /> */}
+        <ChildList />
       {/* <TodoList /> */}
       {/* <ChoreList /> */}
     </div>

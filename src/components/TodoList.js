@@ -39,11 +39,11 @@
 // const mapStateToProps = ({getChoresReducer}) => {
 //   console.log('MapState: ', getChoresReducer.choresList);
 //   return {
-//     todoList: getChoresReducer.choresList
+/*     todoList: getChoresReducer.choresList
 //   };
 // };
 
 // export default connect(
 //   mapStateToProps,
 //   {getChores, deleteChores}
-// )(TodoList);
+// )(TodoList);*/

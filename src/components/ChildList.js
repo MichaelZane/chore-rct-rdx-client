@@ -138,6 +138,12 @@ const ChildList = ( props ) => {
                 >Chores</Button>
             </Link>
 
+            <Link to={`/addChore/`}>
+                <Button
+                variant="text"
+                >Add Chores</Button>
+            </Link>
+
           </CardContent>
           
           <CardActions disableSpacing>
@@ -164,23 +170,29 @@ const ChildList = ( props ) => {
               <Typography >Chores:</Typography>
               {/* <ChoreList /> */}
               <Button 
-              onClick={() => deleteChores()}
-              icon=""
+                variant="text"
+                onClick={() => deleteChores()}
+                icon=""
               >Remove</Button>
               
               <Link to={`/updateChild`}>
-              <Button>Update</Button>
+              <Button
+                variant="text"
+              >Update</Button>
               </Link>
-              <Link to='/addChore'>
-              <Button>Add chore </Button>
+              <Link to={'/addChore'}>
+              <Button
+                variant="text"
+              >Add chore </Button>
               </Link>
             </CardContent>
           </Collapse>          
         </Card>
       )
     )
-    : <CircularProgress/>
+    : <><CircularProgress /></>
     }
+    
   </div>
   );
 };
@@ -194,15 +206,6 @@ const mapStateToProps = (state) => {
   }    
 }
 
-const mapDispatchToProps = dispatch => {
-  return { 
-    getChildren,
-    
-
-  }
-}
-
-
 export default connect(
   mapStateToProps, 
-  mapDispatchToProps)(ChildList);
+  {getChildren})(ChildList);

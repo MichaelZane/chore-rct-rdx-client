@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 
-export default function AddChore() {
+          /* Redux */
+import { connect } from "react-redux"
+import addChores from "../action/addChores"
+
+          /* MUI */
+import { 
+  Button, 
+  TextField, 
+  Typography 
+} from '@material-ui/core';
+
+          /* AddChore */
+
+export function AddChore( props ) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     chore_score: 0,
-    child_id: localStorage.getItem("child_id"),
+    child_id: localStorage.getItem("childId"),
     parent_id: localStorage.getItem("userId"),
   });
 
@@ -18,6 +31,7 @@ export default function AddChore() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    props.addChores(formData, props.history)
   };
 
   return (
@@ -27,7 +41,7 @@ export default function AddChore() {
       onSubmit={handleSubmit}
     >
       <div>
-        <input
+        <TextField
           type="text"
           className="form-control"
           onChange={handleChanges}
@@ -44,10 +58,29 @@ export default function AddChore() {
           required
         />
         {/* <input type="text" className="form-control mt-3" onChange={handleChanges} placeholder="Add Chore Chore Score..." name="chore_score" required /> */}
-        <button className="w-100 btn btn-primary mt-3" type="submit">
+        <Button className="w-100 btn btn-primary mt-3" type="submit">
           Submit
-        </button>
+        </Button>
       </div>
     </form>
   );
 }
+
+export default connect(
+  null,
+  {addChores}
+)(AddChore);
+
+/* 
+  name	Required
+description	Required
+Comments	
+Completed	
+due_date	
+chore_score	Required
+bonus_pts	
+clean_strk	
+photo_obj	
+child_id	Required
+parent_id
+*/

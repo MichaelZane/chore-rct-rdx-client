@@ -131,21 +131,9 @@ const ChildList = ( props ) => {
                 variant="text"
                 >Edit</Button>
             </Link>
-            
-            <Link to={`/chorelist/`}>
-                <Button
-                variant="text"
-                >Chores</Button>
-            </Link>
-
-            <Link to={`/addChore/`}>
-                <Button
-                variant="text"
-                >Add Chores</Button>
-            </Link>
-
-          </CardContent>
           
+          </CardContent> 
+    {/* Expand into chorelist for child */}
           <CardActions disableSpacing>
             
             <Typography>Show Chores</Typography>
@@ -168,7 +156,7 @@ const ChildList = ( props ) => {
             unmountOnExit>
             <CardContent>
               <Typography >Chores:</Typography>
-              {/* <ChoreList /> */}
+              <ChoreList />
               <Button 
                 variant="text"
                 onClick={() => deleteChores()}

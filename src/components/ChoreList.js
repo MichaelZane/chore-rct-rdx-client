@@ -62,11 +62,11 @@ const ChoreList = (props) => {
   const fetchChores = props.getChores
 
   useEffect(() => {
-    fetchChores(props.id);
+    fetchChores();
   }, [fetchChores]);
 
 
-  const chores = props.chore.chore
+  const chores = props.chore.chore.chore
 
   return (
     <div 
@@ -75,12 +75,11 @@ const ChoreList = (props) => {
       // aria-labelledby="simple-modal-title"
       // aria-describedby="simple-modal-description"
     > 
-      <div >
+      
       {chores && chores.length > 0 
     ? chores.map((chre, index) => (
-      <div key={chre.id} id="simple-modal-title" >
+      <div key={chre.id} >
         <p>{chre.name}</p>
-      <div id="simple-modal-description" >
         <p>{chre.description}</p>
         <p>{chre.comments}</p>
         <p>{chre.completed}</p>
@@ -89,13 +88,11 @@ const ChoreList = (props) => {
         <p>{chre.clean_strk}</p>
         <p>{chre.photo_obj}</p>
       </div>  
-      </div>
+      
       )
     )
     : <CircularProgress/>
     }
-    </div>
-    
     </div>
   )
 }

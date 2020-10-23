@@ -14,10 +14,12 @@ const addChores = (chore, history) => async dispatch => {
     .then(res => {
 
       localStorage.getItem('childId')
-      localStorage.getItem('userId')
       localStorage.setItem('choreId', res.data)
+
       dispatch({type: ADD_CHORES_SUCCESS, payload: res.data});
+
       history.push("/home")
+      
     })
     .catch(err => {
 

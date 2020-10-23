@@ -5,13 +5,16 @@ import {
 } from '.';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const updateChild = item => async dispatch => {
+const updateChild = (newChild, id, history )=> dispatch => {
   dispatch({type: UPDATE_CHILD_START});
-  return await axiosWithAuth()
-    .put(`/api/auth/child/justchild${item.id}`, item)
+  return axiosWithAuth()
+    .put(`/api/auth/child/justchild/${id}`, newChild)
     .then(res => {
       
       dispatch({type: UPDATE_CHILD_SUCCESS, payload: res.data});
+
+      history.push(`/justchild/${id}`)
+
     })
     .catch(err => {
 

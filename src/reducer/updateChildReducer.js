@@ -3,7 +3,7 @@ import {
 } from '../action';
 
 const initialState = {
-  child: {},
+  newChild: {},
   updatingChild: false,
   error: ''
 };
@@ -20,7 +20,7 @@ export const updateChildReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingChild: false,
-        child: action.payload
+        newChild: action.payload
       };
     case UPDATE_CHILD_ERROR:
       return {

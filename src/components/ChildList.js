@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
         /* Router */
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
          /* Redux */
 import { connect } from 'react-redux';
-import Chores from '../action/deleteChild';
-import addChores from '../action/deleteChild';
-import deleteChores from '../action/deleteChild';
+import getChores from '../action/getChores';
+import addChores from '../action/addChores';
+import deleteChores from '../action/deleteChores';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
 import ChoreList from './ChoreList';
@@ -68,12 +68,6 @@ const useStyles = makeStyles((theme) => ({
 const ChildList = ( props ) => {
 
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
- 
-  }
 
   const fetch = props.getChildren
 
@@ -81,18 +75,14 @@ const ChildList = ( props ) => {
     fetch()
     
   }, [fetch])
+
+
   
   const exit = () => {
     props.history.goBack()
   }
 
-
-
-  const deleteChild = id => {
-    props.deleteChild(id);
-  };
-
-  const childProps = props.child.child.child
+  const childProps = props.childs.child
 
   return (
     <div className="child-card-wrap">
@@ -105,6 +95,8 @@ const ChildList = ( props ) => {
         className={classes.root}
         
         >
+          <Typography>Id: {chld.id}</Typography>
+          
           <CardHeader
             avatar={
               <Avatar 
@@ -112,39 +104,35 @@ const ChildList = ( props ) => {
               className={classes.avatar}
               src=""
               >
-                M
+              {chld.fstname.toUpperCase().charAt(0)}
+
               </Avatar>
             }
-            title={chld.fstname}
+            titleTypographyProps={{variant: "h5"}}
+          title={<NavLink to={'/child'}
+          >{chld.fstname}</NavLink>}
             subheader={chld.username}
-          />
-
-          <CardContent>
-
-            <Button 
-            onClick={() => deleteChild(chld.id)}
-            variant="text"
-            >Remove</Button>
-
-            <Link to={`/updateChild/`}>
-                <Button
-                variant="text"
-                >Edit</Button>
-            </Link>
-          
-          </CardContent> 
-    {/* Expand into chorelist for child */}
-          <CardActions disableSpacing>
             
-            <Typography>Show Chores</Typography>
+          />
+          
+         
+            {/* <ChoreList /> */}
+          
+          
+    {/* Expand into chorelist for child */}
+          {/* <CardActions disableSpacing>
+            
+            <Typography>See Chores</Typography>
 
             <IconButton
+              color="primary"
+              fontSize="large"
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
               })}
               onClick={handleExpandClick}
               aria-expanded={expanded}
-              aria-label="show chore"
+              aria-label="see chore"
               
             >
               <ExpandMoreIcon />
@@ -159,7 +147,7 @@ const ChildList = ( props ) => {
               <ChoreList />
               <Button 
                 variant="text"
-                onClick={() => deleteChores()}
+              
                 icon=""
               >Remove</Button>
               
@@ -174,11 +162,11 @@ const ChildList = ( props ) => {
               >Add chore </Button>
               </Link>
             </CardContent>
-          </Collapse>          
+          </Collapse>           */}
         </Card>
       )
     )
-    : <><CircularProgress /></>
+    : <CircularProgress />
     }
     
   </div>
@@ -190,9 +178,17 @@ const ChildList = ( props ) => {
 const mapStateToProps = (state) => { 
     
   return {
-    child : state.child
+    childs : state.child.child
+    
+ 
   }    
 }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     children: childProps => dispatch(children(childProps))
+//   }
+// }
 
 export default connect(
   mapStateToProps, 

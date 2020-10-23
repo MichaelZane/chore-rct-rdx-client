@@ -58,35 +58,36 @@ const ChoreList = (props) => {
   // const handleClose = () => {
   //   setOpen(false);
   // };
-  
+
   const fetchChores = props.getChores
 
   useEffect(() => {
-    fetchChores();
+    fetchChores(props.match.params.id);
   }, [fetchChores]);
 
 
-  const chores = props.chore.chore.chore
+  const chores = props.chore.chore
 
   return (
-    <div 
+    <div className="chore-wrap"
       // open={open}
       // onClose={handleClose}
       // aria-labelledby="simple-modal-title"
       // aria-describedby="simple-modal-description"
     > 
       
-      {chores && chores.length > 0 
+      {chores && chores.length 
     ? chores.map((chre, index) => (
       <div key={chre.id} >
-        <p>{chre.name}</p>
-        <p>{chre.description}</p>
-        <p>{chre.comments}</p>
-        <p>{chre.completed}</p>
-        <p>{chre.chore_score}</p>
-        <p>{chre.bonus_pts}</p>
-        <p>{chre.clean_strk}</p>
+        <p>Name: {chre.name}</p>
+        <p>Description: {chre.description}</p>
         <p>{chre.photo_obj}</p>
+        <p>Comments: {chre.comments}</p>
+        <p>Completed: {chre.completed}</p>
+        <p>Score: {chre.chore_score}</p>
+        <p>Bonus: {chre.bonus_pts}</p>
+        <p>Streak: {chre.clean_strk}</p>
+        
       </div>  
       
       )
@@ -99,7 +100,7 @@ const ChoreList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    chore: state.chore
+    chore: state.chore.chore
   };
 };
 

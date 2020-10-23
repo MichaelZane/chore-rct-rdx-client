@@ -9,7 +9,7 @@ import {
 const register = user => async dispatch => {
   dispatch({type: REGISTER_START});
   return await axios
-    .post('https://chore-tracker1.herokuapp.com/api/auth/register', user)
+    .post('https://chore-backend.herokuapp.com/api/auth/register', user)
     .then(res => {
 
 

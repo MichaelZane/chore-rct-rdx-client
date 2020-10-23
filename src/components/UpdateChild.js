@@ -73,7 +73,7 @@ const UpdateChild = props => {
   const submitHandler = event => {
     event.preventDefault();
 
-    console.log('I have been submitted!!', id);
+
 
     props.updateChild(state);
 

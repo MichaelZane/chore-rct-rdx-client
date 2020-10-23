@@ -5,7 +5,7 @@ import { Button, Typography } from '@material-ui/core';
 
 
        /* Redux */
-import TodoList from './TodoList';
+
 import ChildList from './ChildList';
 import ChoreList from './ChoreList';
 
@@ -40,7 +40,7 @@ const Home = () => {
         
         <ChildList />
       {/* <TodoList /> */}
-      {/* <ChoreList /> */}
+        {/* <ChoreList /> */}
     </div>
   );
 };

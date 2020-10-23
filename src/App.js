@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SignUpParent from './components/SignUpParent';
 import SignUpChild from './components/SignUpChild';
@@ -16,6 +16,11 @@ import Home from './components/Home';
 import UpdateChild from './components/UpdateChild';
 
 const App = () => {
+
+  const [seeLogin, setSeeLogin] = useState(false)
+  const [seeSignUp, setSeeSignUp] = useState(false)
+
+
   return (
     
     <Switch>
@@ -31,8 +36,9 @@ const App = () => {
       <PrivateRoute exact path='/updateChore' component={UpdateChore} />
       <PrivateRoute exact path='/childList' component={ChildList} />
       <PrivateRoute exact path='/child' component={Child} />
-      <PrivateRoute exact path='/choreList' component={ChoreList} />
+      <PrivateRoute exact path='/chore/:id'  component={Chore} />
       <PrivateRoute exact path='/choreList/:id' component={Chore} />
+      <PrivateRoute exact path='/choreList' component={ChoreList}/>
     </Switch>
   
   );

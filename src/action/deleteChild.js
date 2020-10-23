@@ -5,17 +5,19 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const deleteChild = id => dispatch => {
+const deleteChild = (id, history) => dispatch => {
   dispatch({type: DELETE_CHILD_START});
   return axiosWithAuth()
-
-    .delete(`/api/auth/child/${id}`)
+    .delete(`/api/auth/child/${id}`, id)
     .then(res => {
-      console.log(res);
-      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data.id});
+
+      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data});
+
+      history.push("/home")
+
     })
     .catch(err => {
-      console.log(err);
+
       dispatch({ type: DELETE_CHILD_ERROR, payload: err.res });
     });
 };

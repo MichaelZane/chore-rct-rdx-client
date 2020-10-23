@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+
+}
+
 .children-wrap {
   display: flex;
   justify-content: center;
@@ -29,10 +34,22 @@ code {
 
 }
 
-.MuiCardContent-root {
+div .MuiCardContent-root {
+  height: 100%;
   text-align: center;
+  
+}
+
+.MuiCardContent-root {
+
+  text-align: center;
+
 }
 
 .MuiCardActions-root {
 
+}
+
+.chore-wrap {
+  position: relative;
 }

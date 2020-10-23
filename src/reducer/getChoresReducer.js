@@ -19,7 +19,7 @@ export const getChoresReducer = (state = initialState, action) => {
         error: null
       };
     case FETCH_CHORES_SUCCESS:
-      console.log("<<<<<ACTION>>>>>", action.payload)
+
       return {
         ...state,
         fetchingChoresList: false,

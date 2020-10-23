@@ -19,7 +19,7 @@ export function AddChore( props ) {
     description: "",
     chore_score: 0,
     child_id: localStorage.getItem("childId"),
-    parent_id: localStorage.getItem("userId"),
+
   });
 
   const handleChanges = e => {

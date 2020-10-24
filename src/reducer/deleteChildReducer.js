@@ -1,9 +1,11 @@
 import {
-  DELETE_CHILD_START, DELETE_CHILD_SUCCESS, DELETE_CHILD_ERROR
+  DELETE_CHILD_START, 
+  DELETE_CHILD_SUCCESS, 
+  DELETE_CHILD_ERROR
 } from '../action';
 
 const initialState = {
-  child: [],
+  children: [],
   deletingChildern: false,
   error: ''
 };
@@ -17,11 +19,11 @@ export const deleteChildReducer = (state = initialState, action) => {
         error: null
       };
     case DELETE_CHILD_SUCCESS:
-      console.log(action.payload)
+
       return {
         ...state,
         deletingChildren: false,
-        child: state.child.filter(child => child.id !== action.payload.id)
+        children: state.children.filter((child,id) => id !== action.payload)
       };
 
     case DELETE_CHILD_ERROR: {

@@ -62,14 +62,14 @@ const ChoreList = (props) => {
   const fetchChores = props.getChores
 
   useEffect(() => {
-    fetchChores(props.match.params.id);
-  }, [fetchChores]);
+    fetchChores(props.id);
+  }, []);
 
 
   const chores = props.chore.chore
 
   return (
-    <div className="chore-wrap"
+    <ul className="chore-wrap"
       // open={open}
       // onClose={handleClose}
       // aria-labelledby="simple-modal-title"
@@ -78,23 +78,24 @@ const ChoreList = (props) => {
       
       {chores && chores.length 
     ? chores.map((chre, index) => (
-      <div key={chre.id} >
-        <p>Name: {chre.name}</p>
-        <p>Description: {chre.description}</p>
+      
+      <li key={chre.id} > 
+      {chre.name}
+        {/* <p>Description: {chre.description}</p>
         <p>{chre.photo_obj}</p>
         <p>Comments: {chre.comments}</p>
         <p>Completed: {chre.completed}</p>
         <p>Score: {chre.chore_score}</p>
         <p>Bonus: {chre.bonus_pts}</p>
-        <p>Streak: {chre.clean_strk}</p>
+        <p>Streak: {chre.clean_strk}</p> */}
         
-      </div>  
+      </li>  
       
       )
     )
     : <CircularProgress/>
     }
-    </div>
+    </ul>
   )
 }
 

@@ -17,7 +17,7 @@ const getChildren = () => async dispatch => {
     })
     .catch(err => {
 
-      dispatch({type: GET_CHILDREN_ERROR, payload: `${err.res}` });
+      dispatch({type: GET_CHILDREN_ERROR, payload: err.res});
       
     });
 };

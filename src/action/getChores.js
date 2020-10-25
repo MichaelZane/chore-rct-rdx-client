@@ -6,6 +6,7 @@ import {
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const getChores = (id) => async dispatch => {
+
   dispatch({type: FETCH_CHORES_START});
   
   return await axiosWithAuth()

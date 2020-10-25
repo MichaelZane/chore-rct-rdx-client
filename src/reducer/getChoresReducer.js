@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   chore: [],
-  fetchingChoresList: false,
+  isLoading: false,
   error: ''
 };
 
@@ -15,14 +15,14 @@ export const getChoresReducer = (state = initialState, action) => {
     case FETCH_CHORES_START:
       return {
         ...state,
-        fetchingChoresList: true,
+        isLoading: true,
         error: null
       };
     case FETCH_CHORES_SUCCESS:
 
       return {
         ...state,
-        fetchingChoresList: false,
+        isLoading: false,
         chore: action.payload
       };
     case FETCH_CHORES_ERROR:

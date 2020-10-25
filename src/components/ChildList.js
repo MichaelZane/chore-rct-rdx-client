@@ -82,13 +82,13 @@ const ChildList = ( props ) => {
       
     
         <Card 
-        key={chld.id}
+        key={index}
         className={classes.root}
         
         >
           <Typography 
           > <Button
-            onClick={() => props.deleteChild(parseInt(chld.id))  }
+            onClick={() => deleteChild(chld.id)  }
           ><span>X</span></Button>
           </Typography>
           
@@ -104,13 +104,13 @@ const ChildList = ( props ) => {
               </Avatar>
             }
             titleTypographyProps={{variant: "h5"}}
-          title={<NavLink to={'/child'}
+          title={<NavLink to={'/childdetail'}
           >{chld.fstname}</NavLink>}
             subheader={chld.username}
             
           />
           <CardContent>
-            <ChoreList id={chld.id}/>
+            <ChoreList child_id={chld.id}/>
           </CardContent>
         
         </Card>

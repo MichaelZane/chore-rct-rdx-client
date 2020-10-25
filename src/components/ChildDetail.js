@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import updateChild from "../action/updateChild"
 import deleteChild from "../action/deleteChild"
+import child from "../action/child"
+
 
         /* Router */
 import {Link} from "react-router-dom"
@@ -45,57 +47,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Child = ( props ) => {
-
-  useEffect(() => {
-    props.updateChild()
-  }, [])
-
-  const [editing, setEditing] = useState(false)
-  const [change, setChange] = useState({
-
-    fstname: props.newChild.fstname,
-    lstname: props.newChild.lstname,
-    username: props.newChild.username,
-    password: props.newChild.password
-
-  })
-
-  const onChange = e => {
-    setChange({
-      ...change,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const onEdit = () => {
-    setEditing(!editing)
-  }
-
-  
-
-  const childSent = {...change, id: props.newChild.id}
-
-  const onSubmit = e => {
-    e.preventDefault()
-    props.updateChild(childSent)
-    setEditing(false)
-  }
-
-  const classes = useStyles();
+	
+	const classes = useStyles();
+	
+	console.log(props.details.details)
   
   return (
     <div>
-
+			
       <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          {/* < AccountCircle /> */}
+          < AccountCircle />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Update Child
+          Child Details
         </Typography>
-        <form className={classes.form} onSubmit={onSubmit} noValidate>
+        <form className={classes.form}  >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               
@@ -106,10 +75,10 @@ const Child = ( props ) => {
                 required
                 fullWidth
                 id='fstname'
-                value={change.fstname}
                 label='First Name'
-                autoFocus
-                onChange={onChange}
+								autoFocus
+								value={props.details.fstname}
+
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -119,11 +88,9 @@ const Child = ( props ) => {
                 required
                 fullWidth
                 id='lstname'
-                value={change.lstname}
                 label='Last Name'
                 name='lstname'
                 autoComplete='lstname'
-                onChange={onChange}
               />
             </Grid>
 
@@ -136,9 +103,7 @@ const Child = ( props ) => {
                 label='Username'
                 type='text'
                 id='username'
-                value={change.username}
                 autoComplete='current-username'
-                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -150,9 +115,7 @@ const Child = ( props ) => {
                 label='Password'
                 type='password'
                 id='password'
-                value={change.password}
                 autoComplete='current-password'
-                onChange={onChange}
               />
             </Grid>
           </Grid>
@@ -163,7 +126,7 @@ const Child = ( props ) => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={() => props.history.push(`/justchild/${props.newChild.id}`)}
+            onClick={() => props.history.push(`/justchild/${props.details.id}`)}
           >
             Update
           </Button>
@@ -179,8 +142,8 @@ const Child = ( props ) => {
 
 const mapStateToProps = state => {
   return {
-    newChild: state.newChild.newChild
+    details: state.details.details
   }
 }
 
-export default connect(mapStateToProps, {updateChild, deleteChild})(Child)
+export default connect(mapStateToProps, {child, updateChild, deleteChild})(Child)

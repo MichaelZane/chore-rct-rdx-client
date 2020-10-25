@@ -45,42 +45,28 @@ import { CircularProgress, Modal } from '@material-ui/core';
 
 const ChoreList = (props) => {
 
-  // const classes = useStyles();
+  const {getChores, chore, child_id} = props
 
-  // const [modalStyle] = useState(getModalStyle);
-
-  // const [open, setOpen] = useState(false);
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  const fetchChores = props.getChores
-
+  
   useEffect(() => {
-    fetchChores(props.id);
-  }, []);
 
+    getChores(props.child_id);
+
+  }, []);
 
   const chores = props.chore.chore
 
+  
+
   return (
-    <ul className="chore-wrap"
-      // open={open}
-      // onClose={handleClose}
-      // aria-labelledby="simple-modal-title"
-      // aria-describedby="simple-modal-description"
-    > 
+    <ul className="chore-wrap"> 
       
-      {chores && chores.length 
+      {chores && chores.length > 0 
     ? chores.map((chre, index) => (
       
       <li key={chre.id} > 
-      {chre.name}
+      {console.log(child_id, chre.child_id)}
+        {chre.name}
         {/* <p>Description: {chre.description}</p>
         <p>{chre.photo_obj}</p>
         <p>Comments: {chre.comments}</p>

@@ -5,13 +5,13 @@ import {
   } from '.';
   import axiosWithAuth from '../utils/axiosWithAuth';
   
-  const child = (child, history )=> dispatch => {
+  const child = (id, history )=> dispatch => {
     dispatch({type: CHILD_START});
     return axiosWithAuth()
-      .put(`/api/auth/child/justchild${localStorage.getItem("childId")}`, child)
+      .put(`/api/auth/child/justchild${id}`)
       .then(res => {
         
-        dispatch({type: CHILD_SUCCESS, payload: res.data});
+        dispatch({type: CHILD_SUCCESS, payload: id });
   
         history.push(`/child`)
   

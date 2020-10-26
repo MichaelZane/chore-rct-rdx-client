@@ -4,7 +4,7 @@ const axiosWithAuth = () => {
   const token = localStorage.getItem('token');
 
   return axios.create({
-    baseURL: 'https://chore-backend.herokuapp.com',
+    baseURL: process.env.REACT_BACKEND_URL,
     headers: {
       Authorization: token
     }

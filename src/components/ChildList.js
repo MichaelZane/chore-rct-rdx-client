@@ -51,10 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
           /* ChildList */
-
-
 
 const ChildList = ( props ) => {
 
@@ -68,11 +65,7 @@ const ChildList = ( props ) => {
     
   }, [fetch])
   
-  const exit = () => {
-    props.history.goBack()
-  }
-
-
+ 
   const childProps = props.childs.child
 
   return (
@@ -110,7 +103,7 @@ const ChildList = ( props ) => {
             
           />
           <CardContent>
-            <ChoreList child_id={chld.id}/>
+            <ChoreList id={chld.id}/>
           </CardContent>
         
         </Card>

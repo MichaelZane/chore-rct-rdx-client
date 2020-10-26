@@ -5,12 +5,12 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChores = (id) => async dispatch => {
-
+const getChores = (child_id) => async dispatch => {
+  
   dispatch({type: FETCH_CHORES_START});
   
   return await axiosWithAuth()
-    .get(`/api/auth/child/${id}`)
+    .get(`/api/auth/child/${child_id}`)
     .then(res => {
 
       dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data})

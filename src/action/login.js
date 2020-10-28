@@ -38,12 +38,12 @@ export const signUpGoogle = (signUpData) => async   (dispatch) => {
     .post("/api/oath/login", {
       token: localStorage.getItem("token")
     })
-    .then((response) => {
-      localStorage.setItem("token", response.data.token)
+    .then((res) => {
+      localStorage.setItem("token", res.data.token)
 
       return dispatch({
         type: USER_SIGNIN_GOOGLE_SUCCESS,
-        payload: response.data
+        payload: res.data
       })
     }) 
 }

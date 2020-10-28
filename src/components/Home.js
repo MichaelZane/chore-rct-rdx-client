@@ -33,6 +33,13 @@ const Home = () => {
           variant="outlined"
         >Add Child</Button>
         </Link>
+
+        <Link to={"/Addchore"}>
+        <Button
+          variant="outlined"
+        >Add Chore</Button>
+        </Link>
+
         <Button
         onClick={logout}
         variant="outlined"

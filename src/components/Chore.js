@@ -1,10 +1,15 @@
 import React from 'react';
 
+      /* MUI */
+import Card from '@material-ui/core/Card';
 
 
 function Chore(props) {
-  return <div>
 
+
+
+  return <div>
+    <Card>
     <p>Name: {props.name}</p>
     <p>Description: {props.description}</p>
     <p>{props.photo_obj}</p>
@@ -12,7 +17,9 @@ function Chore(props) {
     <p>Completed: {props.completed}</p>
     <p>Score: {props.chore_score}</p>
     <p>Bonus: {props.bonus_pts}</p>
-    <p>Streak: {props.clean_strk}</p> 
+    <p>Streak: {props.clean_strk}</p>
+    </Card>
+     
 
   </div>;
 }

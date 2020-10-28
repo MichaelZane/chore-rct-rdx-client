@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
           /* Redux */
 
@@ -20,13 +20,15 @@ const ChoreList = (props) => {
 
   const {getChores, chore, id} = props
 
-
   useEffect(() => {
     
     getChores(props.id);
 
-
   }, []);
+
+  const filterChore = () => {
+    return props.id === chores.child_id
+  }
 
   const chores = props.chore.chore
 
@@ -34,15 +36,17 @@ const ChoreList = (props) => {
     <div className="chore-wrap"> 
       
       {chores && chores.length > 0 
-    ? chores.map((chore, index) => (
-      
-      <li key={index} type="none"> 
-      {props.id === chore.child_id ? <Link to={'/chore'}><span>{chore.name}</span></Link> : <span>No Chores</span> }
+    ? chores
+        .filter(chore => chore.child_id === props.id)
+        .map(chore => (
+          <li key={chore.id} type="none">
+            {chore.name}
+          </li>
+        ))
         
-      </li>  
+        
       
-      )
-    )
+      
     : <CircularProgress/>
     }
     </div>

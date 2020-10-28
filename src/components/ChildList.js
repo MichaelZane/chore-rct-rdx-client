@@ -66,12 +66,13 @@ const ChildList = ( props ) => {
   }, [fetch])
   
  
+
   const childProps = props.childs.child
 
   return (
     <div className="child-card-wrap">
     {childProps && childProps.length > 0 
-    ? childProps.map((chld, index) => (
+    ? childProps.map((child, index) => (
       
     
         <Card 
@@ -81,7 +82,7 @@ const ChildList = ( props ) => {
         >
           <Typography 
           > <Button
-            onClick={() => deleteChild(chld.id)  }
+            onClick={() => deleteChild(child.id)  }
           ><span>X</span></Button>
           </Typography>
           
@@ -92,18 +93,18 @@ const ChildList = ( props ) => {
               className={classes.avatar}
               src=""
               >
-              {chld.fstname.toUpperCase().charAt(0)}
+              {child.fstname.toUpperCase().charAt(0)}
 
               </Avatar>
             }
             titleTypographyProps={{variant: "h5"}}
           title={<NavLink to={'/childdetail'}
-          >{chld.fstname}</NavLink>}
-            subheader={chld.username}
+          >{child.fstname}</NavLink>}
+            subheader={child.username}
             
           />
           <CardContent>
-            <ChoreList id={chld.id}/>
+            <ChoreList id={child.id}/>
           </CardContent>
         
         </Card>

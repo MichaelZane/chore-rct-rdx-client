@@ -36,6 +36,7 @@ const App = () => {
       <PrivateRoute exact path='/updateChore' component={UpdateChore} />
       <PrivateRoute exact path='/childList' component={ChildList} />
       <PrivateRoute exact path='/childdetail' component={ChildDetail} />
+      <PrivateRoute exact path='/chore'  component={Chore} />
       <PrivateRoute exact path='/chore/:id'  component={Chore} />
       <PrivateRoute exact path='/choreList/:id' component={Chore} />
       <PrivateRoute exact path='/choreList' component={ChoreList}/>

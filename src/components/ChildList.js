@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 
         /* Router */
 import { NavLink, Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import addChores from '../action/addChores';
 import deleteChores from '../action/deleteChores';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
+
 import ChoreList from './ChoreList';
 
 import Child from './ChildDetail';
@@ -61,12 +62,12 @@ const ChildList = ( props ) => {
 
 
   useEffect(() => {
-    fetch()
-    
-  }, [fetch])
-  
- 
 
+    fetch()
+         
+  }, [fetch])
+
+  
   const childProps = props.childs.child
 
   return (
@@ -98,8 +99,12 @@ const ChildList = ( props ) => {
               </Avatar>
             }
             titleTypographyProps={{variant: "h5"}}
-          title={<NavLink to={'/childdetail'}
-          >{child.fstname}</NavLink>}
+          title={<NavLink 
+                    to={'/childdetail'}
+                    onClick={localStorage.setItem('childId', child.id)}
+                  >{child.fstname}
+                  </NavLink>}
+
             subheader={child.username}
             
           />
@@ -110,7 +115,7 @@ const ChildList = ( props ) => {
         </Card>
       )
     )
-    : <CircularProgress />
+    : <CircularProgress/>
     }
     
   </div>
@@ -122,7 +127,8 @@ const ChildList = ( props ) => {
 const mapStateToProps = (state) => { 
 
   return {
-    childs : state.child.child,
+    childs: state.child.child,
+    
     
     
  
@@ -131,4 +137,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, 
-  {getChildren, deleteChild})(ChildList);
+  { getChildren, deleteChild })(ChildList);

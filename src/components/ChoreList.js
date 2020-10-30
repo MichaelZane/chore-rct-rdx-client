@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 
           /* Redux */
 
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import getChores from '../action/getChores';
 
           /* Router */
@@ -12,6 +12,7 @@ import {Link} from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Modal } from '@material-ui/core';
+import child from '../action/child';
 
 
           /* ChoreList */
@@ -20,16 +21,11 @@ const ChoreList = (props) => {
 
   const {getChores, chore, id} = props
 
-  useEffect(() => {
-    
-    getChores(props.id);
+  const [chorz, setChorz] = useState([])
 
-  }, []);
 
-  const filterChore = () => {
-    return props.id === chores.child_id
-  }
-
+  
+  
   const chores = props.chore.chore
 
   return (
@@ -38,17 +34,21 @@ const ChoreList = (props) => {
       {chores && chores.length > 0 
     ? chores
         .filter(chore => chore.child_id === props.id)
+        
         .map(chore => (
+          
           <li key={chore.id} type="none">
             {chore.name}
           </li>
+        
         ))
         
         
       
       
-    : <CircularProgress/>
+    : <span>No Chores</span>
     }
+    
     </div>
   )
 }

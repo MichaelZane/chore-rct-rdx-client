@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import updateChild from "../action/updateChild"
 import deleteChild from "../action/deleteChild"
+import getChores from '../action/getChores';
 import child from "../action/child"
 
 
@@ -48,13 +49,26 @@ const useStyles = makeStyles(theme => ({
 
 const Child = ( props ) => {
 	
-	const classes = useStyles();
-	
-	console.log(props.details.details)
+  const classes = useStyles();
   
+  const childId = props.location.idProps
+	
+	useEffect(() => {
+    props.child(childId)
+  }, [])
+
+  useEffect(() => {
+    props.getChores(props.id)
+  })
+
+  const theChild = props.details.details
+  const chore = props.chore.chore
+
   return (
     <div>
-			
+			{theChild && theChild.map(child => (
+
+      
       <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
@@ -77,7 +91,7 @@ const Child = ( props ) => {
                 id='fstname'
                 label='First Name'
 								autoFocus
-								value={props.details.fstname}
+								value={child.fstname}
 
               />
             </Grid>
@@ -91,6 +105,7 @@ const Child = ( props ) => {
                 label='Last Name'
                 name='lstname'
                 autoComplete='lstname'
+                value={child.lstname}
               />
             </Grid>
 
@@ -104,18 +119,7 @@ const Child = ( props ) => {
                 type='text'
                 id='username'
                 autoComplete='current-username'
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                value={child.username}
               />
             </Grid>
           </Grid>
@@ -126,7 +130,7 @@ const Child = ( props ) => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={() => props.history.push(`/justchild/${props.details.id}`)}
+            onClick={() => props.history.push(`/justchild/${childId}`)}
           >
             Update
           </Button>
@@ -135,6 +139,7 @@ const Child = ( props ) => {
       </div>
 
     </Container>
+      ))}
     </div>
     
   )
@@ -142,8 +147,9 @@ const Child = ( props ) => {
 
 const mapStateToProps = state => {
   return {
-    details: state.details.details
+    details: state.details.details,
+    chore: state.chore.chore
   }
 }
 
-export default connect(mapStateToProps, {child, updateChild, deleteChild})(Child)
+export default connect(mapStateToProps, {child, updateChild, deleteChild, getChores})(Child)

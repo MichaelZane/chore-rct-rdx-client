@@ -8,12 +8,12 @@ import {
   const child = (id, history )=> dispatch => {
     dispatch({type: CHILD_START});
     return axiosWithAuth()
-      .put(`/api/auth/child/justchild${id}`)
+      .get(`/api/auth/child/${id}`)
       .then(res => {
         
         dispatch({type: CHILD_SUCCESS, payload: id });
   
-        history.push(`/child`)
+        history.push(`/childdetails`)
   
       })
       .catch(err => {

@@ -1,5 +1,7 @@
 import {
-    CHILD_START, CHILD_SUCCESS, CHILD_ERROR
+    CHILD_START, 
+    CHILD_SUCCESS, 
+    CHILD_ERROR
   } from '../action';
   
   const initialState = {

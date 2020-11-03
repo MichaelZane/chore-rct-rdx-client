@@ -8,12 +8,12 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 const updateChild = (newChild, id, history )=> dispatch => {
   dispatch({type: UPDATE_CHILD_START});
   return axiosWithAuth()
-    .put(`/api/auth/child/justchild/${id}`, newChild)
+    .put(`/api/auth/child/${id}`, newChild)
     .then(res => {
       
       dispatch({type: UPDATE_CHILD_SUCCESS, payload: res.data});
 
-      history.push(`/justchild/${id}`)
+      history.push(`/childdetails/${id}`)
 
     })
     .catch(err => {

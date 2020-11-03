@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 
         /* Router */
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useParams } from 'react-router-dom';
 
          /* Redux */
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { CircularProgress } from '@material-ui/core';
-
+import { useSelector } from "react-redux"
 
 
            /* Styles */
@@ -54,20 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
           /* ChildList */
 
-const ChildList = ( props ) => {
+const ChildList = props => {
 
   const classes = useStyles();
 
-  const fetch = props.getChildren
+  useEffect(() => {    
+    props.getChildren()        
+  }, [])
 
-
-  useEffect(() => {
-
-    fetch()
-         
-  }, [fetch])
-
-  
   const childProps = props.childs.child
 
   return (
@@ -75,9 +69,8 @@ const ChildList = ( props ) => {
     {childProps && childProps.length > 0 
     ? childProps.map((child, index) => (
       
-    
         <Card 
-        key={index}
+        key={child.id}
         className={classes.root}
         
         >
@@ -100,7 +93,7 @@ const ChildList = ( props ) => {
             }
             titleTypographyProps={{variant: "h5"}}
           title={<NavLink 
-                    to={'/childdetail'}
+                    to={`/childdetail/${child.id}`}
                     onClick={localStorage.setItem('childId', child.id)}
                   >{child.fstname}
                   </NavLink>}

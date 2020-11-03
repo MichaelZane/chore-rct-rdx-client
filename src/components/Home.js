@@ -12,6 +12,7 @@ import ChoreList from './ChoreList';
 
        /* Router */
 import { Link } from "react-router-dom"
+import { ChoresList } from './ChoresList';
 
        /* Home */
 
@@ -46,8 +47,9 @@ const Home = () => {
         >LogOut</Button>
         
         <ChildList />
+       
       {/* <TodoList /> */}
-        {/* <ChoreList /> */}
+
     </div>
   );
 };

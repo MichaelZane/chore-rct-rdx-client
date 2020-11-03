@@ -3,17 +3,18 @@ import {
     CHILD_SUCCESS, 
     CHILD_ERROR
   } from '.';
+  
   import axiosWithAuth from '../utils/axiosWithAuth';
   
   const child = (id, history )=> dispatch => {
     dispatch({type: CHILD_START});
     return axiosWithAuth()
-      .get(`/api/auth/child/${id}`)
+      .get(`/api/auth/justchild/${id}`)
       .then(res => {
         
         dispatch({type: CHILD_SUCCESS, payload: id });
   
-        history.push(`/childdetails`)
+        history.push(`/childdetails/${id}`)
   
       })
       .catch(err => {

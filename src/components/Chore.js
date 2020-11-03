@@ -1,27 +1,37 @@
 import React from 'react';
+import { useSelector } from "react-redux"
+
 
       /* MUI */
 import Card from '@material-ui/core/Card';
+import { ChildChores } from './ChildChores';
+import { Link } from '@material-ui/core';
 
 
-function Chore(props) {
+export const Chore = ({ match}) => {
+
+  const { choreId } = match.params
+
+  const chore = useSelector(state => state.chores.find(chore => chore.id === choreId))
+
+  if(!chore) {
+    return (
+      <span>Chore Not Found!</span>
+    )
+  }
+
+return (
+  <div>
+    <strong>{chore.name}</strong>
+    <div>
+      <ChildChores childId={chore.child}/>
+    </div>
+    <Link 
+      to={`/editchore/${chore.id}`} 
+      className="btn">Edit</Link>
+  </div>
+
+)
 
 
-
-  return <div>
-    <Card>
-    <p>Name: {props.name}</p>
-    <p>Description: {props.description}</p>
-    <p>{props.photo_obj}</p>
-    <p>Comments: {props.comments}</p>
-    <p>Completed: {props.completed}</p>
-    <p>Score: {props.chore_score}</p>
-    <p>Bonus: {props.bonus_pts}</p>
-    <p>Streak: {props.clean_strk}</p>
-    </Card>
-     
-
-  </div>;
 }
-
-export default Chore;

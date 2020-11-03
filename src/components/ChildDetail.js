@@ -54,21 +54,15 @@ const Child = ( props ) => {
   const childId = props.location.idProps
 	
 	useEffect(() => {
-    props.child(childId)
+    props.child(props.match.params.id)
   }, [])
 
-  useEffect(() => {
-    props.getChores(props.id)
-  })
 
-  const theChild = props.details.details
-  const chore = props.chore.chore
+  
+
 
   return (
-    <div>
-			{theChild && theChild.map(child => (
-
-      
+    <div>     
       <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
@@ -91,7 +85,7 @@ const Child = ( props ) => {
                 id='fstname'
                 label='First Name'
 								autoFocus
-								value={child.fstname}
+								value={props.name}
 
               />
             </Grid>
@@ -105,7 +99,7 @@ const Child = ( props ) => {
                 label='Last Name'
                 name='lstname'
                 autoComplete='lstname'
-                value={child.lstname}
+                value={props.lstname}
               />
             </Grid>
 
@@ -119,7 +113,7 @@ const Child = ( props ) => {
                 type='text'
                 id='username'
                 autoComplete='current-username'
-                value={child.username}
+                value={props.username}
               />
             </Grid>
           </Grid>
@@ -135,11 +129,12 @@ const Child = ( props ) => {
             Update
           </Button>
           
+          
         </form>
       </div>
 
     </Container>
-      ))}
+     
     </div>
     
   )
@@ -148,7 +143,7 @@ const Child = ( props ) => {
 const mapStateToProps = state => {
   return {
     details: state.details.details,
-    chore: state.chore.chore
+
   }
 }
 

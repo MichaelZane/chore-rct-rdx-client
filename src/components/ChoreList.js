@@ -6,7 +6,7 @@ import {connect, useSelector} from 'react-redux';
 import getChores from '../action/getChores';
 
           /* Router */
-import {Link} from 'react-router-dom'
+import {Link, useParams } from 'react-router-dom'
 
           /* MUI */
 
@@ -19,13 +19,13 @@ import child from '../action/child';
 
 const ChoreList = (props) => {
 
-  const {getChores, chore, id} = props
 
-  const [chorz, setChorz] = useState([])
+  useEffect(() => {
+    
+    props.getChores(props.id)
 
+  }, [])
 
-  
-  
   const chores = props.chore.chore
 
   return (
@@ -33,19 +33,17 @@ const ChoreList = (props) => {
       
       {chores && chores.length > 0 
     ? chores
-        .filter(chore => chore.child_id === props.id)
         
+        .filter(chore => chore.child_id === props.id)
         .map(chore => (
           
           <li key={chore.id} type="none">
-            {chore.name}
+            <strong>{chore.name}</strong>
+            
           </li>
         
         ))
-        
-        
-      
-      
+     
     : <span>No Chores</span>
     }
     

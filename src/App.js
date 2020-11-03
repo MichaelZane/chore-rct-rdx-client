@@ -10,16 +10,15 @@ import UpdateChore from './components/UpdateChore';
 import ChildList from './components/ChildList';
 import ChildDetail from './components/ChildDetail';
 import ChoreList from './components/ChoreList';
-import Chore from './components/Chore';
+import { Chore } from './components/Chore';
 import {PrivateRoute} from './utils/PrivateRoute';
 import Home from './components/Home';
 import UpdateChild from './components/UpdateChild';
+import { connect } from 'react-redux';
 
-const App = () => {
+const App = (props) => {
 
-  const [seeLogin, setSeeLogin] = useState(false)
-  const [seeSignUp, setSeeSignUp] = useState(false)
-
+  
 
   return (
     
@@ -35,14 +34,14 @@ const App = () => {
       <PrivateRoute exact path='/addChore' component={AddChore} />
       <PrivateRoute exact path='/updateChore' component={UpdateChore} />
       <PrivateRoute exact path='/childList' component={ChildList} />
-      <PrivateRoute exact path='/childdetail' component={ChildDetail} />
+      <PrivateRoute exact path='/childdetail/:id' component={ChildDetail} />
       <PrivateRoute exact path='/chore'  component={Chore} />
       <PrivateRoute exact path='/chore/:id'  component={Chore} />
-      <PrivateRoute exact path='/choreList/:id' component={Chore} />
-      <PrivateRoute exact path='/choreList' component={ChoreList}/>
+      <PrivateRoute exact path='/choreList/:id' component={ChoreList} />
+      {/* <PrivateRoute exact path='/choreList' component={ChoreList}/> */}
     </Switch>
   
   );
 };
 
-export default App;
+export default connect(state => state)(App);

@@ -23,9 +23,26 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { AccountCircle } from '@material-ui/icons';
+import Card from '@material-ui/core/Card';
+
+        
+import { ChildChores } from './ChildChores';
+import ChoreList from './ChoreList';
 
        /* styling starts here */
 
+function Copyright() {
+return (
+  <Typography variant='body2' color='textSecondary' align='center'>
+    {'Copyright © '}
+    <Link color='inherit' to='/'>
+      Track `Em
+    </Link>{' '}
+    {new Date().getFullYear()}
+    {'.'}
+  </Typography>
+);
+}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -48,21 +65,48 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Child = ( props ) => {
+
+  const [child, setChild] = useState("")
 	
   const classes = useStyles();
+
+  const changeHandler = event => {
+    setChild({...child, [event.target.name]: event.target.value});
+
+  };
+
+  const submitHandler = e => {
+    e.preventDefault();
+    props.updateChild(child);
+    props.history.push('/home');
+
+    setChild({
+      fstname: '',
+      lstname: '',
+      username: '',
+      
+    });
+  };
   
-  const childId = props.location.idProps
+
 	
 	useEffect(() => {
+
     props.child(props.match.params.id)
+
   }, [])
 
+  const onSubmit = e => {
+    e.preventDefault()
+    
+  }
 
+  const getChild = props.details
   
-
 
   return (
     <div>     
+      
       <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
@@ -70,12 +114,11 @@ const Child = ( props ) => {
           < AccountCircle />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Child Details
+          Your Child Details
         </Typography>
-        <form className={classes.form}  >
+        <form className={classes.form} onSubmit={submitHandler} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              
               <TextField
                 autoComplete='fstname'
                 name='fstname'
@@ -83,10 +126,9 @@ const Child = ( props ) => {
                 required
                 fullWidth
                 id='fstname'
-                label='First Name'
-								autoFocus
-								value={props.name}
-
+                value={getChild.fstname}
+                autoFocus
+                onChange={changeHandler}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -96,10 +138,10 @@ const Child = ( props ) => {
                 required
                 fullWidth
                 id='lstname'
-                label='Last Name'
+                value={getChild.lstname}
                 name='lstname'
                 autoComplete='lstname'
-                value={props.lstname}
+                onChange={changeHandler}
               />
             </Grid>
 
@@ -109,13 +151,18 @@ const Child = ( props ) => {
                 required
                 fullWidth
                 name='username'
-                label='Username'
                 type='text'
                 id='username'
+                value={getChild.username}
                 autoComplete='current-username'
-                value={props.username}
+                onChange={changeHandler}
               />
             </Grid>
+            
+              
+            
+            
+            
           </Grid>
 
           <Button
@@ -124,15 +171,22 @@ const Child = ( props ) => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={() => props.history.push(`/justchild/${childId}`)}
+            onSubmit={onSubmit}
           >
-            Update
+            Update Child
           </Button>
-          
+
+          <Card item xs={12}
+                variant='outlined'
+                fullWidth
+              > {<Link cursor="pointer" to={`/chore/`}><ChoreList id={getChild.id}/></Link>} </Card>
           
         </form>
+        
       </div>
-
+      <Box mt={5}>
+        <Copyright />
+      </Box>
     </Container>
      
     </div>

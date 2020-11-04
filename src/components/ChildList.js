@@ -31,6 +31,7 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { CircularProgress } from '@material-ui/core';
 import { useSelector } from "react-redux"
+import ChildDetail from './ChildDetail';
 
 
            /* Styles */
@@ -59,8 +60,8 @@ const ChildList = props => {
   const classes = useStyles();
 
   useEffect(() => {    
-    props.getChildren()        
-  }, [])
+    props.getChildren(props.id)        
+  }, [getChildren])
 
   const childProps = props.childs.child
 
@@ -102,7 +103,7 @@ const ChildList = props => {
             
           />
           <CardContent>
-            <ChoreList id={child.id}/>
+            
           </CardContent>
         
         </Card>
@@ -115,16 +116,10 @@ const ChildList = props => {
   );
 };
 
-
-
 const mapStateToProps = (state) => { 
 
   return {
-    childs: state.child.child,
-    
-    
-    
- 
+    childs: state.child.child, 
   }    
 }
 

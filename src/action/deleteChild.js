@@ -11,7 +11,7 @@ const deleteChild = (id, history) => dispatch => {
   return axiosWithAuth()
     .delete(`/api/auth/child/${id}`)
     .then(res => {
-      dispatch({ type: DELETE_CHILD_SUCCESS, payload: id,
+      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data.id,
 
       });
       

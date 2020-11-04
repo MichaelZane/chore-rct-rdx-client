@@ -24,29 +24,34 @@ const ChoreList = (props) => {
     
     props.getChores(props.id)
 
-  }, [])
+  }, [props.id])
 
-  const chores = props.chore.chore
+
+  
+
+  const singleChore = props.chore.chore
 
   return (
     <div className="chore-wrap"> 
       
-      {chores && chores.length > 0 
-    ? chores
+      {singleChore && singleChore.length > 0  
+    ? singleChore
+        .filter(function(chore) {
+          return chore.child_id === props.id
+        })
         
-        .filter(chore => chore.child_id === props.id)
         .map(chore => (
-          
+
           <li key={chore.id} type="none">
-            <strong>{chore.name}</strong>
+            <strong>{ chore.name }</strong>
             
           </li>
         
         ))
-     
+   
     : <span>No Chores</span>
-    }
     
+        }
     </div>
   )
 }

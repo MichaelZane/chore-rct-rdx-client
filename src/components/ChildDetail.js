@@ -87,23 +87,15 @@ const Child = ( props ) => {
       
     });
   };
-  
-
-	
+  	
 	useEffect(() => {
 
     props.child(props.match.params.id)
 
   }, [])
 
-  const onSubmit = e => {
-    e.preventDefault()
-    
-  }
-
   const getChild = props.details
   
-
   return (
     <div>     
       
@@ -171,7 +163,7 @@ const Child = ( props ) => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onSubmit={onSubmit}
+            onSubmit={submitHandler}
           >
             Update Child
           </Button>
@@ -179,7 +171,7 @@ const Child = ( props ) => {
           <Card item xs={12}
                 variant='outlined'
                 fullWidth
-              > {<Link cursor="pointer" to={`/chore/`}><ChoreList id={getChild.id}/></Link>} </Card>
+              > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChild.id}/></Link>} </Card>
           
         </form>
         

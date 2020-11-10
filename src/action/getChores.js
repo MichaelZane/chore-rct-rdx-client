@@ -5,7 +5,7 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChores = (id) => async dispatch => {
+const getChores = (id, history) => async dispatch => {
   
   dispatch({type: FETCH_CHORES_START});
   
@@ -14,7 +14,7 @@ const getChores = (id) => async dispatch => {
     .then(res => {
 
       dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data})
-          
+      // history.push(`/childdetails/${id}`)   
     })
     .catch(err => {
       console.log(err);

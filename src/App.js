@@ -10,7 +10,7 @@ import UpdateChore from './components/UpdateChore';
 import ChildList from './components/ChildList';
 import ChildDetail from './components/ChildDetail';
 import ChoreList from './components/ChoreList';
-import { Chore } from './components/Chore';
+import Chore from './components/Chore';
 import {PrivateRoute} from './utils/PrivateRoute';
 import Home from './components/Home';
 import UpdateChild from './components/UpdateChild';
@@ -31,11 +31,10 @@ const App = (props) => {
       <PrivateRoute exact path='/home' component={Home} />
       <PrivateRoute exact path='/signUpChild' component={SignUpChild} />
       <PrivateRoute exact path='/updateChild/:id' component={UpdateChild} />
-      <PrivateRoute exact path='/addChore' component={AddChore} />
+      <PrivateRoute exact path='/addchore' component={AddChore} />
       <PrivateRoute exact path='/updateChore' component={UpdateChore} />
       <PrivateRoute exact path='/childList' component={ChildList} />
       <PrivateRoute exact path='/childdetail/:id' component={ChildDetail} />
-      <PrivateRoute exact path='/chore'  component={Chore} />
       <PrivateRoute exact path='/chore/:id'  component={Chore} />
       <PrivateRoute exact path='/choreList/:id' component={ChoreList} />
       {/* <PrivateRoute exact path='/choreList' component={ChoreList}/> */}

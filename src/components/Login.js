@@ -71,9 +71,6 @@ const Login = props => {
     e.preventDefault()
     props.login(logForm, props.history)
     
-   
-
-
   };
  
   const classes = useStyles();

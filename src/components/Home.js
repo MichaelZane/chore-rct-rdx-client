@@ -35,7 +35,7 @@ const Home = () => {
         >Add Child</Button>
         </Link>
 
-        <Link to={"/Addchore"}>
+        <Link to={"/addchore"}>
         <Button
           variant="outlined"
         >Add Chore</Button>

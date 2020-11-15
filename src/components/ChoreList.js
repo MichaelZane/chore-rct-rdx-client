@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useLayoutEffect} from 'react';
+import React, {useEffect, useRef } from 'react';
 
           /* Redux */
 
@@ -18,7 +18,7 @@ import child from '../action/child';
           /* ChoreList */
 
 const ChoreList = (props) => {
-
+  const prevChore = useRef()
 
   useEffect(() => {
     
@@ -30,6 +30,8 @@ const ChoreList = (props) => {
   
 
   const singleChore = props.chore.chore
+
+  
 
   return (
     <div className="chore-wrap"> 
@@ -43,7 +45,7 @@ const ChoreList = (props) => {
         .map(chore => (
 
           <li key={chore.id} type="none">
-            <strong>{ chore.name }</strong>
+            <strong >{ chore.name }</strong>
             
           </li>
         

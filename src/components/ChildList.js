@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useRef} from 'react';
 
         /* Router */
 import { NavLink, Link, useParams } from 'react-router-dom';
@@ -56,14 +56,17 @@ const useStyles = makeStyles((theme) => ({
           /* ChildList */
 
 const ChildList = props => {
-
+  const prevChore = useRef()
   const classes = useStyles();
 
   useEffect(() => {    
-    props.getChildren(props.id)        
-  }, [getChildren])
+    props.getChildren(props.id)       
+  }, [])
+
 
   const childProps = props.childs.child
+
+ 
 
   return (
     <div className="child-card-wrap">
@@ -103,7 +106,7 @@ const ChildList = props => {
             
           />
           <CardContent>
-            
+            <ChoreList id={child.id}  />
           </CardContent>
         
         </Card>
@@ -120,6 +123,7 @@ const mapStateToProps = (state) => {
 
   return {
     childs: state.child.child, 
+
   }    
 }
 

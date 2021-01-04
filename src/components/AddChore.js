@@ -19,7 +19,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
-import ImageUploader from "./ImageUploader";
+import Upload from "./Upload";
 
           /* Styling */
 
@@ -79,7 +79,7 @@ export function AddChore( props ) {
         <Typography component='h1' variant='h5'>
           Add Your Chores
         </Typography>
-        <ImageUploader />
+        <Upload />
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

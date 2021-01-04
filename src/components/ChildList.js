@@ -60,7 +60,8 @@ const ChildList = props => {
   const classes = useStyles();
 
   useEffect(() => {    
-    props.getChildren(props.id)       
+    props.getChildren(props.id) 
+          
   }, [])
 
 
@@ -106,7 +107,8 @@ const ChildList = props => {
             
           />
           <CardContent>
-            <ChoreList id={child.id}  />
+            {/* <ChoreList  id={child.id}  /> */}
+
           </CardContent>
         
         </Card>

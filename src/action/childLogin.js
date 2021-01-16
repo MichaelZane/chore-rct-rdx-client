@@ -10,9 +10,12 @@ const childLogin = child => async dispatch => {
   return await axiosWithAuth()
     .post('/api/auth/login/child', child)
     .then(res => {
+
+      dispatch({ type: CHILD_LOGIN_SUCCESS, payload: res.data.user });
+
       localStorage.setItem('token', res.data.user.token)
       localStorage.setItem('userId', res.data.user.id)
-      dispatch({ type: CHILD_LOGIN_SUCCESS, payload: res.data.user });
+      
     })
     .catch(err => {
       dispatch({ type: CHILD_LOGIN_ERROR, payload: err.res });

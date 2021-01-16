@@ -19,6 +19,7 @@ export const addChoresReducers = (state = initialStates, action) => {
         error: null
       };
     case ADD_CHORES_SUCCESS:
+      localStorage.setItem("choreId", action.payload.chore.id)
       return {
         ...state,
         addingChores: false,
@@ -29,5 +30,7 @@ export const addChoresReducers = (state = initialStates, action) => {
         ...state,
         error: action.payload
       };
+      default:
+        return state;
   }
 };

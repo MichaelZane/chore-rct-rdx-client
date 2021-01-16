@@ -47,6 +47,7 @@ const ChoreList = (props) => {
           <li key={chore.id} type="none">
             <strong >{ chore.name }</strong>
             
+            
           </li>
         
         ))

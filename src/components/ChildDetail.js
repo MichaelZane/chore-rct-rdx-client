@@ -167,13 +167,24 @@ const Child = ( props ) => {
           >
             Update Child
           </Button>
-
-          <Card item xs={12}
-                variant='outlined'
-                fullWidth
-              > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChild.id}/></Link>} </Card>
+          <Button
+            type='button'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+            onClick={() => props.history.push('/home')}
+          >
+            Cancel
+          </Button>
           
         </form>
+        <h2> {getChild.fstname}'s Chores</h2>
+        <Card item xs={12}
+          variant='outlined'
+          fullWidth
+        > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChild.id}/> </Link>} </Card>
+        
         
       </div>
       <Box mt={5}>

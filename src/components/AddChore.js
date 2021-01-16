@@ -21,6 +21,7 @@ import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
 import Upload from "./Upload";
 
+
           /* Styling */
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(3)
   },
   submit: {
@@ -48,11 +49,14 @@ const useStyles = makeStyles(theme => ({
           /* AddChore */
 
 export function AddChore( props ) {
-  const [formData, setFormData] = useState({
+
+  let childId = localStorage.getItem('childId')
+
+  const [ formData, setFormData ] = useState({
     name: "",
     description: "",
     chore_score: "",
-    child_id: ""
+    child_id: childId,
 
   });
 
@@ -66,7 +70,8 @@ export function AddChore( props ) {
   const handleSubmit = e => {
     e.preventDefault();
     props.addChores(formData, props.history)
-  };
+
+  }
 
   const classes = useStyles();
 
@@ -79,8 +84,9 @@ export function AddChore( props ) {
         <Typography component='h1' variant='h5'>
           Add Your Chores
         </Typography>
-        <Upload />
+        < Upload />
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
+
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -148,6 +154,16 @@ export function AddChore( props ) {
             className={classes.submit}
           >
             Add Chore
+          </Button>
+          <Button
+            type='button'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+            onClick={() => props.history.push('/home')}
+          >
+            Cancel
           </Button>
           
         </form>

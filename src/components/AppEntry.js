@@ -5,10 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Navigation from "./Navigation";
 
-const FormPage = () => {
+const AppEntry = () => {
+
   return (
     <Container>
-      {" "}
       <Navigation />
       <Grid item>
         <h2>Login/Sign Up</h2>
@@ -35,4 +35,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default AppEntry;

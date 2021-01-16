@@ -116,7 +116,7 @@ const Child = ( props ) => {
                 name='fstname'
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 id='fstname'
                 value={getChild.fstname}
                 autoFocus
@@ -128,7 +128,7 @@ const Child = ( props ) => {
                 type='text'
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 id='lstname'
                 value={getChild.lstname}
                 name='lstname'
@@ -141,7 +141,7 @@ const Child = ( props ) => {
               <TextField
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 name='username'
                 type='text'
                 id='username'
@@ -149,17 +149,12 @@ const Child = ( props ) => {
                 autoComplete='current-username'
                 onChange={changeHandler}
               />
-            </Grid>
-            
-              
-            
-            
-            
+            </Grid>            
           </Grid>
 
           <Button
             type='submit'
-            fullWidth
+            fullwidth
             variant='contained'
             color='primary'
             className={classes.submit}
@@ -169,7 +164,7 @@ const Child = ( props ) => {
           </Button>
           <Button
             type='button'
-            fullWidth
+            fullwidth
             variant='contained'
             color='primary'
             className={classes.submit}
@@ -182,7 +177,7 @@ const Child = ( props ) => {
         <h2> {getChild.fstname}'s Chores</h2>
         <Card item xs={12}
           variant='outlined'
-          fullWidth
+          fullwidth
         > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChild.id}/> </Link>} </Card>
         
         

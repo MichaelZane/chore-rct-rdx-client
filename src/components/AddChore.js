@@ -94,7 +94,7 @@ export function AddChore( props ) {
                 name='name'
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 id='name'
                 value={formData.name}
                 label='Add Chore Name'
@@ -107,7 +107,7 @@ export function AddChore( props ) {
                 type='text'
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 id='description'
                 value={formData.description}
                 label='Description'
@@ -121,7 +121,7 @@ export function AddChore( props ) {
               <TextField
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 name='chore_score'
                 label='chore_score'
                 type='text'
@@ -134,7 +134,7 @@ export function AddChore( props ) {
               <TextField
                 variant='outlined'
                 required
-                fullWidth
+                fullwidth
                 name='completed'
                 label='completed'
                 type='completed'
@@ -148,7 +148,7 @@ export function AddChore( props ) {
 
           <Button
             type='submit'
-            fullWidth
+            fullwidth
             variant='contained'
             color='primary'
             className={classes.submit}
@@ -157,7 +157,7 @@ export function AddChore( props ) {
           </Button>
           <Button
             type='button'
-            fullWidth
+            fullwidth
             variant='contained'
             color='primary'
             className={classes.submit}

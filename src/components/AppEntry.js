@@ -8,7 +8,7 @@ import Navigation from "./Navigation";
 const AppEntry = () => {
 
   return (
-    <Container>
+    <div className="app-wrapper">
       <Navigation />
       <Grid item>
         <h2>Login/Sign Up</h2>
@@ -31,7 +31,7 @@ const AppEntry = () => {
         </Grid>
       </Grid>
       <br />
-    </Container>
+    </div>
   );
 };
 

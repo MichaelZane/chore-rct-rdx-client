@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("/shareCore.jpg"), linear-gradient(rgba(64,224,208,1),rgb(20, 191, 174));
+  background-blend-mode: overlay;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover, cover;
 }
 
 code {
@@ -15,6 +20,11 @@ code {
 a {
   text-decoration: none;
 
+}
+
+.app-wrapper {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .children-wrap {
@@ -46,10 +56,10 @@ div .MuiCardContent-root {
 
 }
 
-.MuiCardActions-root {
-
-}
-
 .chore-wrap {
   position: relative;
+}
+
+.MuiContainer.root-MuiContainer {
+  
 }

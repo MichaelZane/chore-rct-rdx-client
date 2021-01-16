@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SignUpParent from './components/SignUpParent';
 import SignUpChild from './components/SignUpChild';
-import Dashboard from './components/Dashboard';
+import AppEntry from './components/AppEntry';
 import Login from './components/Login';
 import childLogin from './components/ChildLogin';
 import AddChore from './components/AddChore';
@@ -11,7 +11,7 @@ import ChildList from './components/ChildList';
 import ChildDetail from './components/ChildDetail';
 import ChoreList from './components/ChoreList';
 import Chore from './components/Chore';
-import {PrivateRoute} from './utils/PrivateRoute';
+import { PrivateRoute } from './utils/PrivateRoute';
 import Home from './components/Home';
 import UpdateChild from './components/UpdateChild';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ const App = (props) => {
   return (
     
     <Switch>
-      <Route exact path='/' component={Dashboard} />
+      <Route exact path='/' component={AppEntry} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signUpParent' component={SignUpParent} />
       <Route exact path='/childLogin' component={childLogin} />

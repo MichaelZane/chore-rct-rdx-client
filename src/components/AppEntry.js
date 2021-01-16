@@ -9,28 +9,35 @@ const AppEntry = () => {
 
   return (
     <div className="app-wrapper">
-      <Navigation />
+      
+      {/* <Navigation /> */}
       <Grid item>
-        <h2>Login/Sign Up</h2>
+        <h1>Login/Sign Up</h1>
       </Grid>
       <br />
-      <Grid container spacing={2}>
+      <Grid 
+        container spacing={4}
+        direction="column"
+        justify="center"
+        alignItems="center"
+        >
         <Grid item>
           <Link to="/SignUpChild" style={{ textDecoration: "none" }}>
-            <Button variant="contained" color="primary">
-              I'm a child
+            <Button  variant="contained" color="primary">
+              <h2>I'm a child</h2>
             </Button>
           </Link>
         </Grid>
         <Grid item>
           <Link to="/SignUpParent" style={{ textDecoration: "none" }}>
             <Button variant="contained" color="primary">
-              I'm a parent
+              <h2>I'm a parent</h2>
             </Button>
           </Link>
         </Grid>
       </Grid>
       <br />
+     
     </div>
   );
 };

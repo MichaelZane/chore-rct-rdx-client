@@ -2,19 +2,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Navigation from "./Navigation";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    
+    color: "white"
+  },
+
+  Button: {
+
+    backgroundColor: "transparent",
+    label: {
+      color: "whitesmoke"
+    }
+    
+  }
+  
+}));
+
 const AppEntry = () => {
+
+  const classes = useStyles();
 
   return (
     <div className="app-wrapper">
       
       {/* <Navigation /> */}
-      <Grid item>
+      {/* <Grid item>
         <h1>Login/Sign Up</h1>
-      </Grid>
+      </Grid> */}
       <br />
+      <img className="logo" src="/tracItLogoWhite.png" alt="logo"/>
       <Grid 
         container spacing={4}
         direction="column"
@@ -23,15 +44,15 @@ const AppEntry = () => {
         >
         <Grid item>
           <Link to="/SignUpChild" style={{ textDecoration: "none" }}>
-            <Button  variant="contained" color="primary">
-              <h2>I'm a child</h2>
+            <Button className={classes.Button} variant="contained" color="transparent">
+              I'm a child 
             </Button>
           </Link>
         </Grid>
         <Grid item>
           <Link to="/SignUpParent" style={{ textDecoration: "none" }}>
-            <Button variant="contained" color="primary">
-              <h2>I'm a parent</h2>
+            <Button className={classes.Button} variant="contained" color="transparent">
+              I'm a parent
             </Button>
           </Link>
         </Grid>

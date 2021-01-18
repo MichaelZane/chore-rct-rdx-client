@@ -41,7 +41,7 @@ const Upload = () => {
             console.error('mistakes were made');
             setErrMsg('something went wrong!');
         };
-        let imgId = localStorage.setItem('')
+        
     };
 
     const uploadImage = async (base64EncodedImage) => {
@@ -50,7 +50,7 @@ const Upload = () => {
                 method: 'POST',                
                 body: JSON.stringify({ data: base64EncodedImage }),
                 headers: { 'Content-Type': 'application/json' },
-                
+                credentials: 'same-origin'
             });
             
             setFileInputState('');

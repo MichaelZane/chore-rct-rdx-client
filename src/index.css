@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+    
 }
 
 code {
@@ -14,8 +14,10 @@ code {
 }
 
 a {
+  
   text-decoration: none;
-
+  text-align: center;
+  
 }
 
 .children-wrap {
@@ -53,23 +55,64 @@ div .MuiCardContent-root {
 
 .app-wrapper {
   background-image: url("/shareCore.jpg"), linear-gradient(rgba(0,181,204,1),rgba(0,181,204,1));
-    background-blend-mode: overlay;
+  background-blend-mode: overlay;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  align-items: center; 
+  align-items: center;
+  z-index: -3;
 }
 
 h1 {
   color: whitesmoke;
-  margin-bottom: 70%;
+  margin-bottom: 10%;
 }
 
 h2 {
   color: whitesmoke ;
 }
+
+.logo {
+  height: 450px;
+}
+
+.logo2 {
+  height: 250px;
+}
+
+.container {
+  width: 30rem;
+  height: 20rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .15);   
+  backdrop-filter: blur(5px);
+ }
+
+ .sign-up-wrapper {
+  background-image: url("/bkgrd-code-rain.gif"), linear-gradient(rgba(243,241,239,1),rgba(243,241,239,1));
+  background-blend-mode: overlay;  
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+ }
+
+ .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+    width: 250px;
+    height: 50px;
+    
+    
+ }

@@ -86,82 +86,83 @@ const Login = props => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
-            <TextField
-              variant="outlined"
-              onChange={changeHandler}
-              margin="normal"
-              value={logForm.username}
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              onChange={changeHandler}
-              margin="normal"
-              required
-              value={logForm.password}
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/">Forgot password?</Link>
+    <div className="sign-up-wrapper">
+      <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} onSubmit={submitHandler} noValidate>
+              <TextField
+                variant="outlined"
+                onChange={changeHandler}
+                margin="normal"
+                value={logForm.username}
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                onChange={changeHandler}
+                margin="normal"
+                required
+                value={logForm.password}
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link to="/">Forgot password?</Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/">{"Don't have an account? Sign Up"}</Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link to="/">{"Don't have an account? Sign Up"}</Link>
-              </Grid>
-            </Grid>
-          </form>
+            </form>
+          </div>
+          <div style={{ display: localStorage.token ? "none" : "block" }}>
+          <GoogleLogin
+            className="google-btn"
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Log In with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            />
         </div>
-        <div style={{ display: localStorage.token ? "none" : "block" }}>
-        <GoogleLogin
-          className="google-btn"
-          clientId={process.env.REACT_APP_CLIENT_ID}
-          buttonText="Log In with Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          />
-      </div>
-      <div>
-        <p>or</p>
-      </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-    </Container>
+        <div>
+          <p>or</p>
+        </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+      </Container>
+    </div>
   );
 };
 

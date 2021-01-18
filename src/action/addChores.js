@@ -13,11 +13,9 @@ const addChores = (chore, history) => async dispatch => {
 
       dispatch({type: ADD_CHORES_SUCCESS, payload: res.data});
 
-      history.push("/home")
-
       localStorage.getItem('childId')
-      localStorage.setItem('choreId', res.data)
-
+      localStorage.setItem('choreId', res.data.chore.id)
+      history.push("/home")
             
     })
     

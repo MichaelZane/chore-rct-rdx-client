@@ -1,58 +1,71 @@
-import React from 'react';
+import React from "react";
 
-       /* MUI */
-import { Button, Typography } from '@material-ui/core';
+/* MUI */
+import { Button, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+/* Redux */
 
+import ChildList from "./ChildList";
+import ChoreList from "./ChoreList";
 
-       /* Redux */
+/* Router */
+import { Link } from "react-router-dom";
+import { ChoresList } from "./ChoresList";
 
-import ChildList from './ChildList';
-import ChoreList from './ChoreList';
+const useStyles = makeStyles((theme) => ({
 
+	root: {
+    
+		color: "white"
+	  },
+	
+	  Button: {
+	
+		backgroundColor: "transparent",
+		label: {
+		  color: "whitesmoke"
+		}
+		
+	  }
 
-       /* Router */
-import { Link } from "react-router-dom"
-import { ChoresList } from './ChoresList';
+}));
 
-       /* Home */
+/* Home */
 
 const Home = () => {
-
   const logout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem("token")
-    window.location.reload("/")
-
-  }
-
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.reload("/");
+  };
+  const classes = useStyles();
   return (
-    <div>
-      <Typography>Welcome to your Track'em Dashboard </Typography>
-      
+    <div className="sign-up-wrapper">
+      <div>
+        <Typography>Welcome to your Track'em Dashboard </Typography>
+
         <Link to={"/signupChild"}>
-        <Button
-          variant="outlined"
-        >Add Child</Button>
+          <Button className={classes.Button} variant="outlined">
+            Add Child
+          </Button>
         </Link>
 
         <Link to={"/addchore"}>
-        <Button
-          variant="outlined"
-        >Add Chore</Button>
+          <Button className={classes.Button} variant="outlined">
+            Add Chore
+          </Button>
         </Link>
 
-        <Button
-        onClick={logout}
-        variant="outlined"
-        >LogOut</Button>
-        
-        <ChildList />
-       
-      {/* <TodoList /> */}
+        <Button className={classes.Button} onClick={logout} variant="outlined">
+          LogOut
+        </Button>
 
+        <ChildList />
+
+        {/* <TodoList /> */}
+      </div>
     </div>
   );
 };
 
-
-export default Home
+export default Home;

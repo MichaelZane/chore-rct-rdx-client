@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import { useEffect, useRef} from 'react';
 
         /* Router */
 import { NavLink, Link, useParams } from 'react-router-dom';
@@ -32,7 +32,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { CircularProgress } from '@material-ui/core';
 import { useSelector } from "react-redux"
 import ChildDetail from './ChildDetail';
-
+import { FaTimes } from 'react-icons/fa'
 
            /* Styles */
 
@@ -56,13 +56,15 @@ const useStyles = makeStyles((theme) => ({
           /* ChildList */
 
 const ChildList = props => {
-  const prevChore = useRef()
+ 
   const classes = useStyles();
 
   useEffect(() => {    
     props.getChildren(props.id) 
           
   }, [])
+
+  
 
 
   const childProps = props.childs.child
@@ -79,10 +81,11 @@ const ChildList = props => {
         className={classes.root}
         
         >
+         
           <Typography 
           > <Button
-            onClick={() => deleteChild(child.id)  }
-          ><span>X</span></Button>
+            onClick={() => props.deleteChild(child.id)}
+          ><FaTimes /></Button>
           </Typography>
           
           <CardHeader
@@ -124,7 +127,8 @@ const ChildList = props => {
 const mapStateToProps = (state) => { 
 
   return {
-    childs: state.child.child, 
+    childs: state.child.child,
+
 
   }    
 }

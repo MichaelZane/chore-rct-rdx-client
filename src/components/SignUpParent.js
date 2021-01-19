@@ -15,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import register from "../action/register";
+import { Input } from "@material-ui/core";
+import { BorderColor } from "@material-ui/icons";
 
 // Styling Sign Up Form
 
@@ -32,9 +34,16 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    
-    color: "white"
+  h1: {
+    color: "rgb(0, 94, 144)"
+  },
+  button: {
+    backgroundColor: "rgb(0, 94, 144)",
+    width: "300px",
+    height: "60px",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex"
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -49,7 +58,9 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
+    
+    
   },
   submit: {
     margin: theme.spacing(3, 0, 2)

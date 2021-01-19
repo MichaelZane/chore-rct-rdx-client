@@ -1,10 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Navigation from "./Navigation";
+import logo from '../assets/tracItLogoWhite.png'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,10 +14,8 @@ const useStyles = makeStyles(theme => ({
 
   Button: {
 
-    backgroundColor: "transparent",
-    label: {
-      color: "whitesmoke"
-    }
+    color: "rgb(0, 94, 144)",
+    backgroundColor: "primary"
     
   }
   
@@ -35,7 +33,7 @@ const AppEntry = () => {
         <h1>Login/Sign Up</h1>
       </Grid> */}
       <br />
-      <img className="logo" src="/tracItLogoWhite.png" alt="logo"/>
+      <img className="logo" src={logo} alt="logo"/>
       <Grid 
         container spacing={4}
         direction="column"

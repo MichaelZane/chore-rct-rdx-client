@@ -21,6 +21,7 @@ import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
 import Upload from "./Upload";
 
+
           /* Styling */
 
 const useStyles = makeStyles(theme => ({
@@ -50,15 +51,17 @@ const useStyles = makeStyles(theme => ({
 export function AddChore( props ) {
 
   let childId = localStorage.getItem('childId')
+  
 
   const [ formData, setFormData ] = useState({
+    id: "",
     name: "",
     description: "",
     chore_score: "",
     child_id: childId,
 
   });
-
+  
   const handleChanges = e => {
     setFormData({
       ...formData,
@@ -66,94 +69,109 @@ export function AddChore( props ) {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e, id) => {
     e.preventDefault();
     props.addChores(formData, props.history)
 
   }
 
   const classes = useStyles();
-
+  
   return (
-    <div className="container">
-      <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            < AccountCircle />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Add Your Chores
-          </Typography>
-          < Upload />
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete='name'
-                  name='name'
-                  variant='outlined'
-                  required
-                  fullwidth='true'
-                  id='name'
-                  value={formData.name}
-                  label='Add Chore Name'
-                  autoFocus
-                  onChange={handleChanges}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  type='text'
-                  variant='outlined'
-                  required
-                  fullwidth='true'
-                  id='description'
-                  value={formData.description}
-                  label='Description'
-                  name='description'
-                  autoComplete='description'
-                  onChange={handleChanges}
-                />
-              </Grid>
+    
+    <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          < AccountCircle />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Add Your Chores
+        </Typography>
+        < Upload />
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        
+        
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='name'
+                name='name'
+                variant='outlined'
+                required
+                fullwidth='true'
+                id='name'
+                value={formData.name}
+                label='Add Chore Name'
+                autoFocus
+                onChange={handleChanges}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type='text'
+                variant='outlined'
+                required
+                fullwidth='true'
+                id='description'
+                value={formData.description}
+                label='Description'
+                name='description'
+                autoComplete='description'
+                onChange={handleChanges}
+              />
+            </Grid>
 
-              <Grid item xs={12}>
-                <TextField 
-                  required
-                  fullwidth='true'
-                  name='completed'
-                  label='completed'
-                  type='completed'
-                  id='completed'
-                  value={formData.completed}
-                  autoComplete='current-completed'
-                  onChange={handleChanges}
-                />
-              </Grid>
-            </Grid> 
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullwidth='true'
+                name='chore_score'
+                label='chore_score'
+                type='text'
+                id='chore_score'
+                value={formData.chore_score}
+                onChange={handleChanges}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullwidth='true'
+                name='completed'
+                label='completed'
+                type='completed'
+                id='completed'
+                value={formData.completed}
+                autoComplete='current-completed'
+                onChange={handleChanges}
+              />
+            </Grid>
+          </Grid>
 
-            <Button
-              type='submit'
-              fullwidth='true'
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-            >
-              Add Chore
-            </Button>
-            <Button
-              type='button'
-              fullwidth='true'
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-              onClick={() => props.history.push('/home')}
-            >
-              Cancel
-            </Button>
-            
-          </form>
-        </div>
+          <Button
+            type='submit'
+            fullwidth='true'
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+          >
+            Add Chore
+          </Button>
+          <Button
+            type='button'
+            fullwidth='true'
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+            onClick={() => props.history.push('/home'), localStorage.setItem('choreId', formData.id) }
+          >
+            Cancel
+          </Button>
+          
+        </form>
       </div>
+
   );
 }
 

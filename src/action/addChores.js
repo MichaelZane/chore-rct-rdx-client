@@ -6,15 +6,16 @@ import {
 } from './index';
 
 const addChores = (chore, history) => async dispatch => {
+  
   dispatch({type: ADD_CHORES_START});
   return await axiosWithAuth()
     .post(`/api/chore`, chore)
     .then(res => {
-
+      
       dispatch({type: ADD_CHORES_SUCCESS, payload: res.data});
-
-      localStorage.getItem('childId')
       localStorage.setItem('choreId', res.data.chore.id)
+      localStorage.getItem('childId')
+      
       history.push("/home")
             
     })

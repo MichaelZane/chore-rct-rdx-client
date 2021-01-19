@@ -5,15 +5,14 @@ import {
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const deleteChild = (id, history) => dispatch => {
-
+const deleteChild = (id, history) => async dispatch => {
+  
   dispatch({type: DELETE_CHILD_START});
-  return axiosWithAuth()
+  return await axiosWithAuth()
     .delete(`/api/auth/child/${id}`)
     .then(res => {
-      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data.id,
-
-      });
+      
+      dispatch({ type: DELETE_CHILD_SUCCESS, payload: res.data.id });
       
       history.push("/home")
       

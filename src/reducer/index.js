@@ -16,7 +16,7 @@ export default combineReducers({
   registerReducer,
   childLoginReducer,
   child: addChildReducer,
-  children: deleteChildReducer,
+  child: deleteChildReducer,
   child: getChildrenReducer,
   newChild: updateChildReducer,
   chore: getChoresReducer,

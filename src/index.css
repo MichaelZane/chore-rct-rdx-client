@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
     
 }
 
@@ -54,7 +55,7 @@ div .MuiCardContent-root {
 }
 
 .app-wrapper {
-  background-image: url("/shareCore.jpg"), linear-gradient(rgba(0,181,204,1),rgba(0,181,204,1));
+  background-image: url("/src/assets/shareCore.jpg"), linear-gradient(rgba(0,181,204,1),rgba(0,181,204,1));
   background-blend-mode: overlay;
   background-position: center;
   background-repeat: no-repeat;
@@ -70,7 +71,7 @@ div .MuiCardContent-root {
 }
 
 h1 {
-  color: whitesmoke;
+  color: rgb(0, 94, 144);
   margin-bottom: 10%;
 }
 
@@ -96,7 +97,7 @@ h2 {
  }
 
  .sign-up-wrapper {
-  background-image: url("/bkgrd-code-rain.gif"), linear-gradient(rgba(243,241,239,1),rgba(243,241,239,1));
+  background-image: url("/src/assets/tracItLogoWhite.png"), linear-gradient(rgba(243,241,239,0.9),rgba(243,241,239,0.9));
   background-blend-mode: overlay;  
   background-position: center;
   background-repeat: no-repeat; 
@@ -104,15 +105,18 @@ h2 {
   
   height: 100vh;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
  }
 
- .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
-    width: 250px;
-    height: 50px;
-    
-    
+ 
+
+ @media screen and ( max-width: 920px ) {
+     .sign-up-wrapper {
+         width: 920px;
+
+     }
  }

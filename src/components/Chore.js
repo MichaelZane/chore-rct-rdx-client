@@ -88,7 +88,10 @@ function Copyright() {
     const getChore = props.chore.chore
     
     return (
+      <>
       <div><strong>{chore.name}</strong></div>
+      <div><strong>{chore.description}</strong></div>
+      </>
       // <div>     
       //   {getChore && getChore.map(one => (
       //   <Container component='main' maxWidth='xs'>

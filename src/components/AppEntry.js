@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Navigation from "./Navigation";
+//import Container from "@material-ui/core/Container";
+//import Navigation from "./Navigation";
 import logo from '../assets/tracItLogoWhite.png'
 
 const useStyles = makeStyles(theme => ({

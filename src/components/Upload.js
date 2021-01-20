@@ -8,6 +8,7 @@ const Upload = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [successMsg, setSuccessMsg] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [url, setUrl] = useState('')
 
 
     const handleFileInputChange = (e) => {
@@ -31,7 +32,7 @@ const Upload = () => {
         e.preventDefault();
 
         if (!selectedFile) return;
-
+        
         const reader = new FileReader();
         reader.readAsDataURL(selectedFile);
         reader.onloadend = () => {
@@ -49,22 +50,24 @@ const Upload = () => {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/chore/image`, {
                 method: 'POST',                
                 body: JSON.stringify({ data: base64EncodedImage }),
+                type: 'cors',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'same-origin'
             });
-            
+            setUrl(res.img_url)
             setFileInputState('');
             setPreviewSource('');
             setSuccessMsg('Image uploaded successfully');
-
+            
         } catch (err) {
             console.error(err);
             setErrMsg('Something went wrong!');
         }
     };
-
+    
     return (
         <div>
+            
             <h1 className="title">Upload Chore Image</h1>
             <Alert msg={errMsg} type="danger" />
             <Alert msg={successMsg} type="success" />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
           /* Redux */
 import { connect } from "react-redux"
@@ -8,16 +8,16 @@ import addChores from "../action/addChores"
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+//import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+//import FormControlLabel from '@material-ui/core/FormControlLabel';
+//import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+//import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import addChild from '../action/addChild';
+//import Container from '@material-ui/core/Container';
+//import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
 import Upload from "./Upload";
 
@@ -164,7 +164,7 @@ export function AddChore( props ) {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={() => props.history.push('/home'), localStorage.setItem('choreId', formData.id) }
+            onClick={() => props.history.push('/home')}
           >
             Cancel
           </Button>

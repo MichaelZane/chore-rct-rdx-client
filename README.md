@@ -5,7 +5,7 @@
 ## 4️⃣ Contributors
 
 |                                       [Michael Stevens](https://github.com/michael69)                                        
-|                      [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" />](https://github.com/mzstevens69/>](https://github.com/)                                             |
+|                      [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" />](https://github.com/mzstevens69)                                             |
 |                 [<img src="https://github.com/michael69" width="15"> ](https://github.com/)                 |                         |
 | [ <img src=https://www.linkedin.com/in/michael-stevens-dev/> ](https://www.linkedin.com/) 
 
@@ -15,7 +15,7 @@
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)]()
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Project Overview
@@ -29,15 +29,15 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 ### 4️⃣ Key Features
 
--    feature one
--    feature two
--    feature three
--    feature four
--    feature five
+-    Create chore with picture.
+-    Add children to your profile to track.
+-    On Dashboard see list of children and chores completed/uncompleted.
+-    LeaderBoard shows breakdown of points and who is leading.
 
 ## 1️⃣ Tech Stack
 
 ### Front end built using:
+    React, Javascript, Material-UI, Styled-components, CSS
 
 #### Front end deployed to `Vercel`
 
@@ -45,9 +45,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 #### NodeJs, Express, Knex, PostgreSQL,
 
--    point one
--    point two
--    point three
+
 
 # 3️⃣ Environment Variables
 

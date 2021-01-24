@@ -1,6 +1,6 @@
 # 1️⃣ Trac It chore tracker
 
-1️⃣ You can find the deployed project at [Trac It](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [Trac It]().
 
 ## 4️⃣ Contributors
 

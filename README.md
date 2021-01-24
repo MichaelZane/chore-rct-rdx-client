@@ -39,7 +39,7 @@ Trac It is an app that let's you set the chores and track them until they are co
 
 #### Front end deployed to `Vercel`
 
-#### [Back end]() built using:
+#### [Back end](https://chore-backend.herokuapp.com) built using:
 
 #### NodeJs, Express, Knex, PostgreSQL,
 
@@ -99,7 +99,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation]() for details on the backend of our project.
+See [Backend Documentation](https://github.com/mzstevens69/chore-njs-exp-bked/blob/main/README.md) for details on the backend of our project.
 
 
 

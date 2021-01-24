@@ -1,18 +1,12 @@
-# 1️⃣ Trac It chore tracker
+# Trac It ---> chore tracker
 
-1️⃣ You can find the deployed project at [Trac It]().
+You can find the deployed project at [Trac It]().
 
-## 4️⃣ Contributors
+## Contributors
 
-|                                       [Michael Stevens](https://github.com/michael69)                                        |:----------------------------------------: |                      [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" height = "200" />](https://github.com/michael69)
-| :-----------------------------------------: |                       |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/michael69)                 |                         |
-| [ <img src=https://www.linkedin.com/in/michael-stevens-dev/> ](https://www.linkedin.com/in/michael-stevens-dev) 
-
-<br>
-<br>
-
-![Maintainability](https://api.codeclimate.com/v1/badges/19602e51aa1666635be7/maintainability)
-![Test Coverage](https://api.codeclimate.com/v1/badges/19602e51aa1666635be7/test_coverage)
+|                                        [Michael Stevens]   (https://github.com/mzstevens69)                                 | :--------------------------------: |                    [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" />](https://github.com/mzstevens69)             |              [<img src="https://user-images.githubusercontent.com/54222870/105636871-ded66b00-5e2f-11eb-8965-8907d005c6c2.jpg" color="white" width="15"> ](https://github.com/mzstevens69)             |              [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"/>](https://www.linkedin.com/in/michael-stevens-dev)               |  
+<br/>
+<br/>
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v17.0.1--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
@@ -24,7 +18,7 @@
 Trac It is an app that let's you set the chores and track them until they are completed and awarding points to the child who completed it.  It will display a leaderboard based on points awarded. 
 
 
-### 4️⃣ Key Features
+###  Key Features
 
 -    Create chore with picture.
 -    Add children to your profile to track.
@@ -32,7 +26,7 @@ Trac It is an app that let's you set the chores and track them until they are co
 -    LeaderBoard shows breakdown of points and who is leading.
 -    Child log-in to see jobs and make them complete and updated picture of chore.
 
-## 1️⃣ Tech Stack
+##  Tech Stack
 
 ### Front end built using:
     React, Javascript, Material-UI, Styled-components, CSS
@@ -45,7 +39,7 @@ Trac It is an app that let's you set the chores and track them until they are co
 
 
 
-# 3️⃣ Environment Variables
+#  Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
@@ -55,7 +49,7 @@ In order for the app to function correctly, the user must set up their own envir
 <!-- # 4️⃣ Testing -->
 
 
-# 4️⃣ Installation Instructions
+#  Installation Instructions
 
 
 

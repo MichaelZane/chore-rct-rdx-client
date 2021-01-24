@@ -1,17 +1,19 @@
 # Trac It ---> chore tracker
 
-You can find the deployed project at [Trac It]().
-
-## Contributors
-
-|                                        [Michael Stevens]   (https://github.com/mzstevens69)                                 | :--------------------------------: |                    [<img src="https://user-images.githubusercontent.com/54222870/105637102-3f19dc80-5e31-11eb-879e-70e36004e904.png" width = "200" />](https://github.com/mzstevens69)             |              [<img src="https://user-images.githubusercontent.com/54222870/105636871-ded66b00-5e2f-11eb-8965-8907d005c6c2.jpg" color="white" width="15"> ](https://github.com/mzstevens69)             |              [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"/>](https://www.linkedin.com/in/michael-stevens-dev)               |  
-<br/>
-<br/>
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v17.0.1--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)]()
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+You can find the deployed project at [Trac It]().
+
+
+## Contributors  
+| [Michael Stevens](https://github.com/mzstevens69) |
+ :-----------------------------------------------------------------------------------------------------------: | [<img src="https://user-images.githubusercontent.com/54222870/105637102-3f19dc80-5e31-11eb-879e-70e36004e904.png" width = "200" />](https://github.com/mzstevens69) | [<img src="https://user-images.githubusercontent.com/54222870/105636871-ded66b00-5e2f-11eb-8965-8907d005c6c2.jpg"  width="15"/> ](https://github.com/mzstevens69) | [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"/>](https://www.linkedin.com/in/michael-stevens-dev) |  
+<br/>
+<br/>
 
 ## Project Overview
 

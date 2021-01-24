@@ -4,12 +4,15 @@
 
 ## 4️⃣ Contributors
 
-|                                       [Michael Stevens](https://github.com/michael69)                                        |:----------------------------------------: | :----------------------------------------: | :---------------------------------------: |                      [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" height = "200" />](https://github.com/michael69)                       |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/michael69)                 |                         |
+|                                       [Michael Stevens](https://github.com/michael69)                                        |:----------------------------------------: |                      [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" height = "200" />](https://github.com/michael69)
+| :-----------------------------------------: |                       |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/michael69)                 |                         |
 | [ <img src=https://www.linkedin.com/in/michael-stevens-dev/> ](https://www.linkedin.com/in/michael-stevens-dev) 
 
 <br>
 <br>
 
+![Maintainability](https://api.codeclimate.com/v1/badges/19602e51aa1666635be7/maintainability)
+![Test Coverage](https://api.codeclimate.com/v1/badges/19602e51aa1666635be7/test_coverage)
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v17.0.1--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)

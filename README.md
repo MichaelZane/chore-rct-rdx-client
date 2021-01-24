@@ -6,7 +6,7 @@
 
 🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
-|                                       [*](https://github.com/)                                        
+|                                       [*](https://github.com/michael69)                                        
 |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                                             |
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |                         |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) 
@@ -25,12 +25,6 @@
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
 ## Project Overview
-
-1️⃣ [Trello Board](🚫add link to trello board here)
-
-1️⃣ [Product Canvas](🚫add link to product canvas here)
-
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
 
 🚫 Replace lorem ipsum with a description of your project
 

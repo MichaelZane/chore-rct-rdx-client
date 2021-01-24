@@ -11,18 +11,14 @@
 <br>
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
+![React](https://img.shields.io/badge/react-v17.0.1--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)]()
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Project Overview
 
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Trac It is an app that let's you set the chores and track them until they are completed and awarding points to the child who completed it.  It will display a leaderboard based on points awarded. 
 
 
 ### 4️⃣ Key Features
@@ -31,6 +27,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 -    Add children to your profile to track.
 -    On Dashboard see list of children and chores completed/uncompleted.
 -    LeaderBoard shows breakdown of points and who is leading.
+-    Child log-in to see jobs and make them complete and updated picture of chore.
 
 ## 1️⃣ Tech Stack
 

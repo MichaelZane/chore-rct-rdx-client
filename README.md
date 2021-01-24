@@ -4,7 +4,7 @@ You can find the deployed project at [Trac It]().
 
 ## Contributors
 
-|                                        [Michael Stevens]   (https://github.com/mzstevens69)                                 | :--------------------------------: |                    [<img src="https://avatars3.githubusercontent.com/u/54222870?s=400&u=dceca4bf8b05a7fef13f7cd4610be6ef995fdb79&v=4" width = "200" />](https://github.com/mzstevens69)             |              [<img src="https://user-images.githubusercontent.com/54222870/105636871-ded66b00-5e2f-11eb-8965-8907d005c6c2.jpg" color="white" width="15"> ](https://github.com/mzstevens69)             |              [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"/>](https://www.linkedin.com/in/michael-stevens-dev)               |  
+|                                        [Michael Stevens]   (https://github.com/mzstevens69)                                 | :--------------------------------: |                    [<img src="https://user-images.githubusercontent.com/54222870/105637102-3f19dc80-5e31-11eb-879e-70e36004e904.png" width = "200" />](https://github.com/mzstevens69)             |              [<img src="https://user-images.githubusercontent.com/54222870/105636871-ded66b00-5e2f-11eb-8965-8907d005c6c2.jpg" color="white" width="15"> ](https://github.com/mzstevens69)             |              [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"/>](https://www.linkedin.com/in/michael-stevens-dev)               |  
 <br/>
 <br/>
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)

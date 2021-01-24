@@ -54,7 +54,7 @@ In order for the app to function correctly, the user must set up their own envir
     *  REACT_APP_BACKEND_URL- this is where you can connect to the backend REST API
 
                              
-# 4️⃣ Testing
+<!-- # 4️⃣ Testing -->
 
 
 # 4️⃣ Installation Instructions

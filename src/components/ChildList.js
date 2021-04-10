@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
          /* Redux */
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 //import getChores from '../action/getChores';
 //import addChores from '../action/addChores';
 //import deleteChores from '../action/deleteChores';
-import deleteChild from '../action/deleteChild';
-import getChildren from '../action/getChildren';
+import deleteChild from '../slices/deleteSlice';
+import getChild from '../slices/childSlice';
 
 //import ChoreList from './ChoreList';
 
@@ -59,17 +59,15 @@ const ChildList = props => {
  
   const classes = useStyles();
 
-  useEffect(() => {    
-    props.getChildren(props.id) 
+  const dispatch = useDispatch()
+
+  useEffect(() => {  
+
+    dispatch(getChild(props.id)) 
           
-  }, [])
-
-  
-
-
-  const childProps = props.childs.child
-
+  }, [dispatch])
  
+  const childProps = props.childs.child
 
   return (
     <div className="child-card-wrap">
@@ -135,4 +133,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, 
-  { getChildren, deleteChild })(ChildList);
+  { getChild, deleteChild })(ChildList);

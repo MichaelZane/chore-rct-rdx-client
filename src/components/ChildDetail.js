@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
         /* Redux */
-import { connect } from 'react-redux'
-import updateChild from "../action/updateChild"
-import deleteChild from "../action/deleteChild"
-import getChores from '../action/getChores';
-import child from "../action/child"
+import { connect, useDispatch } from 'react-redux'
+import updateResult from "../slices/updateSlice"
+import deleteChild from "../slices/deleteSlice"
+import getChore from '../slices/choreSlice';
+import getChild, { childSuccess } from "../slices/childSlice"
 
 
         /* Router */
@@ -70,6 +70,8 @@ const Child = ( props ) => {
 	
   const classes = useStyles();
 
+  const dispatch = useDispatch()
+
   const changeHandler = event => {
     setChild({...child, [event.target.name]: event.target.value});
 
@@ -77,7 +79,7 @@ const Child = ( props ) => {
 
   const submitHandler = e => {
     e.preventDefault();
-    props.updateChild(child);
+    dispatch(updateResult(child));
     props.history.push('/home');
 
     setChild({
@@ -92,11 +94,13 @@ const Child = ( props ) => {
   	
 	useEffect(() => {
 
-    props.child(props.match.params.id)
+    childSuccess(props.match.params.id)
+    
+    dispatch(getChild(child))
 
-  }, [])
+  }, [dispatch])
 
-  const getChild = props.details
+  const getChild = props.child
   
   return (
     <div>     
@@ -196,9 +200,9 @@ const Child = ( props ) => {
 
 const mapStateToProps = state => {
   return {
-    details: state.details.details,
+    child: state.child,
 
   }
 }
 
-export default connect(mapStateToProps, {child, updateChild, deleteChild, getChores})(Child)
+export default connect(mapStateToProps, {child, updateResult, deleteChild, getChore, getChild})(Child)

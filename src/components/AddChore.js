@@ -1,8 +1,8 @@
 import { useState } from "react";
 
           /* Redux */
-import { connect } from "react-redux"
-import addChores from "../action/addChores"
+import { connect, useDispatch } from "react-redux"
+import { getChild } from "../slices/childSlice"
 
           /* MUI */
 
@@ -52,6 +52,7 @@ export function AddChore( props ) {
 
   let childId = localStorage.getItem('childId')
   
+  const dispatch = useDispatch()
 
   const [ formData, setFormData ] = useState({
     id: "",
@@ -71,7 +72,7 @@ export function AddChore( props ) {
 
   const handleSubmit = (e, id) => {
     e.preventDefault();
-    props.addChores(formData, props.history)
+    dispatch(getChild(formData, props.history))
 
   }
 
@@ -177,7 +178,7 @@ export function AddChore( props ) {
 
 export default connect(
   null,
-  {addChores}
+  {getChild}
 )(AddChore);
 
 /* 

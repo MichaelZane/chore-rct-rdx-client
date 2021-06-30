@@ -6,7 +6,7 @@ export const updateResult = createAsyncThunk(
     async ({id, history}, { dispatch, getState }) => {
         const { chore, user } = getState();
         return await axiosWithAuth()
-            .post(`/api/auth/child/${id}`, user, chore)
+            .post(`/api/auth/child/${id}`, {user, chore})
             .then(res => 
                 res.data, 
                 history.push(`/childdetails/${id}`))
@@ -32,14 +32,14 @@ const updateSlice = createSlice({
         
     },
     extraReducers: {
-        [update.pending]: (state) => {
+        [updateResult.pending]: (state) => {
           state.status = "loading";
         },
-        [update.fulfilled]: (state, { payload }) => {
+        [updateResult.fulfilled]: (state, { payload }) => {
           state.child.push(payload);
           state.status = "success";
         },
-        [update.rejected]: (state) => {
+        [updateResult.rejected]: (state) => {
           state.status = "failed";
         },
       },

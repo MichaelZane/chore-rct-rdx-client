@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,10 +14,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import register from "../action/register";
+
 import { Input } from "@material-ui/core";
 import { BorderColor } from "@material-ui/icons";
-
+import { getParent } from "../slices/parentSlice";
+import register from "../action/register";
 // Styling Sign Up Form
 
 function Copyright() {
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    color: "whitesmoke"
+    color: "whiteSmoke"
   },
   avatar: {
     margin: theme.spacing(1),
@@ -71,7 +72,8 @@ const useStyles = makeStyles(theme => ({
 //   Function Starts Here
 
 const Register = props => {
-  const [state, setState] = useState({
+
+  const [regstr, setRegstr] = useState({
     fname: "",
     lname: "",
     email: "",
@@ -79,17 +81,16 @@ const Register = props => {
     password: ""
   });
 
-  const changeHandler = event => {
-    setState({ ...state, [event.target.name]: event.target.value });
+  const changeHandler = e => {
+    setRegstr({ ...regstr, [e.target.name]: e.target.value });
 
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
+  const submitHandler = e => {
+    e.preventDefault();
+    props.register(regstr)
 
-    props.register(state);
-
-    setState({
+    setRegstr({
       fname: "",
       lname: "",
       email: "",
@@ -122,7 +123,7 @@ const Register = props => {
                   required
                   fullWidth
                   id="fname"
-                  // value={state.fname}
+                  value={regstr.fname}
                   label="First Name"
                   autoFocus
                   onChange={changeHandler}
@@ -134,7 +135,7 @@ const Register = props => {
                   required
                   fullWidth
                   id="lname"
-                  // value={state.lname}
+                  value={regstr.lname}
                   label="Last Name"
                   name="lname"
                   autoComplete="lname"
@@ -147,6 +148,7 @@ const Register = props => {
                   required
                   fullWidth
                   id="email"
+                  value={regstr.email}
                   label="Email Address"
                   name="email"
                   autoComplete="email"
@@ -162,6 +164,7 @@ const Register = props => {
                   label="Username"
                   type="text"
                   id="username"
+                  value={regstr.username}
                   autoComplete="current-username"
                   onChange={changeHandler}
                 />
@@ -175,6 +178,7 @@ const Register = props => {
                   label="Password"
                   type="password"
                   id="password"
+                  value={regstr.password}
                   autoComplete="current-password"
                   onChange={changeHandler}
                 />

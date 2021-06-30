@@ -2,14 +2,12 @@ import firebase from 'firebase/app'
 import 'firebase/storage'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCg8N304gWZzvkRF_g-un0w2m6UTJvhdVY",
-    authDomain: "chore-images.firebaseapp.com",
-    databaseURL: "https://chore-images.firebaseio.com",
-    projectId: "chore-images",
-    storageBucket: "chore-images.appspot.com",
-    messagingSenderId: "1067777407839",
-    appId: "1:1067777407839:web:e1c47cfd322f1c35d294ea",
-    measurementId: "G-BLTRZG0Z72"
+    apiKey: "AIzaSyAAJWbRrh93z9c0kBWiMOCVwl6MiW0x5lE",
+    authDomain: "chore-fb.firebaseapp.com",
+    projectId: "chore-fb",
+    storageBucket: "chore-fb.appspot.com",
+    messagingSenderId: "428238425239",
+    appId: "1:428238425239:web:667a7f4cbadd6a08d86dd2"
   };
 
   // Initialize Firebase

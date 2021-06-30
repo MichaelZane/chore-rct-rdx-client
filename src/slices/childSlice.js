@@ -3,7 +3,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const getChild = createAsyncThunk(
   "child/getChild",
-  async (obj, { dispatch, getState }) => {
+  async ({history}, { dispatch, getState }) => {
     const { child } = getState();
     return await axiosWithAuth()
       .post("/api/auth/register/child", child)
@@ -44,6 +44,6 @@ const childSlice = createSlice({
   },
 });
 
-export const { ChildStart, ChildSuccess, ChildError } = childSlice.actions;
+export const { childSuccess } = childSlice.actions;
 
 export default childSlice.reducer;

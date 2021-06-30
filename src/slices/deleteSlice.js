@@ -18,19 +18,19 @@ const deleteSlice = createSlice({
         },
         
     },
-    extraReducers: {
-        [deleteChild.pending]: (state) => {
-          state.status = "loading";
-        },
-        [deleteChild.fulfilled]: (state, { payload }) => {
-          state.child.delete(payload);
-          state.status = "success";
-        },
-        [deleteChild.rejected]: (state) => {
-          state.status = "failed";
-        },
-      },
+    // extraReducers: {
+    //     [deleteChild.pending]: (state) => {
+    //       state.status = "loading";
+    //     },
+    //     [deleteChild.fulfilled]: (state, { payload }) => {
+    //       state.child.delete(payload);
+    //       state.status = "success";
+    //     },
+    //     [deleteChild.rejected]: (state) => {
+    //       state.status = "failed";
+    //     },
+    //   },
 })
-export const { deleteStart, deleteSuccess, deleteError } = deleteSlice.actions
+export const { deleteSuccess } = deleteSlice.actions
 
 export default deleteSlice.reducer

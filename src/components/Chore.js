@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { AccountCircle } from '@material-ui/icons';
+import { updateResult } from '../slices/updateSlice';
+import { getChore } from '../slices/choreSlice';
 
 
 
@@ -68,7 +70,7 @@ function Copyright() {
   
     const submitHandler = e => {
       e.preventDefault();
-      props.updateChore(chore);
+      updateResult(chore);
       props.history.push('/home');
   
       setChore({
@@ -81,12 +83,10 @@ function Copyright() {
       
     useEffect(() => {
   
-      props.chore(props.match.params.id)
+      getChore(props.match.params.id)
   
     }, [])
-
-    const getChore = props.chore.chore
-    
+ 
     return (
       <>
       <div><strong>{chore.name}</strong></div>

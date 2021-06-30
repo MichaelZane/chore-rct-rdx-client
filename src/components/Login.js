@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // Redux
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 // Router
 import { Link } from "react-router-dom";
 // Material UI
@@ -16,10 +16,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
 import login from "../action/login";
 import { signUpGoogle } from "../action/login"
 import GoogleLogin, { GoogleLogout } from "react-google-login"
+// import { getUserLogin } from "../slices/loginSlice";
 
 // Styling Starts Here
 
@@ -56,6 +56,9 @@ const useStyles = makeStyles(theme => ({
 /* LogIn */
 
 const Login = props => {
+
+  // const dispatch = useDispatch()
+
   const [logForm, setLogForm] = useState({
     username: "",
     password: ""
@@ -66,10 +69,10 @@ const Login = props => {
 
   };
   
-  const submitHandler = (e) => {
-   
+  const submitHandler = (e) => { 
     e.preventDefault()
     props.login(logForm, props.history)
+    // dispatch(getUserLogin(logForm, props.history))
     
   };
  
@@ -77,13 +80,7 @@ const Login = props => {
 
   /* OATH GOOGLE */
 
-  const responseGoogle = res => {
-    const { tokenId } = res
-    localStorage.setItem("token", tokenId)
-    localStorage.setItem("image", res.profileObj.imageUrl)
-    props.signUpGoogle()
-    props.history.push("/")
-  }
+  
 
   return (
     <div className="sign-up-wrapper">
@@ -147,13 +144,7 @@ const Login = props => {
             </form>
           </div>
           <div style={{ display: localStorage.token ? "none" : "block" }}>
-          <GoogleLogin
-            className="google-btn"
-            clientId={process.env.REACT_APP_CLIENT_ID}
-            buttonText="Log In with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            />
+          
         </div>
         <div>
           <p>or</p>
@@ -168,12 +159,10 @@ const Login = props => {
 
 const mapStateToProps = state => {
   return {
+
     userData: state.userData,
-    
-    
-  
 
   };
 };
 
-export default connect(mapStateToProps, {login, signUpGoogle })(Login);
+export default connect(mapStateToProps, {login})(Login);

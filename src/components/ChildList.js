@@ -8,8 +8,8 @@ import { connect, useDispatch } from 'react-redux';
 //import getChores from '../action/getChores';
 //import addChores from '../action/addChores';
 //import deleteChores from '../action/deleteChores';
-import deleteChild from '../slices/deleteSlice';
-import getChild from '../slices/childSlice';
+import deleteChild from '../action/deleteChild';
+import getChildren from '../action/getChildren';
 
 //import ChoreList from './ChoreList';
 
@@ -59,13 +59,13 @@ const ChildList = props => {
  
   const classes = useStyles();
 
-  const dispatch = useDispatch()
+  
 
   useEffect(() => {  
 
-    dispatch(getChild(props.id)) 
+    props.getChildren(props.id)
           
-  }, [dispatch])
+  }, [props.id])
  
   const childProps = props.childs.child
 
@@ -133,4 +133,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, 
-  { getChild, deleteChild })(ChildList);
+  { getChildren, deleteChild })(ChildList);

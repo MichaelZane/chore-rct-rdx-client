@@ -64,7 +64,7 @@ const Upload = () => {
             setErrMsg('Something went wrong!');
         }
     };
-    
+    console.log(url)
     return (
         <div>
             
@@ -80,9 +80,9 @@ const Upload = () => {
                     value={fileInputState}
                     className="form-input"
                 />
-                <button className="btn" type="submit">
+                {/* <button className="btn" type="submit">
                     Upload Image First
-                </button>
+                </button> */}
             </form>
             {previewSource && (
                 <img

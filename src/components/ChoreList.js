@@ -67,5 +67,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {getChores}
+  mapStateToProps, { getChores }
 )(ChoreList);

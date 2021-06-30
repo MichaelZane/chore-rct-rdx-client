@@ -24,16 +24,16 @@ const App = (props) => {
     
     <Switch>
       <Route exact path='/' component={AppEntry} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/signUpParent' component={SignUpParent} />
-      <Route exact path='/childLogin' component={childLogin} />
+      <Route path='/login' component={Login} />
+      <Route path='/signUpParent' component={SignUpParent} />
+      <Route path='/childLogin' component={childLogin} />
 
-      <PrivateRoute exact path='/home' component={Home} />
-      <PrivateRoute exact path='/signUpChild' component={SignUpChild} />
-      <PrivateRoute exact path='/updateChild/:id' component={UpdateChild} />
-      <PrivateRoute exact path='/addchore' component={AddChore} />
-      <PrivateRoute exact path='/updateChore' component={UpdateChore} />
-      <PrivateRoute exact path='/childList' component={ChildList} />
+      <PrivateRoute path='/home' component={Home} />
+      <PrivateRoute path='/signUpChild' component={SignUpChild} />
+      <PrivateRoute path='/updateChild/:id' component={UpdateChild} />
+      <PrivateRoute path='/addchore' component={AddChore} />
+      <PrivateRoute path='/updateChore' component={UpdateChore} />
+      <PrivateRoute path='/childList' component={ChildList} />
       <PrivateRoute exact path='/childdetail/:id' component={ChildDetail} />
       <PrivateRoute exact path='/chore/:id'  component={Chore} />
       <PrivateRoute exact path='/choreList/:id' component={ChoreList} />

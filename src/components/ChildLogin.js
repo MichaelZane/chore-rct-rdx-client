@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 
-import { getUserLogin } from "../slices/loginSlice";
+import childLogin from "../action/childLogin";
 
 // Styling Starts Here
 
@@ -51,8 +51,6 @@ const useStyles = makeStyles(theme => ({
 
 const ChildLogin = props => {
 
-  const dispatch = useDispatch()
-
   const [form, setForm] = useState({
     username: "",
     password: ""
@@ -65,7 +63,7 @@ const ChildLogin = props => {
   const submitHandler = event => {
     event.preventDefault();
 
-    dispatch(getUserLogin(form));
+    props.getUserLogin(form);
 
     props.history.push("/home")
 
@@ -150,4 +148,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {childLogin})(ChildLogin);
+export default connect(mapStateToProps, { childLogin })(ChildLogin);

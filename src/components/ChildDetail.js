@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
         /* Redux */
-import { connect, useDispatch } from 'react-redux'
-import updateResult from "../slices/updateSlice"
-import deleteChild from "../slices/deleteSlice"
-import getChore from '../slices/choreSlice';
-import getChild, { childSuccess } from "../slices/childSlice"
+import { connect } from 'react-redux'
+// import updateResult from "../slices/updateSlice"
+// import deleteChild from "../slices/deleteSlice"
+// import getChore from '../slices/choreSlice';
+import getChildren from "../action/getChildren"
+import getChores from '../action/getChores';
 
 
         /* Router */
@@ -70,8 +71,6 @@ const Child = ( props ) => {
 	
   const classes = useStyles();
 
-  const dispatch = useDispatch()
-
   const changeHandler = event => {
     setChild({...child, [event.target.name]: event.target.value});
 
@@ -79,7 +78,7 @@ const Child = ( props ) => {
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(updateResult(child));
+    props.updateResult(child);
     props.history.push('/home');
 
     setChild({
@@ -93,14 +92,12 @@ const Child = ( props ) => {
 
   	
 	useEffect(() => {
-
-    childSuccess(props.match.params.id)
     
-    dispatch(getChild(child))
+    props.getChildren(child.id)
 
-  }, [dispatch])
+  }, [])
 
-  const getChild = props.child
+  const getChildren = props.child
   
   return (
     <div>     
@@ -124,7 +121,7 @@ const Child = ( props ) => {
                 required
                 fullwidth
                 id='fstname'
-                value={getChild.fstname}
+                value={getChildren.fstname}
                 autoFocus
                 onChange={changeHandler}
               />
@@ -136,7 +133,7 @@ const Child = ( props ) => {
                 required
                 fullwidth
                 id='lstname'
-                value={getChild.lstname}
+                value={getChildren.lstname}
                 name='lstname'
                 autoComplete='lstname'
                 onChange={changeHandler}
@@ -151,7 +148,7 @@ const Child = ( props ) => {
                 name='username'
                 type='text'
                 id='username'
-                value={getChild.username}
+                value={getChildren.username}
                 autoComplete='current-username'
                 onChange={changeHandler}
               />
@@ -180,11 +177,11 @@ const Child = ( props ) => {
           </Button>
           
         </form>
-        <h2> {getChild.fstname}'s Chores</h2>
+        <h2> {getChildren.fstname}'s Chores</h2>
         <Card item xs={12}
           variant='outlined'
           fullwidth
-        > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChild.id}/> </Link>} </Card>
+        > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChildren.id}/> </Link>} </Card>
         
         
       </div>
@@ -205,4 +202,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {child, updateResult, deleteChild, getChore, getChild})(Child)
+export default connect(mapStateToProps, { getChildren, getChores })(Child)

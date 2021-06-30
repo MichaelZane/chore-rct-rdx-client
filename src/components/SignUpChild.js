@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,6 +14,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
+
 
 // Styling Sign Up Form
 
@@ -53,6 +54,9 @@ const useStyles = makeStyles(theme => ({
 //   Function Starts Here
 
 const SignUpChild = props => {
+
+ 
+
   const [state, setState] = useState({
     parent_id: localStorage.getItem("userId"),
     fstname: '',

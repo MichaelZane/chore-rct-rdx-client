@@ -11,7 +11,7 @@ const register = user => async dispatch => {
 
   return await axios
   
-    .post('https://chore-backend.herokuapp.com/api/auth/register', user)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, user)
     .then(res => {
 
       dispatch({type: REGISTER_SUCCESS, payload: res.data });

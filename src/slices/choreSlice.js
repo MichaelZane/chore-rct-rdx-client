@@ -6,7 +6,7 @@ export const getChore = createAsyncThunk(
     async ({id, history}, { dispatch, getState }) => {
         const { chore } = getState();
         return await axiosWithAuth()
-            .get(`/api/chore/singlechore/${id}`, chore)
+            .post(`/api/chore/singlechore/${id}`, chore)
             .then(res => res.data, history.push(`/chore/${id}`))
             .catch(err => err.res)
     } 
@@ -30,19 +30,19 @@ const choreSlice = createSlice({
         }
     },
     extraReducers: {
-        [getChild.pending]: (state) => {
+        [getChore.pending]: (state) => {
         state.status = "loading";
         },
-        [getChild.fulfilled]: (state, { payload }) => {
-        state.child.push(payload);
+        [getChore.fulfilled]: (state, { payload }) => {
+        state.chore.push(payload);
         state.status = "success";
         },
-        [getChild.rejected]: (state) => {
+        [getChore.rejected]: (state) => {
         state.status = "failed";
         },
   },
 })
 
-  export const { addChoreStart, addChoreSuccess, addChoreError } = childSlice.actions
+  export const { addChoreSuccess } = choreSlice.actions
 
   export default choreSlice.reducer

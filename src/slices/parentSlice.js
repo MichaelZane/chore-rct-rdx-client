@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "axios"
 
 export const getParent = createAsyncThunk(
-    "child/getChild",
-    async (obj, { dispatch, getState }) => {
+    "parent/getParent",
+    async ({}, { dispatch, getState }) => {
         const { user } = getState();
+        
         return await axios 
             .post(process.env.REACT_APP_BACKEND_URL`/api/auth/register`, user)
             .then(res => res.data)
             .catch(err => err.res)
-    } 
+    }   
 )
 
 const initialState = {

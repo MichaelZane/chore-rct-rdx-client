@@ -1,8 +1,8 @@
 import { useState } from "react";
 
           /* Redux */
-import { connect, useDispatch } from "react-redux"
-import { getChild } from "../slices/childSlice"
+import { connect } from "react-redux"
+import addChores from "../action/addChores"
 
           /* MUI */
 
@@ -52,14 +52,16 @@ export function AddChore( props ) {
 
   let childId = localStorage.getItem('childId')
   
-  const dispatch = useDispatch()
-
+  
+  const [url, setUrl] = useState(null)
+  const [alt, setAlt] = useState(null)
   const [ formData, setFormData ] = useState({
     id: "",
     name: "",
     description: "",
     chore_score: "",
     child_id: childId,
+    imageUrl: url
 
   });
   
@@ -72,12 +74,39 @@ export function AddChore( props ) {
 
   const handleSubmit = (e, id) => {
     e.preventDefault();
-    dispatch(getChild(formData, props.history))
 
+    const { files } = document.querySelector('input[type=file]');
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'chore_preset');
+
+    const options = {
+      method: 'POST',
+      body: formData,
+    };
+    props.addChores(formData)
+    return fetch('https://api.Cloudinary.com/v1_1/mikezs/image/upload', options)
+      .then(res => res.json())
+      .then(res => {
+        setUrl(res.secure_url)
+        setAlt(`An image of ${res.original_filename}`)
+      })
+      .catch(err => console.error(err))    
+  }
+
+  const reset = () => {
+    return setFormData({
+      id: "",
+      name: "",
+      description: "",
+      chore_score: "",
+      child_id: "",
+      imageUrl: null
+    })
   }
 
   const classes = useStyles();
-  
+  console.log(formData)
   return (
     
     <div className={classes.paper}>
@@ -87,7 +116,21 @@ export function AddChore( props ) {
         <Typography component='h1' variant='h5'>
           Add Your Chores
         </Typography>
-        < Upload />
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="fileInput"
+            type="file"
+            name="image"
+            onChange={handleChanges}
+            value={formData.imageUrl}
+            className="form-input"
+          />
+        </Grid>
+        <p>
+          {url && (
+            <img src={url} alt={alt} />
+          )}
+        </p>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
         
         
@@ -103,7 +146,7 @@ export function AddChore( props ) {
                 value={formData.name}
                 label='Add Chore Name'
                 autoFocus
-                onChange={handleChanges}
+                // onChange={handleChanges}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -117,7 +160,7 @@ export function AddChore( props ) {
                 label='Description'
                 name='description'
                 autoComplete='description'
-                onChange={handleChanges}
+                // onChange={handleChanges}
               />
             </Grid>
 
@@ -131,7 +174,7 @@ export function AddChore( props ) {
                 type='text'
                 id='chore_score'
                 value={formData.chore_score}
-                onChange={handleChanges}
+                // onChange={handleChanges}
               />
             </Grid>
             <Grid item xs={12}>
@@ -145,7 +188,7 @@ export function AddChore( props ) {
                 id='completed'
                 value={formData.completed}
                 autoComplete='current-completed'
-                onChange={handleChanges}
+                // onChange={handleChanges}
               />
             </Grid>
           </Grid>
@@ -178,7 +221,7 @@ export function AddChore( props ) {
 
 export default connect(
   null,
-  {getChild}
+  { addChores }
 )(AddChore);
 
 /* 

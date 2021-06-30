@@ -3,16 +3,15 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const getUserLogin = createAsyncThunk(
     "login/getUserLogin",
-    async ({id, history}, { dispatch, getState }) => {
+    async ({ history }, { dispatch, getState }) => {
         const { chore, user } = getState();
         return await axiosWithAuth()
-            .post('/api/auth/login', chore, user)
+            .post('/api/auth/login', {chore, user})
             .then(res => 
-                res.data, 
-                history.push("/home"), 
                 localStorage.setItem('token', res.data.token),
-                localStorage.setItem('userId', res.data.user_id))
-            .catch(err => err.res);
+                history.push("/home")) 
+                
+            .catch(err => console.log(err.res));
     }
 )
 
@@ -35,14 +34,15 @@ const loginSlice = createSlice({
         
     },
     extraReducers: {
-        [getLogin.pending]: (state) => {
+        [getUserLogin.pending]: (state) => {
           state.status = "loading";
         },
-        [getLogin.fulfilled]: (state, { payload }) => {
-          state.user = payload;
+        [getUserLogin.fulfilled]: (state, { payload }) => {
+          state.user.push(payload);
+          state.chore.push(payload)
           state.status = "success";
         },
-        [getLogin.rejected]: (state) => {
+        [getUserLogin.rejected]: (state) => {
           state.status = "failed";
         },
       },

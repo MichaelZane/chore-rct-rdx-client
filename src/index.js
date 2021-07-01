@@ -9,6 +9,8 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import './index.css';
 // import store from './store'
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

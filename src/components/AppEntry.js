@@ -1,60 +1,49 @@
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-//import Container from "@material-ui/core/Container";
-//import Navigation from "./Navigation";
+import { useState } from "react"
+import { Button } from "react-bootstrap";
+
 import logo from '../assets/tracItLogoWhite.png'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    
-    color: "white"
-  },
-
-  Button: {
-
-    color: "rgb(0, 94, 144)",
-    backgroundColor: "primary"
-    
-  }
-  
-}));
+import SignUpParent from "./SignUpParent";
+import Login from "./Login";
 
 const AppEntry = () => {
 
-  const classes = useStyles();
+  const [modalShow, setModalShow] = useState(false);
+  const [modalShow2, setModalShow2] = useState(false);
 
   return (
     <div className="app-wrapper">
-      
-      {/* <Navigation /> */}
-      {/* <Grid item>
-        <h1>Login/Sign Up</h1>
-      </Grid> */}
       <br />
       <img className="logo" src={logo} alt="logo"/>
-      <Grid 
+      <div
         container spacing={4}
         direction="column"
         justify="center"
         alignItems="center"
         >
-        <Grid item>
-          <Link to="/SignUpChild" style={{ textDecoration: "none" }}>
-            <Button className={classes.Button} variant="contained" color="transparent">
-              I'm a child 
+        <div>
+ 
+          <Button  variant="contained" color="transparent">
+            I'm a child 
+          </Button>
+
+        </div>
+        <div> 
+          <h4>I'm A Parent</h4> 
+          <SignUpParent 
+            show={modalShow}
+            onHide={() => setModalShow(false)} />  
+          <Login 
+            show={modalShow2}
+            onHide={() => setModalShow2(false)} />               
+            <Button  variant="contained" color="transparent" onClick={() => setModalShow(true)} >
+              Sign Up              
+            </Button>       
+            <Button  variant="contained" color="transparent" onClick={() => setModalShow2(true)} >
+              Sign In             
             </Button>
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link to="/SignUpParent" style={{ textDecoration: "none" }}>
-            <Button className={classes.Button} variant="contained" color="transparent">
-              I'm a parent
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
+
+        </div>
+      </div>
       <br />
      
     </div>

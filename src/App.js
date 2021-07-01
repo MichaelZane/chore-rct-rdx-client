@@ -34,9 +34,9 @@ const App = (props) => {
       <PrivateRoute path='/addchore' component={AddChore} />
       <PrivateRoute path='/updateChore' component={UpdateChore} />
       <PrivateRoute path='/childList' component={ChildList} />
-      <PrivateRoute exact path='/childdetail/:id' component={ChildDetail} />
-      <PrivateRoute exact path='/chore/:id'  component={Chore} />
-      <PrivateRoute exact path='/choreList/:id' component={ChoreList} />
+      <PrivateRoute path='/childdetail/:id' component={ChildDetail} />
+      <PrivateRoute path='/chore/:id'  component={Chore} />
+      <PrivateRoute path='/choreList/:id' component={ChoreList} />
       {/* <PrivateRoute exact path='/choreList' component={ChoreList}/> */}
     </Switch>
   

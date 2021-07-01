@@ -2,7 +2,7 @@ import React, {useEffect, useRef } from 'react';
 
           /* Redux */
 
-import {connect, useSelector} from 'react-redux';
+import { connect } from 'react-redux';
 import getChores from '../action/getChores';
 
           /* Router */
@@ -23,21 +23,18 @@ const ChoreList = (props) => {
   useEffect(() => {
     
     props.getChores(props.id)
+    
 
   }, [props.id])
 
 
+  const childChore = props.chore.chore
   
-
-  const singleChore = props.chore.chore
-
-  
-
   return (
     <div className="chore-wrap"> 
       
-      {singleChore && singleChore.length > 0  
-    ? singleChore
+      {childChore && childChore.length > 0  
+    ? childChore
         .filter(function(chore) {
           return chore.child_id === props.id
         })
@@ -45,9 +42,7 @@ const ChoreList = (props) => {
         .map(chore => (
 
           <li key={chore.id} type="none">
-            <strong >{ chore.name }</strong>
-            
-            
+            <strong ><Link to='/chore/:id'>{ chore.name }</Link></strong>           
           </li>
         
         ))

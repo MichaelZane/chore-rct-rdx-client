@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
         /* Redux */
 import { connect } from 'react-redux'
-// import updateResult from "../slices/updateSlice"
-// import deleteChild from "../slices/deleteSlice"
-// import getChore from '../slices/choreSlice';
 import getChildren from "../action/getChildren"
 import getChores from '../action/getChores';
 
 
         /* Router */
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 
         /* MUI */
 import Avatar from '@material-ui/core/Avatar';
@@ -89,13 +86,13 @@ const Child = ( props ) => {
     });
   };
 
-
+  const { id } = useParams()
   	
 	useEffect(() => {
     
-    props.getChildren(child.id)
+    props.getChildren(id)
 
-  }, [])
+  }, [id])
 
   const getChildren = props.child
   
@@ -175,7 +172,7 @@ const Child = ( props ) => {
           >
             Cancel
           </Button>
-          
+        {console.log(getChildren.id)} 
         </form>
         <h2> {getChildren.fstname}'s Chores</h2>
         <Card item xs={12}

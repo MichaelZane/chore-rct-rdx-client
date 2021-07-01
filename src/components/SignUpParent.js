@@ -1,211 +1,133 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-
-
-import { Input } from "@material-ui/core";
-import { BorderColor } from "@material-ui/icons";
-import { getParent } from "../slices/parentSlice";
+import { connect } from "react-redux";
+import { Modal, Form, Button } from "react-bootstrap";
 import register from "../action/register";
-// Styling Sign Up Form
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <div variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" to="/">
         Trac It
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
-    </Typography>
+    </div>
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  h1: {
-    color: "rgb(0, 94, 144)"
-  },
-  button: {
-    backgroundColor: "rgb(0, 94, 144)",
-    width: "300px",
-    height: "60px",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex"
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    color: "whiteSmoke"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-    
-    
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  
-}));
-
-//   Function Starts Here
-
-const Register = props => {
-
-  const [regstr, setRegstr] = useState({
+const Register = (props) => {
+  const [register, setRegister] = useState({
     fname: "",
     lname: "",
     email: "",
     username: "",
-    password: ""
+    password: "",
   });
 
-  const changeHandler = e => {
-    setRegstr({ ...regstr, [e.target.name]: e.target.value });
-
-  };
-
-  const submitHandler = e => {
-    e.preventDefault();
-    props.register(regstr)
-
-    setRegstr({
+  function reset() {
+    return setRegister({
       fname: "",
       lname: "",
       email: "",
       username: "",
-      password: ""
+      password: "",
     });
+  }
 
-    props.history.push("/login");
+  const changeHandler = (e) => {
+    setRegister({ ...register, [e.target.name]: e.target.value });
   };
-  const classes = useStyles();
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    props.register(register);
+    props.history.push("/login");
+    reset();
+  };
 
   return (
-    <div className="sign-up-wrapper">
-      <Container component="main" maxWidth="xs">      
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="fname"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="fname"
-                  value={regstr.fname}
-                  label="First Name"
-                  autoFocus
-                  onChange={changeHandler}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lname"
-                  value={regstr.lname}
-                  label="Last Name"
-                  name="lname"
-                  autoComplete="lname"
-                  onChange={changeHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  value={regstr.email}
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={changeHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="username"
-                  label="Username"
-                  type="text"
-                  id="username"
-                  value={regstr.username}
-                  autoComplete="current-username"
-                  onChange={changeHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={regstr.password}
-                  autoComplete="current-password"
-                  onChange={changeHandler}
-                />
-              </Grid>
-            </Grid>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">Sign Up</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={submitForm} >
+          <Form.Group controlId="formGroupName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="First Name"
+              onChange={changeHandler}
+              value={register.fname}
+            />
+          </Form.Group>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Last Name"
+              onChange={changeHandler}
+              value={register.lname}
+            />
+          </Form.Group>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Email"
+              onChange={changeHandler}
+              value={register.email}
+            />
+          </Form.Group>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="username"
+              placeholder="Username"
+              onChange={changeHandler}
+              value={register.username}
+            />
+          </Form.Group>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              onChange={changeHandler}
+              value={register.password}
+            />
+          </Form.Group>
+          <Button 
+            type="submit"   
+            fullWidth variant="outlined" 
+            color="primary"
             >
-              Sign Up
-            </Button>
-            <Grid container justify="center">
-              <Grid item>
-                <Link to="/Login">Already have an account? Sign in here.</Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
-    </div>
+            Sign Up
+          </Button>
+          <Button
+            type="button"
+            fullwidth="true"
+            variant="contained"
+            color="primary"
+            onClick={() => props.history.push("/home")}
+          >
+            Cancel
+          </Button>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+      <Copyright />
+      <Button onClick={props.onHide}>Close</Button>
+    </Modal.Footer>
+    </Modal>
+
   );
 };
 

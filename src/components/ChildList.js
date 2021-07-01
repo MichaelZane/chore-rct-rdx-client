@@ -11,7 +11,7 @@ import { connect, useDispatch } from 'react-redux';
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
 
-//import ChoreList from './ChoreList';
+import ChoreList from './ChoreList';
 
 //import Child from './ChildDetail';
 
@@ -66,7 +66,7 @@ const ChildList = props => {
     props.getChildren(props.id)
           
   }, [props.id])
- 
+
   const childProps = props.childs.child
 
   return (
@@ -108,7 +108,8 @@ const ChildList = props => {
             
           />
           <CardContent>
-            {/* <ChoreList  id={child.id}  /> */}
+            <h4>Chores To Do:</h4>
+            <ChoreList  id={child.id}  />
 
           </CardContent>
         

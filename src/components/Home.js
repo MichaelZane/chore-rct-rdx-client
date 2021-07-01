@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
+import {Button } from "react-bootstrap"
 /* MUI */
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
 
 import ChildList from "./ChildList";
-import ChoreList from "./ChoreList";
+
 
 /* Router */
 import { Link } from "react-router-dom";
+import AddChore from "./AddChore";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,35 +35,39 @@ const useStyles = makeStyles((theme) => ({
 /* Home */
 
 const Home = () => {
+
+  const [modalShow, setModalShow] = useState(false);
+
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     window.location.reload("/");
   };
-  const classes = useStyles();
+
   return (
     <div className="sign-up-wrapper">
+      <AddChore 
+          show={modalShow}
+          onHide={() => setModalShow(false)} />
       <div>
         <Typography>Welcome to your Track'em Dashboard </Typography>
 
         <Link to={"/signupChild"}>
-          <Button className={classes.Button} variant="outlined">
+          <Button  variant="outlined">
             Add Child
           </Button>
         </Link>
-
-        <Link to={"/addchore"}>
-          <Button className={classes.Button} variant="outlined">
+          <Button  variant="outlined" onClick={() => setModalShow(true)} >
             Add Chore
           </Button>
-        </Link>
+        
 
-        <Button className={classes.Button} onClick={logout} variant="outlined">
+        <Button  onClick={logout} variant="outlined">
           LogOut
         </Button>
 
         <ChildList />
-
+        
         {/* <TodoList /> */}
       </div>
     </div>

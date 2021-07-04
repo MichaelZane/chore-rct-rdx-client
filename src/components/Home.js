@@ -18,9 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
   Button: {
     backgroundColor: "transparent",
-    label: {
-      color: "whitesmoke",
-    },
+    color: 'rgb(0, 94, 144)',
+    
   },
 }));
 
@@ -41,12 +40,12 @@ const Home = () => {
         </Typography>
       <div className="button-wrap">
         <Link to={"/signupChild"}>
-          <Button className={classes.Button} variant="outlined">
+          <Button className={classes.Button} variant="outlined"  >
             Add Child
           </Button>
         </Link>
         <Link to={"/addchore"}>
-          <Button variant="outlined">Add Chore</Button>
+          <Button className={classes.Button} variant="outlined">Add Chore</Button>
         </Link>
 
         <Button className={classes.Button} onClick={logout} variant="outlined">

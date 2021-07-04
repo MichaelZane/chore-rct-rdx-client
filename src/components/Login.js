@@ -14,9 +14,9 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import Popup from 'reactjs-popup'
+import Card from "@material-ui/core/Card";
 
 import login from '../action/login'
 
@@ -34,19 +34,30 @@ function Copyright () {
   )
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => createStyles({
+  root: {
+    width: 220,
+    height: 220,
+    margin: 20,
+    borderRadius: 15,
+    background: "rgba(255,255,255,0.1)",
+    position: "relative",
+    overflow: "hidden",
+    backdropFilter: "blur(2px)",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20,
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1)
   },
   submit: {
@@ -82,6 +93,7 @@ const Login = props => {
     <div className='sign-up-wrapper'>
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
+        <Card raised={true} >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -146,6 +158,7 @@ const Login = props => {
         <Box mt={8}>
           <Copyright />
         </Box>
+        </Card>
       </Container>
     </div>
   )

@@ -78,12 +78,6 @@ const Child = ( props ) => {
     props.updateResult(child);
     props.history.push('/home');
 
-    setChild({
-      fstname: '',
-      lstname: '',
-      username: '',
-      
-    });
   };
 
   const { id } = useParams()

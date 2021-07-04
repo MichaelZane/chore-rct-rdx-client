@@ -1,4 +1,4 @@
-import React, {useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 
           /* Redux */
 
@@ -14,21 +14,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Modal } from '@material-ui/core';
 import child from '../action/child';
 
-
           /* ChoreList */
 
 const ChoreList = (props) => {
-  const prevChore = useRef()
+
+  const [childChores, setChildChores] = useState([])
 
   useEffect(() => {
     
-    props.getChores(props.id)
+    props.getChores()
     
+  },[])
 
-  }, [props.id])
-
-
-  const childChore = props.chore.chore
+  const childChore = props.chore
   
   return (
     <div className="chore-wrap"> 
@@ -37,12 +35,12 @@ const ChoreList = (props) => {
     ? childChore
         .filter(function(chore) {
           return chore.child_id === props.id
-        })
-        
+          })
         .map(chore => (
 
           <li key={chore.id} type="none">
-            <strong ><Link to='/chore/:id'>{ chore.name }</Link></strong>           
+            <strong ><Link  to='/chore/:id'>{ chore.name }</Link></strong>  
+                    
           </li>
         
         ))

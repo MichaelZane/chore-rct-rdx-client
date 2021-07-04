@@ -10,7 +10,7 @@ const getChores = (id, history) => async dispatch => {
   dispatch({type: FETCH_CHORES_START});
   
   await axiosWithAuth()
-    .get(`/api/auth/child/${id}`)
+    .get(`/api/chore`)
     .then(res => {
 
       dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data})

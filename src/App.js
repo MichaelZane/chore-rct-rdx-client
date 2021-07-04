@@ -8,6 +8,7 @@ import childLogin from './components/ChildLogin';
 import AddChore from './components/AddChore';
 import UpdateChore from './components/UpdateChore';
 import ChildList from './components/ChildList';
+import Child from './components/Child';
 import ChildDetail from './components/ChildDetail';
 import ChoreList from './components/ChoreList';
 import Chore from './components/Chore';
@@ -37,6 +38,7 @@ const App = (props) => {
       <PrivateRoute path='/childdetail/:id' component={ChildDetail} />
       <PrivateRoute path='/chore/:id'  component={Chore} />
       <PrivateRoute path='/choreList/:id' component={ChoreList} />
+      <PrivateRoute path='/child/:id'  component={Child} />
       {/* <PrivateRoute exact path='/choreList' component={ChoreList}/> */}
     </Switch>
   

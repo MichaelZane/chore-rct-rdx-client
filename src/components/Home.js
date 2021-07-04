@@ -1,75 +1,59 @@
 import React, { useState } from "react";
 
-import {Button } from "react-bootstrap"
 /* MUI */
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
 
 import ChildList from "./ChildList";
 
-
 /* Router */
 import { Link } from "react-router-dom";
 import AddChore from "./AddChore";
 
-
 const useStyles = makeStyles((theme) => ({
+  root: {
+    color: "white",
+  },
 
-	root: {
-    
-		color: "white"
-	  },
-	
-	  Button: {
-	
-		backgroundColor: "transparent",
-		label: {
-		  color: "whitesmoke"
-		}
-		
-	  }
-
+  Button: {
+    backgroundColor: "transparent",
+    label: {
+      color: "whitesmoke",
+    },
+  },
 }));
 
 /* Home */
 
 const Home = () => {
-
-  const [modalShow, setModalShow] = useState(false);
-
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     window.location.reload("/");
   };
-
+  const classes = useStyles();
   return (
     <div className="sign-up-wrapper">
-      <AddChore 
-          show={modalShow}
-          onHide={() => setModalShow(false)} />
-      <div>
-        <Typography>Welcome to your Track'em Dashboard </Typography>
-
+      
+      <Typography gutterBottom={true} variant={"h4"} >
+        Welcome to your Track'em Dashboard 
+        </Typography>
+      <div className="button-wrap">
         <Link to={"/signupChild"}>
-          <Button  variant="outlined">
+          <Button className={classes.Button} variant="outlined">
             Add Child
           </Button>
         </Link>
-          <Button  variant="outlined" onClick={() => setModalShow(true)} >
-            Add Chore
-          </Button>
-        
+        <Link to={"/addchore"}>
+          <Button variant="outlined">Add Chore</Button>
+        </Link>
 
-        <Button  onClick={logout} variant="outlined">
+        <Button className={classes.Button} onClick={logout} variant="outlined">
           LogOut
         </Button>
-
-        <ChildList />
-        
-        {/* <TodoList /> */}
       </div>
+      <ChildList />
     </div>
   );
 };

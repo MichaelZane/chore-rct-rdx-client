@@ -1,196 +1,232 @@
-import { useEffect, useState } from 'react';
-        /* Redux */
-import { connect } from 'react-redux'
-import getChildren from "../action/getChildren"
-import getChores from '../action/getChores';
+import { useEffect, useState } from "react";
+/* Redux */
+import { connect } from "react-redux";
+import updateChild from "../action/updateChild";
+import child from "../action/child";
 
+/* Router */
+import { Link, useParams } from "react-router-dom";
+/* MUI */
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { AccountCircle } from "@material-ui/icons";
+import Card from "@material-ui/core/Card";
+import ChoreList from "./ChoreList";
 
-        /* Router */
-import {Link, useParams} from "react-router-dom"
+/* styling starts here */
 
-        /* MUI */
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { AccountCircle } from '@material-ui/icons';
-import Card from '@material-ui/core/Card';
-
-        
-//import { ChildChores } from './ChildChores';
-import ChoreList from './ChoreList';
-
-       /* styling starts here */
-
-function Copyright() {
-return (
-  <Typography variant='body2' color='textSecondary' align='center'>
-    {'Copyright © '}
-    <Link color='inherit' to='/'>
-      Track `Em
-    </Link>{' '}
-    {new Date().getFullYear()}
-    {'.'}
-  </Typography>
-);
-}
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 450,
+    height: 550,
+    margin: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    borderRadius: "15px",
+    background: "rgba(255,255,255,0.1)",
+    position: "relative",
+    overflow: "hidden",
+    backdropFilter: "blur(1px)",
+    color: "rgb(0, 94, 144)",
+    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+  },
+  container: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    maxWidth: 1200,
+    flexWrap: "wrap",
+    zIndex: 1,
+    color: "rgb(0, 94, 144)",
+  },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "whiteSmoke",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', 
-    marginTop: theme.spacing(3)
+    width: "100%",
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-const Child = ( props ) => {
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" to="/">
+        Track `Em
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
-  const [child, setChild] = useState("")
-	
+const ChildDetail = (props) => {
+  const [child, setChild] = useState({
+    fstname: '',
+    lstname: '',
+    username: '',
+    password: '',
+  });
+  const [isEditing, setIsEditing] = useState(false);
+
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setChild({ ...child, [name]: value });
+    setIsEditing(false)
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    props.updateChild(child.id, child);
+    props.history.push("/home");
+  };
+
+  useEffect(() => {
+    props.child(props.match.params.id);
+    setChild({ child });
+  }, []);
+
   const classes = useStyles();
 
-  const changeHandler = event => {
-    setChild({...child, [event.target.name]: event.target.value});
+  const getChild = props.child;
 
-  };
-
-  const submitHandler = e => {
-    e.preventDefault();
-    props.updateResult(child);
-    props.history.push('/home');
-
-  };
-
-  const { id } = useParams()
-  	
-	useEffect(() => {
-    
-    props.getChildren(id)
-
-  }, [id])
-
-  const getChildren = props.child
-  
   return (
-    <div>     
-      
-      <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          < AccountCircle />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Your Child Details
-        </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete='fstname'
-                name='fstname'
-                variant='outlined'
-                required
-                fullwidth
-                id='fstname'
-                value={getChildren.fstname}
-                autoFocus
-                onChange={changeHandler}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                type='text'
-                variant='outlined'
-                required
-                fullwidth
-                id='lstname'
-                value={getChildren.lstname}
-                name='lstname'
-                autoComplete='lstname'
-                onChange={changeHandler}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullwidth
-                name='username'
-                type='text'
-                id='username'
-                value={getChildren.username}
-                autoComplete='current-username'
-                onChange={changeHandler}
-              />
-            </Grid>            
-          </Grid>
-
-          <Button
-            type='submit'
-            fullwidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onSubmit={submitHandler}
-          >
-            Update Child
-          </Button>
-          <Button
-            type='button'
-            fullwidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onClick={() => props.history.push('/home')}
-          >
-            Cancel
-          </Button>
-        {console.log(getChildren.id)} 
-        </form>
-        <h2> {getChildren.fstname}'s Chores</h2>
-        <Card item xs={12}
-          variant='outlined'
-          fullwidth
-        > {<Link cursor="pointer" to={`/chore`}><ChoreList id={getChildren.id}/> </Link>} </Card>
-        
-        
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
-     
-    </div>
     
-  )
-}
+    <Container maxWidth="sm" className={classes.container}>
+      <CssBaseline />
+      <Card raised={true} className={classes.root}>
+        {isEditing &&  (
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <AccountCircle />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Your Child's Details
+          </Typography>
+          <form className={classes.form} onSubmit={submitHandler} noValidate>
+            <TextField
+              autoComplete="fstname"
+              margin='normal'
+              name="fstname"
+              variant="outlined"
+              
+              fullWidth
+              id="fstname"
+              value={getChild.fstname}
+              label="First Name"
+              autoFocus
+              onChange={changeHandler}
+            />
 
-const mapStateToProps = state => {
+            <TextField
+              type="text"
+              variant="outlined"
+              
+              margin='normal'
+              fullWidth
+              id="lstname"
+              value={getChild.lstname}
+              label="Last Name"
+              name="lstname"
+              autoComplete="lstname"
+              onChange={changeHandler}
+            />
+
+            <TextField
+              variant="outlined"
+              
+              fullWidth
+              margin='normal'
+              name="username"
+              label="Username"
+              type="text"
+              id="username"
+              value={getChild.username}
+              autoComplete="current-username"
+              onChange={changeHandler}
+            />
+
+            <TextField
+              variant="outlined"
+              
+              fullWidth
+              margin='normal'
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              value={getChild.password}
+              autoComplete="current-password"
+              onChange={changeHandler}
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onSubmit={submitHandler}
+            >
+              Update Child
+            </Button>
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => props.history.push("/home")}
+            >
+              Cancel
+            </Button>
+          </form>
+          <div>
+            <h2> {getChild.fstname}'s Chores</h2>
+            <Card item xs={12} variant="outlined">
+              {" "}
+              {<ChoreList id={props.id} />}{" "}
+            </Card>
+          </div>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </div>
+        
+        )}
+      </Card>
+    </Container>
+  );
+};
+
+const mapStateToProps = (state) => {
   return {
     child: state.child,
+  };
+};
 
-  }
-}
-
-export default connect(mapStateToProps, { getChildren, getChores })(Child)
+export default connect(mapStateToProps, { child })(ChildDetail);

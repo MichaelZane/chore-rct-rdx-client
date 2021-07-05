@@ -28,7 +28,7 @@ function Copyright () {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link to='/'>HomeChoreTracker</Link> {new Date().getFullYear()}
+      <Link to='/'>TracIt</Link> {new Date().getFullYear()}
       {'.'}
     </Typography>
   )
@@ -36,21 +36,38 @@ function Copyright () {
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
-    width: 220,
-    height: 220,
-    margin: 20,
-    borderRadius: 15,
-    background: "rgba(255,255,255,0.1)",
+    width: "500px",
+    height: "750px",
+    margin: "20px",
+    borderRadius: "15px",
+    backgroundColor: "rgba(255,255,255,0.1)",
     position: "relative",
     overflow: "hidden",
     backdropFilter: "blur(2px)",
+    color: "rgb(0, 94, 144)",
+    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+    label: 'rgb(0, 94, 144)',
+    padding: "20px"
+    
+  },
+  container: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: "1000px",
+    flexWrap: "wrap",
+    zIndex: 1,
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: 20,
+    margin: 20
   },
   avatar: {
     margin: theme.spacing(1),
@@ -58,7 +75,12 @@ const useStyles = makeStyles((theme) => createStyles({
   },
   form: {
     width: '100%', 
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    padding: 20
+  },
+  Button: {
+    color: 'rgb(0, 94, 144)',
+    
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -91,9 +113,9 @@ const Login = props => {
 
   return (
     <div className='sign-up-wrapper'>
-      <Container component='main' maxWidth='xs'>
+      <Container  maxWidth='sm' className={classes.container} >
         <CssBaseline />
-        <Card raised={true} >
+        <Card className={classes.root}  raised={true} >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -135,8 +157,8 @@ const Login = props => {
             <Button
               type='submit'
               fullWidth
-              variant='contained'
-              color='primary'
+              variant='outlined'
+              
               className={classes.submit}
             >
               Sign In
@@ -145,17 +167,18 @@ const Login = props => {
               <Grid item xs>
                 <Link to='/'>Forgot password?</Link>
               </Grid>
+              
               <Grid item>
                 <Link to='/'>{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
           </form>
         </div>
-        <div style={{ display: localStorage.token ? 'none' : 'block' }}></div>
+        {/* <div style={{ display: localStorage.token ? 'none' : 'block' }}></div>
         <div>
-          <p>or</p>
-        </div>
-        <Box mt={8}>
+          <p>or</p> */}
+        {/* </div> */}
+        <Box mt={4}>
           <Copyright />
         </Box>
         </Card>

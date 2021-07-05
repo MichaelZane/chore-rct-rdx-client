@@ -7,8 +7,10 @@ import CardContent from "@material-ui/core/CardContent";
 import { FaTimes } from "react-icons/fa";
 import Avatar from "@material-ui/core/Avatar";
 import ChoreList from "../components/ChoreList";
+
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+
 
 // styles start here
 
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 220,
     height: 250,
-    margin: "30px",
+    margin: 30,
     borderRadius: 15,
     background: "rgba(255,255,255,0.1)",
     position: "relative",
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     color: "rgb(0, 94, 144)",
     textAlign: "center",
     pointerEvents: "none",
+    
   },
   subheader: {
     textAlign: "center",

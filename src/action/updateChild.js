@@ -13,7 +13,7 @@ const updateChild = (newChild, id, history )=> dispatch => {
       
       dispatch({type: UPDATE_CHILD_SUCCESS, payload: res.data});
 
-      history.push(`/childdetails/${id}`)
+      history.push(`/childdetail/${id}`)
 
     })
     .catch(err => {

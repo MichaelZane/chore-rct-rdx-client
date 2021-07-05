@@ -1,38 +1,15 @@
 import { useEffect } from 'react';
-
-        /* Router */
-
-
-         /* Redux */
 import { connect } from 'react-redux';
-
 import deleteChild from '../action/deleteChild';
 import getChildren from '../action/getChildren';
-
-
-/* MUI */
-import { makeStyles } from '@material-ui/core/styles';
-//import clsx from 'clsx';
-
-import { red } from '@material-ui/core/colors';
-
 import { CircularProgress } from '@material-ui/core';
-
-
 import Child from './Child';
-
-           /* Styles */
-
-
-
-          /* ChildList */
 
 const ChildList = props => {
  
   useEffect(() => {  
 
-    props.getChildren(props.id)
-    
+    props.getChildren(props.id)  
           
   }, [])
 
@@ -60,7 +37,6 @@ const mapStateToProps = (state) => {
 
   return {
     childs: state.child.child,
-
 
   }    
 }

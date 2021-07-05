@@ -63,7 +63,7 @@ const SignUpChild = props => {
     lstname: '',
     username: '',
     password: '',
-    isEditing: false
+
   });
 
   const changeHandler = event => {

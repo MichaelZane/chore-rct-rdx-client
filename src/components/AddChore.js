@@ -64,6 +64,7 @@ export function AddChore( props ) {
       [e.target.name]: e.target.value
     });
   };
+
   
   const handleSubmit = (e) => {
 

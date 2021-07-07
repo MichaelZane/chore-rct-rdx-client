@@ -18,7 +18,7 @@ import child from '../action/child';
 
 const ChoreList = (props) => {
 
-  const [childChores, setChildChores] = useState([])
+
 
   useEffect(() => {
     

@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 const UpdateChild = props => {
   const {id} = useParams();
-  console.log(id);
+
   const [state, setState] = useState({
     parent_id: props.parentId,
     fstname: '',
@@ -65,22 +65,19 @@ const UpdateChild = props => {
     id: id
   });
 
-  const changeHandler = event => {
-    setState({...state, [event.target.name]: event.target.value});
-    // console.log([event.target.name], event.target.value);
+  const changeHandler = e => {
+    setState({...state, [e.target.name]: e.target.value});
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
-
-
-
+  const submitHandler = e => {
+    e.preventDefault();
     props.updateChild(state);
 
     setState({
       fstname: '',
       lstname: '',
-      username: ''
+      username: '',
+      password: ""
     });
 
     props.history.push('/home');

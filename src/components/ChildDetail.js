@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 /* Redux */
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import updateChild from "../action/updateChild";
 import child from "../action/child";
 
 /* Router */
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 /* MUI */
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,6 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { AccountCircle } from "@material-ui/icons";
@@ -24,8 +25,8 @@ import ChoreList from "./ChoreList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 450,
-    height: 550,
+    width: 500,
+    height: 750,
     margin: 30,
     display: "flex",
     justifyContent: "center",
@@ -65,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
+    padding: 20,
     width: "100%",
     marginTop: theme.spacing(3),
   },
@@ -87,41 +89,163 @@ function Copyright() {
 }
 
 const ChildDetail = (props) => {
-  const [child, setChild] = useState({
+  const history = useHistory()
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
+  const child = state.childReducer
+  const [change, setChange] = useState({
     fstname: '',
     lstname: '',
     username: '',
-    password: '',
+    password: ''
   });
   const [isEditing, setIsEditing] = useState(false);
+  
+  const toggleEdit = () => {
+    setIsEditing(!isEditing)
+  }
 
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    setChild({ ...child, [name]: value });
-    setIsEditing(false)
+  const changeHandler = e => {
+
+    setChange({...change, [e.target.name]: e.target.value });  
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.updateChild(child.id, child);
-    props.history.push("/home");
+    dispatch(updateChild(child.id, change));
+    history.push("/home");
+    toggleEdit()
   };
 
+  const cancel = (e) => {
+    e.preventDefault()
+    toggleEdit()
+  }
+
   useEffect(() => {
-    props.child(props.match.params.id);
-    setChild({ child });
+    
+    dispatch(child(props.match.params.id));
+    
   }, []);
 
+  useEffect(() => {
+    setChange({
+      fstname: child.fstname,
+      lstname: child.lstname,
+      username: child.username,
+      password: child.password
+    })
+  }, [child])
+
   const classes = useStyles();
-
-  const getChild = props.child;
-
+  
   return (
     
     <Container maxWidth="sm" className={classes.container}>
       <CssBaseline />
-      <Card raised={true} className={classes.root}>
-        {isEditing &&  (
+      {!isEditing ? (
+      <Card raised={true} className={classes.root}> 
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <AccountCircle />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Your Child's Details
+          </Typography>
+          {/* <form className={classes.form} onSubmit={submitHandler} noValidate> */}
+            {/* <CardContent>
+              {child.fstname}
+            </CardContent>
+            <CardContent>
+              {child.lstname}
+            </CardContent>
+            <CardContent>
+              {child.username}
+            </CardContent>
+            <CardContent>
+              {child.password}
+            </CardContent> */}
+
+            <TextField
+              type="text"
+              variant="outlined"
+              
+              margin='normal'
+              fullWidth
+              id="lstname"
+              // defaultValue={childValue.lstname}
+              label="Last Name"
+              name="lstname"
+              autoComplete="lstname"
+              onChange={changeHandler}
+            />
+
+            <TextField
+              variant="outlined"
+              
+              fullWidth
+              margin='normal'
+              name="username"
+              label="Username"
+              type="text"
+              id="username"
+              // defaultValue={childValue.username}
+              autoComplete="current-username"
+              onChange={changeHandler}
+            />
+
+            <TextField
+              variant="outlined"
+              
+              fullWidth
+              margin='normal'
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              // defaultValue={childValue.password}
+              autoComplete="current-password"
+              onChange={changeHandler}
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Update Child
+            </Button>
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => props.history.push("/home")}
+            >
+              Cancel
+            </Button>
+            <Card item xs={12}
+              variant="outlined"
+              >
+                {<Link></Link>}
+              </Card>
+          {/* </form> */}
+          <div>
+            
+            {/* <h2> {child.fstname}'s Chores</h2> */}
+            <Card item xs={12} variant="outlined">
+              {" "}
+              {<ChoreList id={props.id} />}{" "}
+            </Card>
+          </div>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </div>      
+      </Card>
+      ) : (
+        <Card raised={true} className={classes.root}> 
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <AccountCircle />
@@ -138,7 +262,7 @@ const ChildDetail = (props) => {
               
               fullWidth
               id="fstname"
-              value={getChild.fstname}
+              defaultValue={change.fstname || ''}
               label="First Name"
               autoFocus
               onChange={changeHandler}
@@ -151,7 +275,7 @@ const ChildDetail = (props) => {
               margin='normal'
               fullWidth
               id="lstname"
-              value={getChild.lstname}
+              defaultValue={change.lstname || ''}
               label="Last Name"
               name="lstname"
               autoComplete="lstname"
@@ -167,7 +291,7 @@ const ChildDetail = (props) => {
               label="Username"
               type="text"
               id="username"
-              value={getChild.username}
+              defaultValue={change.username || ''}
               autoComplete="current-username"
               onChange={changeHandler}
             />
@@ -181,7 +305,7 @@ const ChildDetail = (props) => {
               label="Password"
               type="password"
               id="password"
-              value={getChild.password}
+              defaultValue={change.password || ''}
               autoComplete="current-password"
               onChange={changeHandler}
             />
@@ -191,7 +315,6 @@ const ChildDetail = (props) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onSubmit={submitHandler}
             >
               Update Child
             </Button>
@@ -204,9 +327,15 @@ const ChildDetail = (props) => {
             >
               Cancel
             </Button>
+            <Card item xs={12}
+              variant="outlined"
+              >
+                {<Link></Link>}
+              </Card>
           </form>
           <div>
-            <h2> {getChild.fstname}'s Chores</h2>
+            
+            <h2> {child.fstname}'s Chores</h2>
             <Card item xs={12} variant="outlined">
               {" "}
               {<ChoreList id={props.id} />}{" "}
@@ -215,11 +344,11 @@ const ChildDetail = (props) => {
           <Box mt={5}>
             <Copyright />
           </Box>
-        </div>
-        
-        )}
+        </div>      
       </Card>
+      )} 
     </Container>
+  
   );
 };
 
@@ -229,4 +358,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { child })(ChildDetail);
+export default connect(mapStateToProps, { child, updateChild })(ChildDetail);

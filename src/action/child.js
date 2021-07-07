@@ -14,7 +14,7 @@ import {
         
         dispatch({type: CHILD_SUCCESS, payload: res.data });
   
-        history.push(`/childdetails/${id}`)
+        // history.push(`/childdetails/${id}`)
   
       })
       .catch(err => {

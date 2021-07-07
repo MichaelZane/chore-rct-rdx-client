@@ -9,12 +9,12 @@ const ChildList = props => {
  
   useEffect(() => {  
 
-    props.getChildren(props.id)  
+    props.getChildren()  
           
   }, [])
 
   const childProps = props.childs.child
-
+  
   return (
     <div className="child-card-wrap">
     {childProps && childProps.length > 0 

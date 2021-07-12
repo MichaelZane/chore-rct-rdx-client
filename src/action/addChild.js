@@ -12,9 +12,9 @@ const addChild = (child, history ) => async dispatch => {
     .then(res => {
           
       dispatch({ type: ADD_CHILD_SUCCESS, payload: res.data });
-
+      console.log("<<<<>>>>>", res.data)
       localStorage.getItem('userId')
-      localStorage.setItem('childId', res.data.child.id) 
+      
       history.push("/home")
     })
 

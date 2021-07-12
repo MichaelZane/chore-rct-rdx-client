@@ -1,24 +1,27 @@
-import React, {useEffect, useRef, useState } from 'react';
+import React, {useEffect} from 'react';
 
           /* Redux */
-
 import { connect } from 'react-redux';
 import getChores from '../action/getChores';
 
-          /* Router */
-import {Link, useParams } from 'react-router-dom'
-
           /* MUI */
 
-import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Modal } from '@material-ui/core';
-import child from '../action/child';
+import {makeStyles} from '@material-ui/core/styles';
+
+          /* Router */
+import {Link } from 'react-router-dom'
+
+const useStyles = makeStyles({
+  link: {
+    color: "rgb(0, 94, 144)"
+  }
+})
 
           /* ChoreList */
 
 const ChoreList = (props) => {
 
-
+  const classes = useStyles();
 
   useEffect(() => {
     
@@ -39,7 +42,7 @@ const ChoreList = (props) => {
         .map(chore => (
 
           <li key={chore.id} type="none">
-            <strong ><Link  to='/chore/:id'>{ chore.name }</Link></strong>  
+            <strong ><Link className={classes.link}  to='/chore/:id'>{ chore.name }</Link></strong>  
                     
           </li>
         

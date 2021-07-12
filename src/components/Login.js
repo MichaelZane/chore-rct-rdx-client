@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // Redux
 import { connect } from 'react-redux'
 // Router
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 // Material UI
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
@@ -90,7 +90,8 @@ const useStyles = makeStyles((theme) => createStyles({
 /* LogIn */
 
 const Login = props => {
-  // const dispatch = useDispatch()
+  
+  const history = useHistory()
 
   const [logForm, setLogForm] = useState({
     username: '',
@@ -163,6 +164,18 @@ const Login = props => {
             >
               Sign In
             </Button>
+
+            <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => props.history.push("/")}
+          >
+            Cancel
+          </Button>
+
             <Grid container>
               <Grid item xs>
                 <Link to='/'>Forgot password?</Link>

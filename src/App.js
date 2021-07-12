@@ -28,17 +28,20 @@ const App = (props) => {
       <Route path='/login' component={Login} />
       <Route path='/signUpParent' component={SignUpParent} />
       <Route path='/childLogin' component={childLogin} />
-
       <PrivateRoute path='/home' component={Home} />
       <PrivateRoute path='/signUpChild' component={SignUpChild} />
       <PrivateRoute path='/updateChild/:id' component={UpdateChild} />
       <PrivateRoute path='/addchore' component={AddChore} />
       <PrivateRoute path='/updateChore' component={UpdateChore} />
       <PrivateRoute path='/childList' component={ChildList} />
-      <PrivateRoute path='/childdetail/:id' component={ChildDetail} />
       <PrivateRoute path='/chore/:id'  component={Chore} />
       <PrivateRoute path='/choreList/:id' component={ChoreList} />
       <PrivateRoute path='/child/:id'  component={Child} />
+      <PrivateRoute 
+          exact
+          path='/childdetail/:id' 
+          component={(props => < ChildDetail {...props} />)}
+          />  
       <PrivateRoute path='/updatechild/:id'>
         <UpdateChild />
       </PrivateRoute> 

@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 /* MUI */
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 /* Home */
 
-const Home = () => {
+const Home = props => {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
@@ -44,7 +42,10 @@ const Home = () => {
             Add Child
           </Button>
         </Link>
-        <Link to={"/addchore"}>
+        <Link to={{
+          pathname: "/addchore",
+          state: { id: props.id }
+          }}>
           <Button className={classes.Button} variant="outlined">Add Chore</Button>
         </Link>
 

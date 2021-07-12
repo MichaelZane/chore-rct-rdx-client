@@ -1,28 +1,15 @@
-import { useEffect, useState } from "react";
-/* Redux */
-import { connect, useDispatch  } from "react-redux";
-import updateChild from "../action/updateChild";
-import child from "../action/child";
-
-/* Router */
-import { Link, useHistory } from "react-router-dom";
-/* MUI */
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import { Link, useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { AccountCircle } from "@material-ui/icons";
-import { CircularProgress } from '@material-ui/core';
 import Card from "@material-ui/core/Card";
-import ChoreList from "./ChoreList";
-
-/* styling starts here */
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,54 +76,21 @@ function Copyright() {
   );
 }
 
-const childData = {
-  fstname: '',
-  lstname: '',
-  username: '',
-  password: '',
-}
-
-const ChildDetail = (props) => {
-
-  const dispatch = useDispatch()  
-
-  const history = useHistory()
-
-  const id = props.match.params.id
-  console.log(id)
-
-  const [change, setChange] = useState(childData)
-
-  const changeHandler = (e) => {
-
-    setChange({...change, [e.target.name]: e.target.value }); 
-
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    props.updateChild(change);
-    history.push("/home");
-    
-  };
-  
-  // const childToEdit = props.child.child.find(child => child.id === Number(id)
-  //)
-  useEffect(() => {
-      dispatch(props.child(id))
-      // setChange(child)
-  
-    
-  }, []);
+const ChildForm = ({
+  handleSubmit,
+  submitHandler,
+  register,
+  value,
+  changeHandler,
+}) => {
+  const history = useHistory();
 
   const classes = useStyles();
 
   return (
-    
     <Container maxWidth="sm" className={classes.container}>
       <CssBaseline />
-      
-      <Card raised={true} className={classes.root}> 
+      <Card raised={true} className={classes.root}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <AccountCircle />
@@ -144,16 +98,20 @@ const ChildDetail = (props) => {
           <Typography component="h1" variant="h5">
             Your Child's Details
           </Typography>
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
+          <form
+            className={classes.form}
+            onSubmit={handleSubmit(submitHandler)}
+            noValidate
+          >
             <TextField
+              ref={register}
               autoComplete="fstname"
-              margin='normal'
+              margin="normal"
               name="fstname"
               variant="outlined"
-              
               fullWidth
               id="fstname"
-              value={change.fstname}
+              value={value}
               label="First Name"
               autoFocus
               onChange={changeHandler}
@@ -162,11 +120,11 @@ const ChildDetail = (props) => {
             <TextField
               type="text"
               variant="outlined"
-              
-              margin='normal'
+              ref={register}
+              margin="normal"
               fullWidth
               id="lstname"
-              value={change.lstname}
+              value={value}
               label="Last Name"
               name="lstname"
               autoComplete="lstname"
@@ -175,28 +133,28 @@ const ChildDetail = (props) => {
 
             <TextField
               variant="outlined"
-              
+              ref={register}
               fullWidth
-              margin='normal'
+              margin="normal"
               name="username"
               label="Username"
               type="text"
               id="username"
-              value={change.username}
+              value={value}
               autoComplete="current-username"
               onChange={changeHandler}
             />
 
             <TextField
               variant="outlined"
-              
+              ref={register}
               fullWidth
-              margin='normal'
+              margin="normal"
               name="password"
               label="Password"
               type="password"
               id="password"
-              value={change.password}
+              value={value}
               autoComplete="current-password"
               onChange={changeHandler}
             />
@@ -218,37 +176,25 @@ const ChildDetail = (props) => {
             >
               Cancel
             </Button>
-            <Card item xs={12}
-              variant="outlined"
-              >
-                {<Link></Link>}
-              </Card>
+            <Card item xs={12} variant="outlined">
+              {<Link></Link>}
+            </Card>
           </form>
           <CardContent>
-            
-            <h2> {change.fstname}'s Chores</h2>
+            {/* <h2> {.fstname}'s Chores</h2> */}
             <Card item xs={12} variant="outlined">
-              
               {/* {<ChoreList />} */}
             </Card>
           </CardContent>
           <Box mt={5}>
             <Copyright />
           </Box>
-        </div>      
+        </div>
       </Card>
-       
-       {/* <Button onClick={() => toggleEdit()} >{isEditing? "Update" : "Edit"}</Button> */}
-      
+
+      {/* <Button onClick={() => toggleEdit()} >{isEditing? "Update" : "Edit"}</Button> */}
     </Container>
-    
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    child: state.child,
-  };
-};
-
-export default connect(mapStateToProps, { child, updateChild })(ChildDetail);
+export default ChildForm;

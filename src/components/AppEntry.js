@@ -49,7 +49,7 @@ const AppEntry = () => {
         </Grid>
         <Grid item>
           <Link to="/SignUpParent" style={{ textDecoration: "none" }}>
-            <Button className={classes.Button} variant="contained" color="transparent">
+            <Button className={classes.Button} variant="contained" color="inherit">
               I'm a parent
             </Button>
           </Link>

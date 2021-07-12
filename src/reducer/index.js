@@ -20,7 +20,7 @@ export default combineReducers({
   child: getChildrenReducer,
   newChild: updateChildReducer,
   chore: getChoresReducer,
-  deleteChoresReducer,
+  delChore: deleteChoresReducer,
   details: childReducer,
   oneChore: choreReducer
 });

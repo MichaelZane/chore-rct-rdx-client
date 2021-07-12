@@ -1,31 +1,31 @@
 import {
-    FETCH_CHORE_START, 
-    FETCH_CHORE_SUCCESS, 
-    FETCH_CHORE_ERROR
+    EDIT_CHORE_START, 
+    EDIT_CHORE_SUCCESS, 
+    EDIT_CHORE_ERROR
   } from '../action';
   
   const initialState = {
-    chore: [],
+    chore: {},
     isLoading: false,
     error: ''
   };
   
   export const choreReducer = (state = initialState, action) => {
     switch (action.type) {
-      case FETCH_CHORE_START:
+      case EDIT_CHORE_START:
         return {
           ...state,
           isLoading: true,
           error: null
         };
-      case FETCH_CHORE_SUCCESS:
+      case EDIT_CHORE_SUCCESS:
   
         return {
           ...state,
           isLoading: false,
           chore: action.payload
         };
-      case FETCH_CHORE_ERROR:
+      case EDIT_CHORE_ERROR:
         return {
           ...state,
           error: action.payload

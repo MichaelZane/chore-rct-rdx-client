@@ -1,99 +1,149 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-          /* Redux */
-import { connect } from "react-redux"
-import addChores from "../action/addChores"
+/* Redux */
+import { connect } from "react-redux";
+import addChores from "../action/addChores";
 
-          /* MUI */
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import { AccountCircle } from '@material-ui/icons';
+/* MUI */
+import Container from '@material-ui/core/Container'
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { AccountCircle } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
+import Card from "@material-ui/core/Card";
 
-          /* Styling */
+import { Image, Transformation } from 'cloudinary-react';
 
-const useStyles = makeStyles(theme => ({
+/* Styling */
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "500px",
+    height: "100%",
+    margin: "20px",
+    borderRadius: "15px",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    position: "relative",
+    overflow: "hidden",
+    backdropFilter: "blur(2px)",
+    color: "rgb(0, 94, 144)",
+    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+    label: 'rgb(0, 94, 144)',
+    padding: "20px"
+    
+  },
+  container: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: "1000px",
+    flexWrap: "wrap",
+    zIndex: 1,
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20,
+    margin: 20
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', 
-    marginTop: theme.spacing(3)
+    
+    width: "100%",
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+  },
+  btn: {
+    width: 200,
+    height: 200,
+    borderRadius: "50%",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 16,
+    color: "white",
+    border: "none",
+    backgroundColor: "silver"
+
   }
-}));    
+}));
 
+/* AddChore */
 
-
-          /* AddChore */
-
-export function AddChore( props ) {
-
-  let childId = localStorage.getItem('childId')
-  
-  const history = useHistory()
-
-  const [url, setUrl] = useState(null)
-  const [alt, setAlt] = useState(null)
-  const [ chore, setChore ] = useState({
+export function AddChore(props) {
+  let childId = localStorage.getItem("childId");
+  const inputRef = useRef()
+  const history = useHistory();
+  const [preview, setPreview] = useState();
+  const [image, setImage] = useState()
+  const [url, setUrl] = useState("");
+  const [alt, setAlt] = useState("");
+  const [chore, setChore] = useState({
     name: "",
     description: "",
-    chore_score: null,
+    chore_score: "",
     child_id: childId,
-    imageUrl: url
-
+    imageUrl: url,
   });
-  
-  const handleChanges = e => {
+
+  useEffect(() => {
+    if(image) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result)
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreview(null)
+    }
+  }, [image])
+
+    const handleChanges = (e) => {
     setChore({
       ...chore,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
-    const { files } = document.querySelector('input[type=file]');
+    const { files } = document.querySelector("input[type=file]");
     const formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('upload_preset', 'chore_preset');
-
+    formData.append("file", files[0]);
+    formData.append("upload_preset", "chore_preset");
+    setPreview(files);
     const options = {
-      method: 'POST',
+      method: "POST",
       body: formData,
     };
-    
-    return fetch('https://api.Cloudinary.com/v1_1/mikezs/image/upload', options)
-      .then(res => res.json())
-      .then(res => {
-        setUrl(res.secure_url)
-        setAlt(`An image of ${res.original_filename}`)
-        chore.imageUrl = url
-        props.addChores(chore)
-        reset()
-        history.push("/home")
-        
+
+    return fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.secure_url)
+        setUrl(res.secure_url);
+        setAlt(`An image of ${res.original_filename}`);
+        props.addChores(chore);
+        reset();
+        history.push("/home");
       })
-      .catch(err => console.error(err))
-  
-  }
+      .catch((err) => console.error(err));
+  };
 
   const reset = () => {
     return setChore({
@@ -101,84 +151,102 @@ export function AddChore( props ) {
       description: "",
       chore_score: null,
       child_id: null,
-      imageUrl: ""
-    })
-  }
+      imageUrl: "",
+    });
+  };
 
   const classes = useStyles();
-  
+
   return (
     
-    <div className={classes.paper}>
+    <Container maxWidth='sm' className={classes.container} >
+      <Card className={classes.root}  raised={true} >
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          < AccountCircle />
+          <AccountCircle />
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Add Your Chores
         </Typography>
-        
+
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
-        
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="fileInput"
-            type="file"
-            name="imageUrl"
-            onChange={handleChanges}
-            value={chore.url}
-            className="form-input"
-          />
-        </Grid>
-        <p>
-          {url && (
-            <img src={url} alt={alt} />
+        {preview ? (<Image src={preview} alt={alt} >
+          <Transformation height="150" width="100%" />
+        </Image>
+        ) : (
+          <Button className={classes.btn} onClick={(e) => {
+            e.preventDefault()
+            inputRef.current.click()
+          }}
+          >Add Image
+          </Button>
           )}
-        </p>
-        
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <TextField
+              style={{display: "none"}}
+              id="fileInput"
+              inputRef={inputRef}
+              type="file"
+              name="imageUrl"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0]
+                if(file && file.type.substr(0,5) === "image") {
+                  setImage(file)
+                } else {
+                  setImage(null)
+                }
+              }}
+              value={chore.imageUrl}
+              className={classes.picFile}
+              fullWidth
+              margin='normal'
+            />
+          
               <TextField
-                autoComplete='name'
-                name='name'
-                variant='outlined'
+                autoComplete="name"
+                name="name"
+                variant="outlined"
+                margin='normal'
                 required
-                fullwidth='true'
-                id='name'
+                fullWidth
+                id="name"
                 value={chore.name}
-                label='Add Chore Name'
+                label="Add Chore Name"
                 autoFocus
                 onChange={handleChanges}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+
+            
               <TextField
-                type='text'
-                variant='outlined'
+                type="text"
+                variant="outlined"
                 required
-                fullwidth='true'
-                id='description'
+                fullWidth
+                margin='normal'
+                id="description"
                 value={chore.description}
-                label='Description'
-                name='description'
-                autoComplete='description'
+                label="Description"
+                name="description"
+                autoComplete="description"
                 onChange={handleChanges}
               />
-            </Grid>
+            
 
-            <Grid item xs={12}>
+            
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
-                fullwidth='true'
-                name='chore_score'
-                label='chore_score'
-                type='text'
-                id='chore_score'
+                fullWidth
+                margin='normal'
+                name="chore_score"
+                label="chore_score"
+                type="text"
+                id="chore_score"
                 value={chore.chore_score}
                 onChange={handleChanges}
               />
-            </Grid>
-            <Grid item xs={12}>
+            
+            {/* <Grid item xs={12}>
               <TextField
                 variant='outlined'
                 required
@@ -191,39 +259,37 @@ export function AddChore( props ) {
                 autoComplete='current-completed'
                 onChange={handleChanges}
               />
-            </Grid>
-          </Grid>
+            </Grid> */}
+         
 
           <Button
-            type='submit'
-            fullwidth='true'
-            variant='contained'
-            color='primary'
+            type="submit"
+            fullWidth
+            variant="contained"
+            margin='normal'
+            color="primary"
             className={classes.submit}
           >
             Add Chore
           </Button>
           <Button
-            type='button'
-            fullwidth='true'
-            variant='contained'
-            color='primary'
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
             className={classes.submit}
-            onClick={() => props.history.push('/home')}
+            onClick={() => props.history.push("/home")}
           >
             Cancel
           </Button>
-          
         </form>
       </div>
-
+      </Card>
+    </Container>
   );
 }
 
-export default connect(
-  null,
-  { addChores }
-)(AddChore);
+export default connect(null, { addChores })(AddChore);
 
 /* 
   name	Required

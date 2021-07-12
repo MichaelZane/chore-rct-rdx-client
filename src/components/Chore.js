@@ -19,22 +19,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { AccountCircle } from '@material-ui/icons';
 
-
-
-
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' to='/'>
-        Track `Em
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-  }
+import Copyright from './Copyright';
+import { useParams } from 'react-router-dom';
   
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -57,6 +43,8 @@ function Copyright() {
   }));
   
   const Chore = ( props ) => {
+
+    const { id } = useParams()
   
     const [chore, setChore] = useState("")
     
@@ -81,102 +69,101 @@ function Copyright() {
       });
     };
       
+    const getChore = props.getChores
+
     useEffect(() => {
-  
- 
-  
+      
+      getChore(id)
+    
     }, [])
  
     return (
-      <>
-      <div><strong>{chore.name}</strong></div>
-      <div><strong>{chore.description}</strong></div>
-      </>
-      // <div>     
-      //   {getChore && getChore.map(one => (
-      //   <Container component='main' maxWidth='xs'>
-      //   <CssBaseline />
-      //   <div className={classes.paper}>
-      //     <Avatar className={classes.avatar}>
-      //       < AccountCircle />
-      //     </Avatar>
-      //     <Typography component='h1' variant='h5'>
-      //       Your Chore Details
-      //     </Typography>
-      //     <form className={classes.form} onSubmit={submitHandler} noValidate>
-      //       <Grid container spacing={2}>
-      //         <Grid item xs={12} sm={6}>
-      //           <TextField
-      //             autoComplete='name'
-      //             name='name'
-      //             variant='outlined'
-      //             required
-      //             fullWidth
-      //             id='name'
-      //             value={getChore.name}
-      //             autoFocus
-      //             onChange={changeHandler}
-      //           />
-      //         </Grid>
-      //         <Grid item xs={12} sm={6}>
-      //           <TextField
-      //             type='text'
-      //             variant='outlined'
-      //             required
-      //             fullWidth
-      //             id='description'
-      //             value={getChore.description}
-      //             name='description'
-      //             autoComplete='description'
-      //             onChange={changeHandler}
-      //           />
-      //         </Grid>
+      
+      <div>     
+        {getChore && getChore.map(one => (
+        <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            < AccountCircle />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
+            Your Chore Details
+          </Typography>
+          <form className={classes.form} onSubmit={submitHandler} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete='name'
+                  name='name'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='name'
+                  value={getChore.name}
+                  autoFocus
+                  onChange={changeHandler}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  type='text'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='description'
+                  value={getChore.description}
+                  name='description'
+                  autoComplete='description'
+                  onChange={changeHandler}
+                />
+              </Grid>
   
-      //         <Grid item xs={12}>
-      //           <TextField
-      //             variant='outlined'
-      //             required
-      //             fullWidth
-      //             name='chore_score'
-      //             type='text'
-      //             id='chore_score'
-      //             value={getChore.chore_score}
-      //             autoComplete='current-chore_score'
-      //             onChange={changeHandler}
-      //           />
-      //         </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='chore_score'
+                  type='text'
+                  id='chore_score'
+                  value={getChore.chore_score}
+                  autoComplete='current-chore_score'
+                  onChange={changeHandler}
+                />
+              </Grid>
               
                 
               
               
               
-      //       </Grid>
+            </Grid>
   
-      //       <Button
-      //         type='submit'
-      //         fullWidth
-      //         variant='contained'
-      //         color='primary'
-      //         className={classes.submit}
-      //         onSubmit={submitHandler}
-      //       >
-      //         Update Chore
-      //       </Button>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+              onSubmit={submitHandler}
+            >
+              Update Chore
+            </Button>
   
-      //       {/* <Card item xs={12}
-      //             variant='outlined'
-      //             fullWidth
-      //           > {<Link cursor="pointer" to={`/chore/`}><ChoreList id={getChore.id}/></Link>} </Card> */}
+            {/* <Card item xs={12}
+                  variant='outlined'
+                  fullWidth
+                > {<Link cursor="pointer" to={`/chore/`}><ChoreList id={getChore.id}/></Link>} </Card> */}
             
-      //     </form>
+          </form>
           
-      //   </div>
-      //   <Box mt={5}>
-      //     <Copyright />
-      //   </Box>
-      //   </Container>
-      //   ))}
-      // </div>
+        </div>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+        </Container>
+        ))}
+      </div>
       
     )
   }

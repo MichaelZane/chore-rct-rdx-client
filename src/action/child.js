@@ -6,7 +6,7 @@ import {
   
   import axiosWithAuth from '../utils/axiosWithAuth';
   
-  const child = (id, history )=> dispatch => {
+  const details = (id, history )=> dispatch => {
     dispatch({type: CHILD_START});
     return axiosWithAuth()
       .get(`/api/auth/child/justchild/${id}`)
@@ -23,4 +23,4 @@ import {
       });
   };
   
-  export default child;
+  export default details;

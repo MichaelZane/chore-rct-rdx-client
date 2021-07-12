@@ -14,7 +14,7 @@ const getChores = (id, history) => async dispatch => {
     .then(res => {
 
       dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data})
-      // history.push(`/childdetails/${id}`)   
+       
     })
     .catch(err => {
       console.log(err);

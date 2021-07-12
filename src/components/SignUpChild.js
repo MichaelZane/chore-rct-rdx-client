@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,22 +14,10 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import addChild from '../action/addChild';
 import { AccountCircle } from '@material-ui/icons';
+import Copyright from './Copyright';
 
 
 // Styling Sign Up Form
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' to='/'>
-        Track `Em
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -55,10 +43,10 @@ const useStyles = makeStyles(theme => ({
 
 const SignUpChild = props => {
 
- 
+  const history = useHistory()
 
   const [state, setState] = useState({
-    parent_id: localStorage.getItem("userId"),
+    parent_id: localStorage.getItem("userId"), 
     fstname: '',
     lstname: '',
     username: '',
@@ -74,8 +62,7 @@ const SignUpChild = props => {
   const submitHandler = e => {
     e.preventDefault();
     props.addChild(state);
-    props.history.push('/home');
-
+    history.push('/home');
     setState({
       fstname: '',
       lstname: '',

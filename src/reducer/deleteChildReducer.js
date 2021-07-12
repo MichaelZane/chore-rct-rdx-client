@@ -23,7 +23,7 @@ export const deleteChildReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingChildren: false,
-        child: state.filter(chld => chld.id !== action.payload)
+        child: state.children.filter(child => child.id !== action.payload)
       };
 
     case DELETE_CHILD_ERROR: {

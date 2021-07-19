@@ -2,16 +2,23 @@
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
-
+import { connect, useSelector } from 'react-redux'
 import ChildList from "./ChildList";
+import getChildren from "../action/getChildren"
 
 /* Router */
-import { Link } from "react-router-dom";
-import AddChore from "./AddChore";
+import { Link, useHistory } from "react-router-dom";
+import { useEffect } from "react";
+
+/* MUI styling */
 
 const useStyles = makeStyles((theme) => ({
   root: {
     color: "white",
+  },
+
+  headline: {
+
   },
 
   Button: {
@@ -24,17 +31,26 @@ const useStyles = makeStyles((theme) => ({
 /* Home */
 
 const Home = props => {
+
+  const history = useHistory()
+
   const logout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
-    window.location.reload("/");
+    localStorage.clear();
+    history.push("/login");
   };
+  // const getChilds = useSelector(state => state.child)
+  // console.log(getChilds)
+  // useEffect(() => {
+  //   getChildren()
+  // },[])
   const classes = useStyles();
+
   return (
     <div className="sign-up-wrapper">
       
-      <Typography gutterBottom={true} variant={"h4"} >
-        Welcome to your Track'em Dashboard 
+      <Typography className={classes.headline} gutterBottom={true} variant={"h4"} >
+        Welcome to your TrackIt Dashboard 
         </Typography>
       <div className="button-wrap">
         <Link to={"/signupChild"}>
@@ -58,4 +74,4 @@ const Home = props => {
   );
 };
 
-export default Home;
+export default Home

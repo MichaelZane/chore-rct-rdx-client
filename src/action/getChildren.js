@@ -1,23 +1,23 @@
 import {
-  GET_CHILDREN_START, 
-  GET_CHILDREN_ERROR, 
-  GET_CHILDREN_SUCCESS
+  CHILD_START,
+  CHILD_SUCCESS, 
+  CHILD_ERROR  
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const getChildren = () => async dispatch => {
   
-  dispatch({type: GET_CHILDREN_START});
+  dispatch({type: CHILD_START});
 
   await axiosWithAuth()
     .get(`/api/auth/parent/${localStorage.getItem('userId')}`)
     .then(res => {
-      dispatch({ type: GET_CHILDREN_SUCCESS, payload: res.data });
+      dispatch({ type: CHILD_SUCCESS, payload: res.data });
 
     })
     .catch(err => {
 
-      dispatch({type: GET_CHILDREN_ERROR, payload: err.res});
+      dispatch({type: CHILD_ERROR, payload: err.res});
       
     });
 };

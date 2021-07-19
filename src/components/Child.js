@@ -10,8 +10,7 @@ import ChoreList from "../components/ChoreList";
 
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import deleteChild from "../action/deleteChild";
-
+import { useDispatch } from "react-redux";
 
 // styles start here
 
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
     color: "rgb(0, 94, 144)",
     textAlign: "center",
     pointerEvents: "none",
-    
   },
   subheader: {
     textAlign: "center",
@@ -73,17 +71,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Child = (props) => {
 
-  const { id } = useParams()
+  const dispatch = useDispatch()
+
+  const { id } = useParams();
 
   const today = new Date();
-
-  const classes = useStyles();
   
+  const classes = useStyles();
+
   return (
     <Container maxWidth="sm" className={classes.container}>
       <Card key={props.id} className={classes.root} raised={true}>
         <Typography>
-          
           <Button onClick={() => props.handleDelete(props.id)}>
             <FaTimes />
           </Button>
@@ -105,14 +104,12 @@ const Child = (props) => {
               underline="hover"
               className={classes.link}
               to={`/childdetail/${props.id}`}
-              onClick={() => localStorage.setItem("childId", props.id)}
+              onClick={() => props.handleEdit(props.id)}
             >
               {props.fstname}
-              
-              
+
               {/* {<span style={{"fontSize": "10px"}} >click to edit</span>} */}
             </Link>
-            
           }
           subheaderTypographyProps={{ variant: "h5", color: "rgb(0, 94, 144)" }}
           subheader={props.username}

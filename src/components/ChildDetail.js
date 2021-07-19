@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 /* Redux */
-import { connect, useDispatch  } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import updateChild from "../action/updateChild";
-import child from "../action/child";
+import child from "../action/child"
+import deleteChild from '../action/deleteChild';
+
 
 /* Router */
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 /* MUI */
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
@@ -21,7 +23,7 @@ import { AccountCircle } from "@material-ui/icons";
 import { CircularProgress } from '@material-ui/core';
 import Card from "@material-ui/core/Card";
 import ChoreList from "./ChoreList";
-
+import Copyright from "./Copyright";
 /* styling starts here */
 
 const useStyles = makeStyles((theme) => ({
@@ -76,59 +78,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" to="/">
-        Track `Em
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const childData = {
-  fstname: '',
-  lstname: '',
-  username: '',
-  password: '',
-}
-
-const ChildDetail = (props) => {
-
+const ChildDetail = forwardRef((props, ref) => {
+  
   const dispatch = useDispatch()  
 
   const history = useHistory()
 
-  const id = props.match.params.id
-  console.log(id)
+  const { id } = useParams()
 
-  const [change, setChange] = useState(childData)
+  
 
-  const changeHandler = (e) => {
-
-    setChange({...change, [e.target.name]: e.target.value }); 
-
-  };
-
+  const editChild = useSelector((state) => state.child.child)
+  const getChild = editChild.find(child => child.id == id)
+  
+  const [form, setForm] = useState("")
+  const [fstname, setFstname] = useState(getChild.fstname)
+  const [lstname, setLstname] = useState(getChild.lstname)
+  const [username, setUsername] = useState(getChild.username)
+  const [password, setPassword] = useState(getChild.password)
+  
   const submitHandler = (e) => {
     e.preventDefault();
-    props.updateChild(change);
+    dispatch(updateChild({
+      fstname: fstname,
+      lstname: lstname,
+      username: username,
+      password: password
+    }));
     history.push("/home");
     
   };
   
-  // const childToEdit = props.child.child.find(child => child.id === Number(id)
-  //)
-  useEffect(() => {
-      dispatch(props.child(id))
-      // setChange(child)
-  
-    
-  }, []);
-
   const classes = useStyles();
 
   return (
@@ -149,56 +129,52 @@ const ChildDetail = (props) => {
               autoComplete="fstname"
               margin='normal'
               name="fstname"
-              variant="outlined"
-              
+              variant="outlined"              
               fullWidth
               id="fstname"
-              value={change.fstname}
+              value={fstname}
               label="First Name"
               autoFocus
-              onChange={changeHandler}
+              onChange={(e) => setFstname(e.target.value)}
             />
 
             <TextField
               type="text"
-              variant="outlined"
-              
+              variant="outlined"              
               margin='normal'
               fullWidth
               id="lstname"
-              value={change.lstname}
+              value={lstname}
               label="Last Name"
               name="lstname"
               autoComplete="lstname"
-              onChange={changeHandler}
+              onChange={(e) => setLstname(e.target.value)}
             />
 
             <TextField
-              variant="outlined"
-              
+              variant="outlined"              
               fullWidth
               margin='normal'
               name="username"
               label="Username"
               type="text"
               id="username"
-              value={change.username}
+              value={username}
               autoComplete="current-username"
-              onChange={changeHandler}
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <TextField
-              variant="outlined"
-              
+              variant="outlined"              
               fullWidth
               margin='normal'
               name="password"
               label="Password"
               type="password"
               id="password"
-              value={change.password}
+              value={password}
               autoComplete="current-password"
-              onChange={changeHandler}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
@@ -218,7 +194,7 @@ const ChildDetail = (props) => {
             >
               Cancel
             </Button>
-            <Card item xs={12}
+            <Card 
               variant="outlined"
               >
                 {<Link></Link>}
@@ -226,8 +202,8 @@ const ChildDetail = (props) => {
           </form>
           <CardContent>
             
-            <h2> {change.fstname}'s Chores</h2>
-            <Card item xs={12} variant="outlined">
+            <h2> {fstname}'s Chores</h2>
+            <Card  variant="outlined">
               
               {/* {<ChoreList />} */}
             </Card>
@@ -243,12 +219,6 @@ const ChildDetail = (props) => {
     </Container>
     
   );
-};
+});
 
-const mapStateToProps = (state) => {
-  return {
-    child: state.child,
-  };
-};
-
-export default connect(mapStateToProps, { child, updateChild })(ChildDetail);
+export default ChildDetail

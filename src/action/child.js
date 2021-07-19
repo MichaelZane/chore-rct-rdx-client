@@ -6,9 +6,10 @@ import {
   
   import axiosWithAuth from '../utils/axiosWithAuth';
   
-  const details = (id, history )=> dispatch => {
+  const child = ( id )=> async dispatch => {
     dispatch({type: CHILD_START});
-    return axiosWithAuth()
+
+    return await axiosWithAuth()
       .get(`/api/auth/child/justchild/${id}`)
       .then(res => {
         
@@ -23,4 +24,4 @@ import {
       });
   };
   
-  export default details;
+  export default child;

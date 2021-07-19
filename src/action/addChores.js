@@ -11,7 +11,7 @@ const addChores = (chore, history) => async dispatch => {
   return await axiosWithAuth()
     .post(`/api/chore`, chore)
     .then(res => {
-      console.log(chore.id)
+
       dispatch({type: ADD_CHORES_SUCCESS, payload: res.data});
      
       localStorage.getItem('childId')

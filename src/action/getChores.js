@@ -1,24 +1,24 @@
 import {
-  FETCH_CHORES_START, 
-  FETCH_CHORES_SUCCESS, 
-  FETCH_CHORES_ERROR
+  CHORES_START, 
+  CHORES_SUCCESS, 
+  CHORES_ERROR
 } from './index';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const getChores = (id, history) => async dispatch => {
+const getChores = (chore) => async dispatch => {
   
-  dispatch({type: FETCH_CHORES_START});
+  dispatch({type: CHORES_START});
   
   await axiosWithAuth()
-    .get(`/api/chore`)
+    .get(`/api/chore`, chore)
     .then(res => {
 
-      dispatch({type: FETCH_CHORES_SUCCESS, payload: res.data})
+      dispatch({type: CHORES_SUCCESS, payload: res.data})
        
     })
     .catch(err => {
       console.log(err);
-      dispatch({type: FETCH_CHORES_ERROR, payload: err.res });
+      dispatch({type: CHORES_ERROR, payload: err.res });
     });
 };
 

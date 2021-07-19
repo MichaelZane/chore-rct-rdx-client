@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { AccountCircle } from '@material-ui/icons';
+import { FaTimes } from "react-icons/fa";
 
 import Copyright from './Copyright';
 import { useParams } from 'react-router-dom';
@@ -60,7 +61,7 @@ import { useParams } from 'react-router-dom';
       e.preventDefault();
 
       props.history.push('/home');
-  
+
       setChore({
         name: '',
         description: '',
@@ -80,9 +81,12 @@ import { useParams } from 'react-router-dom';
     return (
       
       <div>     
-        {getChore && getChore.map(one => (
+        {getChore && getChore.map(chore => (
         <Container component='main' maxWidth='xs'>
         <CssBaseline />
+        <Button onClick={() => props.handleDelete(props.id)}>
+            <FaTimes />
+          </Button>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             < AccountCircle />
@@ -175,7 +179,7 @@ import { useParams } from 'react-router-dom';
     }
   }
   
-  export default connect(mapStateToProps, { chore })(Chore)
+  export default connect(mapStateToProps, { chore, getChores })(Chore)
   // <div>
   //   <strong>{chore.name}</strong>
   //   <p>{chore.photo_obj}</p>

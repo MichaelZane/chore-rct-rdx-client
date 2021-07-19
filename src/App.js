@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SignUpParent from './components/SignUpParent';
 import SignUpChild from './components/SignUpChild';
@@ -17,9 +17,8 @@ import Home from './components/Home';
 import UpdateChild from './components/UpdateChild';
 import { connect } from 'react-redux';
 
-const App = (props) => {
 
-  
+const App = (props) => {
 
   return (
     
@@ -40,8 +39,8 @@ const App = (props) => {
       <PrivateRoute 
           exact
           path='/childdetail/:id' 
-          component={(props => < ChildDetail {...props} />)}
-          />  
+          > < ChildDetail {...props} />
+          </PrivateRoute>  
       <PrivateRoute path='/updatechild/:id'>
         <UpdateChild />
       </PrivateRoute> 
@@ -50,4 +49,5 @@ const App = (props) => {
   );
 };
 
-export default connect(state => state)(App);
+
+export default App;

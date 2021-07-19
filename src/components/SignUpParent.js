@@ -17,30 +17,18 @@ import Popup from "reactjs-popup";
 
 import { Input } from "@material-ui/core";
 import { BorderColor } from "@material-ui/icons";
-
+import Copyright from './Copyright';
 import register from "../action/register";
 import Login from "./Login";
-// Styling Sign Up Form
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" to="/">
-        Trac It
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// Styling Sign Up Form
 
 const useStyles = makeStyles(theme => ({
   h1: {
     color: "rgb(0, 94, 144)"
   },
   button: {
-    backgroundColor: "rgb(0, 94, 144)",
+    backgroundColor: "hsl(201, 100%, 28.2%)",
     width: "300px",
     height: "60px",
     alignItems: "center",
@@ -60,13 +48,16 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: "100%", 
-    marginTop: theme.spacing(3),
-    
-    
+    marginTop: theme.spacing(3),  
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
+  signin: {
+    textAlign: "center",  
+    
+  }
+
   
 }));
 
@@ -197,7 +188,7 @@ const Register = props => {
             </Button>
             <Grid container justify="center">
               <Grid item>
-                <Link to="/Login">Already have an account? Sign in here.</Link>
+                <Link to="/Login">Already have an account? <h4 className={classes.signin} >Sign in here.</h4></Link>
               </Grid>
             </Grid>
           </form>

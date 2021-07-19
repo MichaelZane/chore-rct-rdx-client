@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
           /* Redux */
 import { connect } from 'react-redux';
 import getChores from '../action/getChores';
+import deleteChores from "../action/deleteChores"
 
           /* MUI */
 
@@ -23,11 +24,13 @@ const ChoreList = (props) => {
 
   const classes = useStyles();
 
+  const getChore = props.getChores
+
   useEffect(() => {
     
-    props.getChores()
+    getChore()
     
-  },[])
+  },[getChore])
 
   const childChore = props.chore
   

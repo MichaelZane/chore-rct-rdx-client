@@ -278,7 +278,7 @@ export function AddChore(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => props.history.push("/home")}
+            onClick={() => history.push("/home")}
           >
             Cancel
           </Button>

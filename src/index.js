@@ -9,7 +9,7 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import './index.css';
 // import store from './store'
 import App from './App';
-import 'reactjs-popup/dist/index.css';
+
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

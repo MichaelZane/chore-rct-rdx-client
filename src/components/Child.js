@@ -2,15 +2,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CardContent from "@material-ui/core/CardContent";
 import { FaTimes } from "react-icons/fa";
 import Avatar from "@material-ui/core/Avatar";
 import ChoreList from "../components/ChoreList";
-
+import moment from "moment"
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { useDispatch } from "react-redux";
+
 
 // styles start here
 
@@ -19,15 +19,18 @@ const useStyles = makeStyles((theme) => ({
     width: 220,
     height: "100%",
     margin: 30,
+    borderTopLeftRadius: 50/50,
     borderRadius: 15,
     background: "rgba(255,255,255,0.1)",
     position: "relative",
     overflow: "hidden",
     backdropFilter: "blur(1px)",
-    color: "rgb(0, 94, 144)",
+    color: "whitesmoke",//"rgb(0, 94, 144)",
     boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
     borderTop: "1px solid rgba(255, 255, 255, 0.5)",
     borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+    textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90" 
+    // WebkitTextStrokeColor: "rgb(0, 94, 144)"
   },
   container: {
     position: "relative",
@@ -37,20 +40,23 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1200px",
     flexWrap: "wrap",
     zIndex: 1,
-    color: "rgb(0, 94, 144)",
+    // color: "rgb(0, 94, 144)",
   },
   chores: {
-    alignItems: "center",
+    // alignItems: "center",
+    color: "whitesmoke",
     justifyContent: "center",
     padding: 20,
     transition: "0.5s",
   },
   avatar: {
     display: "flex",
-    position: "relative",
+    right: 5,
+    top: 5,
+    position: "absolute",
     flexDirection: "column",
     fontSize: "2em",
-    color: "rgb(0, 94, 144)",
+    // color: "rgb(0, 94, 144)",
     textAlign: "center",
     pointerEvents: "none",
   },
@@ -59,29 +65,29 @@ const useStyles = makeStyles((theme) => ({
   },
 
   link: {
-    color: "rgb(0, 94, 144)",
+    color: "whitesmoke",//"rgb(0, 94, 144)",
+    fontSize: 35,
     textDecoration: "none",
-    textAlign: "center",
+    // textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90" 
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
   },
+  day: {
+    textAlign: "center",
+  },
 }));
 
 const Child = (props) => {
 
-  const dispatch = useDispatch()
-
-  const { id } = useParams();
-
-  const today = new Date();
+  
   
   const classes = useStyles();
 
   return (
     <Container maxWidth="sm" className={classes.container}>
-      <Card key={props.id} className={classes.root} raised={true}>
+      <Card id="childCard" key={props.id} className={classes.root} raised={true}>
         <Typography>
           <Button onClick={() => props.handleDelete(props.id)}>
             <FaTimes />
@@ -89,33 +95,34 @@ const Child = (props) => {
         </Typography>
 
         <CardHeader
-          avatar={
-            <Avatar
-              aria-label="child"
-              className={classes.avatar}
-              fontSize="inherit"
-            >
-              {props.fstname.toUpperCase().charAt(0)}
-            </Avatar>
-          }
-          titleTypographyProps={{ variant: "h4", color: "rgb(0, 94, 144)" }}
+          // avatar={
+          //   <Avatar
+          //     aria-label="child"
+          //     className={classes.avatar}
+          //     fontSize="inherit"
+          //   >
+          //     {props.fstname.toUpperCase().charAt(0)}
+          //   </Avatar>
+          // }
+          titleTypographyProps={{ align: "center" }}
           title={
             <Link
+              
               underline="hover"
               className={classes.link}
-              to={`/childdetail/${props.id}`}
-              onClick={() => props.handleEdit(props.id)}
+              to={`/childdetail/${props.id}`}             
             >
               {props.fstname}
 
               {/* {<span style={{"fontSize": "10px"}} >click to edit</span>} */}
             </Link>
           }
-          subheaderTypographyProps={{ variant: "h5", color: "rgb(0, 94, 144)" }}
+          subheaderTypographyProps={{ variant: "h5", color: "rgb(0, 94, 144)", align: "center" }}
           subheader={props.username}
         />
+        <Typography className={classes.day} >Today is {moment().format("dddd")}</Typography>
         <CardContent className={classes.chores}>
-          <Typography className={classes.todo}> Assigned Chores: </Typography>
+          <Typography className={classes.todo}> {props.fstname}'s Chores: </Typography>
           <ChoreList key={props.id} id={props.id} />
         </CardContent>
       </Card>

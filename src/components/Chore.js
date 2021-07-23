@@ -1,202 +1,261 @@
-import React, { useState, useEffect } from 'react';
-
-      /* Redux */
-import { connect } from "react-redux"
-import getChores from "../action/getChores"
-import chore from "../action/chore";
-
-      /* MUI */
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import { Link } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { AccountCircle } from '@material-ui/icons';
+import { useState } from "react"
+/* MUI */
+import Button from "@material-ui/core/Button";
+import CardContent from "@material-ui/core/CardContent";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { AccountCircle } from "@material-ui/icons";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import Avatar from "@material-ui/core/Avatar";
 import { FaTimes } from "react-icons/fa";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import getChores from "../action/getChores";
 
-import Copyright from './Copyright';
-import { useParams } from 'react-router-dom';
-  
-  const useStyles = makeStyles(theme => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main
-    },
-    form: {
-      width: '100%', 
-      marginTop: theme.spacing(3)
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2)
-    }
-  }));
-  
-  const Chore = ( props ) => {
-
-    const { id } = useParams()
-  
-    const [chore, setChore] = useState("")
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "500px",
+    height: "100%",
+    margin: "20px",
+    borderRadius: "15px",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    position: "relative",
+    overflow: "hidden",
+    backdropFilter: "blur(2px)",
+    color: "rgb(0, 94, 144)",
+    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+    label: 'rgb(0, 94, 144)',
+    padding: "20px"
     
-    const classes = useStyles();
-  
-    const changeHandler = event => {
-
-      setChore({...chore, [event.target.name]: event.target.value});
-  
-    };
-  
-    const submitHandler = e => {
-      e.preventDefault();
-
-      props.history.push('/home');
-
-      setChore({
-        name: '',
-        description: '',
-        chore_score: '',
-        
-      });
-    };
-      
-    const getChore = props.getChores
-
-    useEffect(() => {
-      
-      getChore(id)
+  },
+  container: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: "1000px",
+    flexWrap: "wrap",
+    zIndex: 1,
+  },
+  paper: {
+    marginTop: theme.spacing(4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 20,
+    margin: 20
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
     
-    }, [])
- 
-    return (
-      
-      <div>     
-        {getChore && getChore.map(chore => (
-        <Container component='main' maxWidth='xs'>
-        <CssBaseline />
-        <Button onClick={() => props.handleDelete(props.id)}>
-            <FaTimes />
+    width: "100%",
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  btn: {
+    width: 200,
+    height: 200,
+    borderRadius: "50%",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 16,
+    color: "white",
+    border: "none",
+    backgroundColor: "silver"
+
+  },
+  
+  images: {
+    width: "100%"
+  }
+}));
+
+const Chore = () => {
+  const inputRef = useRef()
+
+  const { id } = useParams()
+
+  const history = useHistory()
+
+  const getChore = useSelector(state => state.chore.chore)
+  console.log(getChore)
+  const editChore = getChore.find((child) => child.id == id);
+
+  const [chore, setChore] = useState({
+    name: editChore.name,
+    description: editChore.description,
+    chore_score: editChore.chore_score,
+    child_id: 1,
+    
+  });
+
+  useEffect(() => {
+    getChores()
+  })
+
+  const handleChanges = (e) => {
+    setChore({
+      ...chore,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+  const classes = useStyles();
+
+  return (
+    <Container maxWidth='sm' className={classes.container} >
+      <Card className={classes.root}  raised={true} >
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <AccountCircle />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Update Your Chores
+        </Typography>
+
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        {/* {preview ? (<Image className={classes.images} src={preview} alt={alt} >
+         
+        </Image> */}
+        {/* ) : (
+          <Button className={classes.btn} onClick={(e) => {
+            e.preventDefault()
+            inputRef.current.click()
+          }}
+          >Add Image
           </Button>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            < AccountCircle />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Your Chore Details
-          </Typography>
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete='name'
-                  name='name'
-                  variant='outlined'
-                  required
-                  fullWidth
-                  id='name'
-                  value={getChore.name}
-                  autoFocus
-                  onChange={changeHandler}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  type='text'
-                  variant='outlined'
-                  required
-                  fullWidth
-                  id='description'
-                  value={getChore.description}
-                  name='description'
-                  autoComplete='description'
-                  onChange={changeHandler}
-                />
-              </Grid>
-  
-              <Grid item xs={12}>
-                <TextField
-                  variant='outlined'
-                  required
-                  fullWidth
-                  name='chore_score'
-                  type='text'
-                  id='chore_score'
-                  value={getChore.chore_score}
-                  autoComplete='current-chore_score'
-                  onChange={changeHandler}
-                />
-              </Grid>
-              
-                
-              
-              
-              
-            </Grid>
-  
-            <Button
-              type='submit'
+          ) */}
+            {/* <TextField
+              style={{display: "none"}}
+              id="fileInput"
+              inputRef={inputRef}
+              type="file"
+              name="imageUrl"
+              accept="image/*"
+              onChange={handleChanges}              
+              value={chore.imageUrl}
+              className={classes.picFile}
               fullWidth
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-              onSubmit={submitHandler}
-            >
-              Update Chore
-            </Button>
-  
-            {/* <Card item xs={12}
-                  variant='outlined'
-                  fullWidth
-                > {<Link cursor="pointer" to={`/chore/`}><ChoreList id={getChore.id}/></Link>} </Card> */}
+              margin='normal'
+            /> */}
             
-          </form>
-          
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-        </Container>
-        ))}
+              {/* <Select /> */}
+              <TextField
+                autoComplete="name"
+                name="name"
+                variant="outlined"
+                margin='normal'
+                required
+                fullWidth
+                id="name"
+                value={chore.name}
+                label="Add Chore Name"
+                autoFocus
+                onChange={handleChanges}
+              />
+
+            
+              <TextField
+                type="text"
+                variant="outlined"
+                required
+                fullWidth
+                margin='normal'
+                id="description"
+                value={chore.description}
+                label="Description"
+                name="description"
+                autoComplete="description"
+                onChange={handleChanges}
+              />
+            
+
+            
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                margin='normal'
+                name="chore_score"
+                label="chore_score"
+                type="text"
+                id="chore_score"
+                value={chore.chore_score}
+                onChange={handleChanges}
+              />
+            
+            {/* <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullwidth='true'
+                name='completed'
+                label='completed'
+                type='completed'
+                id='completed'
+                value={chore.completed}
+                autoComplete='current-completed'
+                onChange={handleChanges}
+              />
+            </Grid> */}
+         
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            margin='normal'
+            color="primary"
+            className={classes.submit}
+          >
+            Update Chore
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => history.push("/home")}
+          >
+            Cancel
+          </Button>
+        </form>
       </div>
-      
-    )
-  }
-  
-  const mapStateToProps = state => {
-    return {
-      oneChore: state.chore.chore,
-  
-    }
-  }
-  
-  export default connect(mapStateToProps, { chore, getChores })(Chore)
-  // <div>
-  //   <strong>{chore.name}</strong>
-  //   <p>{chore.photo_obj}</p>
-  //   <p>{chore.bonus_pts}</p>
-  //   <p>{chore.chore_score}</p>
-  //   <p>{chore.clean_strk}</p>
-  //   <p>{chore.comments}</p>
-  //   <p>{chore.completed}</p>
-  //   <p>{chore.description}</p>
-  //   <p>{chore.due_date}</p>
-   
-  // </div>
+      </Card>
+    </Container>
+  );
+};
+export default Chore
+// <div>
+//   <strong>{chore.name}</strong>
+//   <p>{chore.photo_obj}</p>
+//   <p>{chore.bonus_pts}</p>
+//   <p>{chore.chore_score}</p>
+//   <p>{chore.clean_strk}</p>
+//   <p>{chore.comments}</p>
+//   <p>{chore.completed}</p>
+//   <p>{chore.description}</p>
+//   <p>{chore.due_date}</p>
 
-
-
-
-
+// </div>
 
 /* 
 bonus_pts: null

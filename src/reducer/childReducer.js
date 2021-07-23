@@ -22,7 +22,8 @@ const initialState = {
 };
 
 export const childReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case CHILD_START:
       return {
         ...state,
@@ -33,12 +34,12 @@ export const childReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        child: action.payload,
+        child: payload,
       };
     case CHILD_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: payload,
       };
     case ADD_CHILD_START:
       return {
@@ -48,19 +49,19 @@ export const childReducer = (state = initialState, action) => {
       };
 
     case ADD_CHILD_SUCCESS:
-      localStorage.getItem("userId", action.payload.user_id);
-      localStorage.setItem("childId", action.payload.child_id);
+      localStorage.getItem("userId", payload.user_id);
+      localStorage.setItem("childId", payload.child_id);
 
       return {
         ...state,
         addChild: false,
-        child: action.payload,
+        child: payload,
       };
 
     case ADD_CHILD_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: payload,
       };
 
     case DELETE_CHILD_START:
@@ -73,13 +74,14 @@ export const childReducer = (state = initialState, action) => {
       return {
         ...state,
         deletingChild: false,
-        child: action.payload.map((child) => child),
+        child: state.filter(({ id }) => id !== payload.id)
+      
       };
 
     case DELETE_CHILD_ERROR: {
       return {
         ...state,
-        error: action.payload,
+        error: payload,
       };
     }
     case UPDATE_CHILD_START:
@@ -90,11 +92,13 @@ export const childReducer = (state = initialState, action) => {
       };
     case UPDATE_CHILD_SUCCESS:
       return {
-        ...state,
         updatingChild: false,
-        child: state.child.map((child) => {
-          if (child.id === action.payload.id) {
-            return child = action.payload;
+        child: state.map((child) => {
+          if (child.id === payload.id) {
+            return {
+              ...child,
+              ...payload
+            }
           } else {
             return child;
           }
@@ -103,7 +107,7 @@ export const childReducer = (state = initialState, action) => {
     case UPDATE_CHILD_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: payload,
       };
 
     default:

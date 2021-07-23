@@ -1,29 +1,25 @@
-import { forwardRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 /* Redux */
-import { useDispatch, useSelector  } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import updateChild from "../action/updateChild";
-import child from "../action/child"
-import deleteChild from '../action/deleteChild';
-
 
 /* Router */
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 /* MUI */
 import Avatar from "@material-ui/core/Avatar";
+import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import CardContent from "@material-ui/core/CardContent";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { AccountCircle } from "@material-ui/icons";
-import { CircularProgress } from '@material-ui/core';
-import Card from "@material-ui/core/Card";
-import ChoreList from "./ChoreList";
 import Copyright from "./Copyright";
+
 /* styling starts here */
 
 const useStyles = makeStyles((theme) => ({
@@ -78,45 +74,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChildDetail = forwardRef((props, ref) => {
-  
-  const dispatch = useDispatch()  
+const ChildDetail = () => {
+  const dispatch = useDispatch();
 
-  const history = useHistory()
+  const history = useHistory();
 
-  const { id } = useParams()
+  const { id } = useParams();
 
-  
+  const editChild = useSelector((state) => state.child.child);
+  const getChild = editChild.find((child) => child.id == id);
+  const [child, setChild] = useState({
+  parent_id: getChild.parent_id,
+  fstname: getChild.fstname,
+  lstname: getChild.lstname,
+  username: getChild.username
+  })
 
-  const editChild = useSelector((state) => state.child.child)
-  const getChild = editChild.find(child => child.id == id)
-  
-  const [form, setForm] = useState("")
-  const [fstname, setFstname] = useState(getChild.fstname)
-  const [lstname, setLstname] = useState(getChild.lstname)
-  const [username, setUsername] = useState(getChild.username)
-  const [password, setPassword] = useState(getChild.password)
+  const handleChanges = (e) => {
+    setChild({
+      ...child,
+      [e.target.name]: e.target.value,
+    });
+  };
   
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateChild({
-      fstname: fstname,
-      lstname: lstname,
-      username: username,
-      password: password
-    }));
+    if(child)
+    dispatch(
+      updateChild({
+       id
+      })
+    );
     history.push("/home");
-    
   };
-  
+
   const classes = useStyles();
 
   return (
-    
     <Container maxWidth="sm" className={classes.container}>
       <CssBaseline />
-      
-      <Card raised={true} className={classes.root}> 
+
+      <Card raised={true} className={classes.root}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <AccountCircle />
@@ -127,54 +125,41 @@ const ChildDetail = forwardRef((props, ref) => {
           <form className={classes.form} onSubmit={submitHandler} noValidate>
             <TextField
               autoComplete="fstname"
-              margin='normal'
+              margin="normal"
               name="fstname"
-              variant="outlined"              
+              variant="outlined"
               fullWidth
               id="fstname"
-              value={fstname}
+              value={child.fstname}
               label="First Name"
               autoFocus
-              onChange={(e) => setFstname(e.target.value)}
+              onChange={handleChanges}
             />
 
             <TextField
               type="text"
-              variant="outlined"              
-              margin='normal'
+              variant="outlined"
+              margin="normal"
               fullWidth
               id="lstname"
-              value={lstname}
+              value={child.lstname}
               label="Last Name"
               name="lstname"
               autoComplete="lstname"
-              onChange={(e) => setLstname(e.target.value)}
+              onChange={handleChanges}
             />
 
             <TextField
-              variant="outlined"              
+              variant="outlined"
               fullWidth
-              margin='normal'
+              margin="normal"
               name="username"
               label="Username"
               type="text"
               id="username"
-              value={username}
+              value={child.username}
               autoComplete="current-username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-
-            <TextField
-              variant="outlined"              
-              fullWidth
-              margin='normal'
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChanges}
             />
 
             <Button
@@ -194,31 +179,14 @@ const ChildDetail = forwardRef((props, ref) => {
             >
               Cancel
             </Button>
-            <Card 
-              variant="outlined"
-              >
-                {<Link></Link>}
-              </Card>
           </form>
-          <CardContent>
-            
-            <h2> {fstname}'s Chores</h2>
-            <Card  variant="outlined">
-              
-              {/* {<ChoreList />} */}
-            </Card>
-          </CardContent>
           <Box mt={5}>
             <Copyright />
           </Box>
-        </div>      
+        </div>
       </Card>
-       
-       {/* <Button onClick={() => toggleEdit()} >{isEditing? "Update" : "Edit"}</Button> */}
-      
     </Container>
-    
   );
-});
+};
 
-export default ChildDetail
+export default ChildDetail;

@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 /* Redux */
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import addChores from "../action/addChores";
 
 /* MUI */
@@ -14,8 +14,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
+/* Cloudinary Bucket */
+import { Image } from 'cloudinary-react';
 
-import { Image, Transformation } from 'cloudinary-react';
+import Select from "./Select"
 
 /* Styling */
 
@@ -72,31 +74,35 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     cursor: "pointer",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     fontSize: 16,
     color: "white",
     border: "none",
     backgroundColor: "silver"
 
+  },
+  
+  images: {
+    width: "100%"
   }
 }));
 
 /* AddChore */
 
 export function AddChore(props) {
-  let childId = localStorage.getItem("childId");
+  
   const inputRef = useRef()
   const history = useHistory();
   const [preview, setPreview] = useState();
   const [image, setImage] = useState()
-  const [url, setUrl] = useState("");
-  const [alt, setAlt] = useState("");
+  const [url, setUrl] = useState();
+  const [alt, setAlt] = useState();
   const [chore, setChore] = useState({
     name: "",
     description: "",
     chore_score: "",
-    child_id: childId,
+    child_id: 1,
     imageUrl: url,
   });
 
@@ -118,13 +124,22 @@ export function AddChore(props) {
       [e.target.name]: e.target.value,
     });
   };
+  const handleInputChange = useCallback((e) => {
+    
+      const file = e.target.files[0]
+      if(file && file.type.substr(0,5) === "image") {
+        setImage(file)        
+      } else {
+        setImage(null)
+      }
+    }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { files } = document.querySelector("input[type=file]");
     const formData = new FormData();
-    formData.append("file", files[0]);
+    formData.append("file", image);
     formData.append("upload_preset", "chore_preset");
     setPreview(files);
     const options = {
@@ -132,15 +147,17 @@ export function AddChore(props) {
       body: formData,
     };
 
-    return fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.secure_url)
-        setUrl(res.secure_url);
-        setAlt(`An image of ${res.original_filename}`);
+    return fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options )
+
+      .then(res => res.json())
+
+      .then(data => {
+
+        setUrl(data.public_id);
+
         props.addChores(chore);
-        reset();
-        history.push("/home");
+        
+        // history.push("/home");
       })
       .catch((err) => console.error(err));
   };
@@ -154,7 +171,7 @@ export function AddChore(props) {
       imageUrl: "",
     });
   };
-
+  
   const classes = useStyles();
 
   return (
@@ -170,16 +187,18 @@ export function AddChore(props) {
         </Typography>
 
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
-        {preview ? (<Image src={preview} alt={alt} >
-          <Transformation height="150" width="100%" />
+        {preview ? (<Image className={classes.images} src={preview} alt={alt} >
+         
         </Image>
         ) : (
+          <div className="btn-wrapper">
           <Button className={classes.btn} onClick={(e) => {
             e.preventDefault()
             inputRef.current.click()
           }}
           >Add Image
           </Button>
+          </div>
           )}
             <TextField
               style={{display: "none"}}
@@ -188,20 +207,14 @@ export function AddChore(props) {
               type="file"
               name="imageUrl"
               accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0]
-                if(file && file.type.substr(0,5) === "image") {
-                  setImage(file)
-                } else {
-                  setImage(null)
-                }
-              }}
+              onChange={handleInputChange}              
               value={chore.imageUrl}
               className={classes.picFile}
               fullWidth
               margin='normal'
             />
-          
+            
+              {/* <Select /> */}
               <TextField
                 autoComplete="name"
                 name="name"

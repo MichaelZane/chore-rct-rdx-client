@@ -5,7 +5,7 @@ import {
   ADD_CHILD_ERROR
 } from './index';
 
-const addChild = (child, history ) => async dispatch => {
+const addChild = (child, history, id ) => async dispatch => {
   dispatch({type: ADD_CHILD_START});
   return await axiosWithAuth()
     .post('/api/auth/register/child', child)
@@ -14,6 +14,7 @@ const addChild = (child, history ) => async dispatch => {
       dispatch({ type: ADD_CHILD_SUCCESS, payload: res.data });
 
       localStorage.getItem('userId')
+      localStorage.setItem("childId", id)
       
       history.push("/home")
     })

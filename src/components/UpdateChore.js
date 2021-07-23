@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
+import editChore from "../action/editChore"
 
 export default function Form() {
+
+  const dispatch = useDispatch()
+
+  const { id } = useParams
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    chore_score: 0,
-    child_id: 0,
-    parent_id: 0
+    chore_score: "",
+    child_id: "",
+    parent_id: ""
   });
 
   const handleChanges = e => {
@@ -18,6 +26,12 @@ export default function Form() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(formData)
+    dispatch(
+      editChore({
+       id
+      })
+    );
   };
 
   return (

@@ -7,15 +7,15 @@ import {
   
   
   
-  const editChore= (newChore, id, history )=> dispatch => {
+  const editChore= ( id )=> dispatch => {
     dispatch({type: EDIT_CHORE_START});
     return axiosWithAuth()
-      .put(`/api/auth/child/${id}`, newChore)
+      .put(`/api/auth/child/${id}`)
       .then(res => {
         
         dispatch({type: EDIT_CHORE_SUCCESS, payload: res.data});
         
-        history.push(`/chore/${id}`)
+        
   
       })
       .catch(err => {

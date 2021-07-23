@@ -2,13 +2,9 @@
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
-import { connect, useSelector } from 'react-redux'
 import ChildList from "./ChildList";
-import getChildren from "../action/getChildren"
-
 /* Router */
 import { Link, useHistory } from "react-router-dom";
-import { useEffect } from "react";
 
 /* MUI styling */
 
@@ -30,20 +26,16 @@ const useStyles = makeStyles((theme) => ({
 
 /* Home */
 
-const Home = props => {
+const Home = () => {
 
   const history = useHistory()
-
+  
   const logout = (e) => {
     e.preventDefault();
     localStorage.clear();
     history.push("/login");
   };
-  // const getChilds = useSelector(state => state.child)
-  // console.log(getChilds)
-  // useEffect(() => {
-  //   getChildren()
-  // },[])
+ 
   const classes = useStyles();
 
   return (
@@ -58,10 +50,7 @@ const Home = props => {
             Add Child
           </Button>
         </Link>
-        <Link to={{
-          pathname: "/addchore",
-          state: { id: props.id }
-          }}>
+        <Link to={"/addchore"}>
           <Button className={classes.Button} variant="outlined">Add Chore</Button>
         </Link>
 

@@ -80,7 +80,7 @@ h4 {
   background-size: cover; 
   /* background: #161623; */
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   width: 100%;
   flex-direction: column;
   justify-content: center;
@@ -88,6 +88,12 @@ h4 {
   align-items: center;
   z-index: 1;
  }
+ .btn-wrapper {
+  display: flex;
+  justify-content: center;
+
+ }
+
 .button-wrap {
   display: flex;
   

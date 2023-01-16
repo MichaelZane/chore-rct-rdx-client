@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -10,9 +9,10 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import addChild from "../action/addChild";
+import addChild from "../slices/childSlice";
 import { AccountCircle } from "@material-ui/icons";
 import Copyright from "./Copyright";
+import { useDispatch } from "react-redux";
 
 // Styling Sign Up Form
 
@@ -38,8 +38,10 @@ const useStyles = makeStyles((theme) => ({
 
 //   Function Starts Here
 
-const SignUpChild = (props) => {
+export default function SignUpChild () {
+
   const history = useHistory();
+  const dispatch = useDispatch()
 
   const [state, setState] = useState({
     parent_id: localStorage.getItem("userId"),
@@ -56,7 +58,7 @@ const SignUpChild = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.addChild(state);
+    dispatch(addChild(state), history.push("/home"))
     history.push("/home");
     setState({
       fstname: "",
@@ -157,4 +159,3 @@ const SignUpChild = (props) => {
   );
 };
 
-export default connect(null, { addChild })(SignUpChild);

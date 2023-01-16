@@ -7,7 +7,7 @@ import childLogin from "./components/ChildLogin";
 import AddChore from "./components/AddChore";
 import UpdateChore from "./components/UpdateChore";
 import ChildList from "./components/ChildList";
-import Child from "./components/Child";
+import Child from "./components/ChildCard";
 import ChildDetail from "./components/ChildDetail";
 import ChoreList from "./components/ChoreList";
 import Chore from "./components/Chore";

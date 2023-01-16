@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,7 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "./Copyright";
-import register from "../action/register";
+import { useDispatch } from "react-redux";
+import register from "../slices/registerSlice";
 
 // Styling Sign Up Form
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 //   Function Starts Here
 
-const Register = (props) => {
+export default function Register(props) {
   const [regstr, setRegstr] = useState({
     fname: "",
     lname: "",
@@ -62,13 +62,16 @@ const Register = (props) => {
     password: "",
   });
 
+  const dispatch = useDispatch()
+  const history = useHistory()
+
   const changeHandler = (e) => {
     setRegstr({ ...regstr, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.register(regstr);
+    dispatch(register(regstr), history.push("/login"));
 
     setRegstr({
       fname: "",
@@ -192,4 +195,4 @@ const Register = (props) => {
   );
 };
 
-export default connect(null, { register })(Register);
+ 

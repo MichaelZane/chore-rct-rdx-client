@@ -82,7 +82,7 @@ const ChildDetail = () => {
   const { id } = useParams();
 
   const editChild = useSelector((state) => state.child.child);
-  const getChild = editChild.find((child) => child.id == id);
+  const getChild = editChild.find((child) => child.id === id);
   const [child, setChild] = useState({
   parent_id: getChild.parent_id,
   fstname: getChild.fstname,

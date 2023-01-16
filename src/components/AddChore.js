@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-
-/* Redux */
-import { connect, useSelector } from "react-redux";
-import addChores from "../action/addChores";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addChores } from "../slices/choreSlice";
 
 /* MUI */
 import Container from '@material-ui/core/Container'
@@ -12,7 +11,6 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
-import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 /* Cloudinary Bucket */
 import { Image } from 'cloudinary-react';
@@ -90,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 /* AddChore */
 
-export function AddChore(props) {
+export default function AddChore() {
   
   const inputRef = useRef()
   const history = useHistory();
@@ -103,8 +101,11 @@ export function AddChore(props) {
     description: "",
     chore_score: "",
     child_id: 1,
-    imageUrl: url,
+    imageUrl: "",
   });
+
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     if(image) {
@@ -154,8 +155,8 @@ export function AddChore(props) {
       .then(data => {
 
         setUrl(data.public_id);
-
-        props.addChores(chore);
+        
+        dispatch(addChores(chore))
         
         // history.push("/home");
       })
@@ -174,6 +175,8 @@ export function AddChore(props) {
   
   const classes = useStyles();
 
+  
+ 
   return (
     
     <Container maxWidth='sm' className={classes.container} >
@@ -301,8 +304,6 @@ export function AddChore(props) {
     </Container>
   );
 }
-
-export default connect(null, { addChores })(AddChore);
 
 /* 
   name	Required

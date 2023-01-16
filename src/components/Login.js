@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 // Redux
-import { connect } from "react-redux";
+
 // Router
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -17,8 +17,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
-
-import login from "../action/login";
+import { useThunkDispatch } from "../store";
+import { useDispatch } from "react-redux";
+import { login } from "../slices/loginSlice";
 
 // Styling Starts Here
 
@@ -87,19 +88,24 @@ const useStyles = makeStyles((theme) =>
 
 /* LogIn */
 
-const Login = (props) => {
+export default function Login() {
   const [logForm, setLogForm] = useState({
     username: "",
     password: "",
   });
 
+  const dispatch = useDispatch()//useThunkDispatch()
+  const history = useHistory()
+
   const changeHandler = (event) => {
     setLogForm({ ...logForm, [event.target.name]: event.target.value });
   };
-
+  const user = {username: logForm.username, password: logForm.password};
   const submitHandler = (e) => {
     e.preventDefault();
-    props.login(logForm, props.history);
+    dispatch(login(user))
+    history.push("/home")
+    
   };
 
   const classes = useStyles();
@@ -164,7 +170,7 @@ const Login = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={() => props.history.push("/")}
+                onClick={() => history.push("/")}
               >
                 Cancel
               </Button>
@@ -190,10 +196,3 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userData: state.userData,
-  };
-};
-
-export default connect(mapStateToProps, { login })(Login);

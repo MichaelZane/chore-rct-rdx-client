@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 /* Redux */
-import { connect } from "react-redux";
-import getChores from "../action/getChores";
-import deleteChores from "../action/deleteChores";
+
+
 
 /* MUI */
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 
 /* Router */
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   link: {
@@ -24,26 +23,19 @@ const useStyles = makeStyles({
 
 /* ChoreList */
 
-const ChoreList = (props) => {
+const ChoreList = ({ choreList }) => {
+ 
   const classes = useStyles();
-  const { id } = useParams()
+  // const { id } = useParams()
 
-  const getChore = props.getChores;
 
-  useEffect(() => {
-    getChore();
-  }, [getChore]);
-
-  const childChore = props.chore;
   
   return (
     <div className="chore-wrap">
-      {childChore && childChore.length > 0 ? (
-        childChore
-          .filter(function (chore) {
-            return chore.child_id === props.id;
-          })
+      {choreList ? (
+        choreList  
           .map((chore) => (
+            
             <li className={classes.check}  key={chore.id} type="none">
               <Checkbox
                  
@@ -65,10 +57,4 @@ const ChoreList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    chore: state.chore.chore,
-  };
-};
-
-export default connect(mapStateToProps, { getChores })(ChoreList);
+export default ChoreList;

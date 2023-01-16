@@ -13,9 +13,9 @@ import { FaTimes } from "react-icons/fa";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import getChores from "../action/getChores";
+import { getChores, selectChores } from "../slices/choreSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,11 +89,13 @@ const Chore = () => {
 
   const { id } = useParams()
 
+  const dispatch = useDispatch()
+
   const history = useHistory()
 
-  const getChore = useSelector(state => state.chore.chore)
-  console.log(getChore)
-  const editChore = getChore.find((child) => child.id == id);
+  const getChore = useSelector(selectChores)
+  console.log("<<GC<>>>", getChore)
+  const editChore = getChore.find((child) => child.id === id);
 
   const [chore, setChore] = useState({
     name: editChore.name,
@@ -104,7 +106,7 @@ const Chore = () => {
   });
 
   useEffect(() => {
-    getChores()
+    dispatch(getChore())
   })
 
   const handleChanges = (e) => {

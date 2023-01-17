@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -63,7 +63,7 @@ export default function Register(props) {
   });
 
   const dispatch = useDispatch()
-  const history = useHistory()
+
 
   const changeHandler = (e) => {
     setRegstr({ ...regstr, [e.target.name]: e.target.value });
@@ -71,7 +71,7 @@ export default function Register(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(regstr), history.push("/login"));
+    dispatch(register(regstr));
 
     setRegstr({
       fname: "",
@@ -177,7 +177,7 @@ export default function Register(props) {
             >
               Sign Up
             </Button>
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Grid item>
                 <Link to="/Login">
                   Already have an account?{" "}

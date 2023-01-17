@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 /* MUI */
 import Button from "@material-ui/core/Button";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { FaTimes } from "react-icons/fa";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { getChores, selectChores } from "../slices/choreSlice";
@@ -91,10 +91,10 @@ const Chore = () => {
 
   const dispatch = useDispatch()
 
-  const history = useHistory()
+  const history = useNavigate()
 
   const getChore = useSelector(selectChores)
-  console.log("<<GC<>>>", getChore)
+
   const editChore = getChore.find((child) => child.id === id);
 
   const [chore, setChore] = useState({

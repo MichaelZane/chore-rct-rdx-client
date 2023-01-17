@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import editChore from "../action/editChore"
 
 export default function Form() {
 
@@ -27,11 +26,7 @@ export default function Form() {
   const handleSubmit = e => {
     e.preventDefault();
     if(formData)
-    dispatch(
-      editChore({
-       id
-      })
-    );
+    dispatch();
   };
 
   return (

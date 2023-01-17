@@ -14,9 +14,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-
-import childLogin from "../action/childLogin";
-
 // Styling Starts Here
 
 function Copyright() {
@@ -142,10 +139,4 @@ const ChildLogin = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    userData: state.userData,
-  };
-};
-
-export default connect(mapStateToProps, { childLogin })(ChildLogin);
+export default ChildLogin;

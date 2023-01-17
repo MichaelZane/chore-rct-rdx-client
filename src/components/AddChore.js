@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addChores } from "../slices/choreSlice";
 
 /* MUI */
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AddChore() {
   
   const inputRef = useRef()
-  const history = useHistory();
+  const navigate = useNavigate();
   const [preview, setPreview] = useState();
   const [image, setImage] = useState()
   const [url, setUrl] = useState();
@@ -135,7 +135,7 @@ export default function AddChore() {
       }
     }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { files } = document.querySelector("input[type=file]");
@@ -148,19 +148,15 @@ export default function AddChore() {
       body: formData,
     };
 
-    return fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options )
+    try {
+      const res = await fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options);
+      const data = await res.json();
+      setUrl(data.public_id);
 
-      .then(res => res.json())
-
-      .then(data => {
-
-        setUrl(data.public_id);
-        
-        dispatch(addChores(chore))
-        
-        // history.push("/home");
-      })
-      .catch((err) => console.error(err));
+      dispatch(addChores(chore));
+    } catch (err) {
+      return console.error(err);
+    }
   };
 
   const reset = () => {
@@ -294,7 +290,7 @@ export default function AddChore() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => history.push("/home")}
+            onClick={() => navigate("/home")}
           >
             Cancel
           </Button>

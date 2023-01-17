@@ -26,18 +26,18 @@ const AppEntry = () => {
         container
         spacing={4}
         direction="column"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
       >
         <Grid item>
-          <Link to="/SignUpChild" style={{ textDecoration: "none" }}>
+          <Link to="/signUpChild" style={{ textDecoration: "none" }}>
             <Button className={classes.Button} variant="contained">
               I'm a child
             </Button>
           </Link>
         </Grid>
         <Grid item>
-          <Link to="/SignUpParent" style={{ textDecoration: "none" }}>
+          <Link to="/signUpParent" style={{ textDecoration: "none" }}>
             <Button
               className={classes.Button}
               variant="contained"

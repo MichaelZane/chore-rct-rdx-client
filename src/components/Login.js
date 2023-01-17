@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // Redux
 
 // Router
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -95,7 +95,7 @@ export default function Login() {
   });
 
   const dispatch = useDispatch()//useThunkDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const changeHandler = (event) => {
     setLogForm({ ...logForm, [event.target.name]: event.target.value });
@@ -104,7 +104,7 @@ export default function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(user))
-    history.push("/home")
+    navigate("/home")
     
   };
 
@@ -170,7 +170,7 @@ export default function Login() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={() => history.push("/")}
+                onClick={() => navigate("/")}
               >
                 Cancel
               </Button>

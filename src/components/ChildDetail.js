@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 /* Redux */
 import { useDispatch, useSelector } from "react-redux";
-import updateChild from "../action/updateChild";
+
 
 /* Router */
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 /* MUI */
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 const ChildDetail = () => {
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -100,12 +100,8 @@ const ChildDetail = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if(child)
-    dispatch(
-      updateChild({
-       id
-      })
-    );
-    history.push("/home");
+    dispatch();
+    navigate("/home");
   };
 
   const classes = useStyles();
@@ -175,7 +171,7 @@ const ChildDetail = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => history.push("/home")}
+              onClick={() => navigate("/home")}
             >
               Cancel
             </Button>

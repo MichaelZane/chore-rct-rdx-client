@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, {useState} from 'react'
 import {Link, useParams} from 'react-router-dom';
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,8 +10,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-import updateChild from '../action/updateChild';
 
 // Styling Sign Up Form
 
@@ -163,14 +159,4 @@ const UpdateChild = props => {
   );
 };
 
-const mapStateToProps = ({loginReducer, updateChildReducer}) => {
-  return {
-    child: updateChildReducer.child,
-    parentId: loginReducer.userID
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  {updateChild}
-)(UpdateChild);
+export default UpdateChild

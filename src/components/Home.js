@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
 import ChildList from "./ChildList";
 /* Router */
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /* MUI styling */
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
 
-  const history = useHistory()
+  const history = useNavigate()
   
   const logout = (e) => {
     e.preventDefault();

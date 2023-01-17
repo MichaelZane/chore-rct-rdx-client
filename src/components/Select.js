@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import getChildren from '../action/getChildren';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +27,7 @@ export default function SimpleSelect() {
   const childSelect = useSelector(state => state.child.child)
 
   useEffect(() => {
-    dispatch(getChildren());
+    dispatch();
     
   }, [dispatch]);
 

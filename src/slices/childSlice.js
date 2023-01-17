@@ -13,6 +13,19 @@ export const fetchChildren = createAsyncThunk(
     }
   }
 );
+
+export const fetchChildAndChores = createAsyncThunk(
+  'children/fetchChildren',
+  async (dispatch) => {
+    try {
+      const res = await axiosWithAuth().get(`/api/chore/chores`);
+      return res.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+);
+
 export const fetchChildDetails = createAsyncThunk(
   'children/fetchChildDetails',
   async (childId, { dispatch }) => {
@@ -59,7 +72,6 @@ export const getChildDetails = createAsyncThunk(
     }
   }
 );
-
 
 export const updateChild = createAsyncThunk(
   "child/updateChild",
@@ -152,7 +164,18 @@ const childSlice = createSlice({
         .addCase(deleteChild.rejected, (state, { error }) => {
         state.error = error;
         state.status = 'failed';
-      }); 
+        })
+        // .addCase(fetchChildAndChores.pending, (state) => {
+        //   state.status = "loading";
+        // })
+        // .addCase(fetchChildAndChores.fulfilled, (state, { payload }) => {
+        //   state.children = payload;
+        //   state.status = "succeeded";
+        // })
+        // .addCase(fetchChildAndChores.rejected, (state, { error }) => {
+        //   state.status = "failed";
+        //   state.error = error.message;
+        // })
     },
   });
         
@@ -161,6 +184,7 @@ const childSlice = createSlice({
   // Selectors
   export const selectChildren = (state) => state.child.children;
   export const selectChildDetails = (state) => state.child.children.childDetails;
+  export const selectChildrenAndChores = (state) => state.child.children
   export const selectLoading = (state) => state.child.children.status === 'loading';
   export const selectError = (state) => state.child.children.error;
 

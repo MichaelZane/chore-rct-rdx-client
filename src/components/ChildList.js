@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@material-ui/core";
 import ChildCard from "./ChildCard";
-import { selectChildren, selectLoading, selectError, fetchChildren, deleteChild } from '../slices/childSlice'
+import { selectChildrenAndChores, fetchChildAndChores, selectLoading, selectError, deleteChild } from '../slices/childSlice'
 
 const ChildList = () => {
   const dispatch = useDispatch();
 
-  const children = useSelector(selectChildren);
+  const children = useSelector(selectChildrenAndChores);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError)
 
@@ -15,9 +15,9 @@ const ChildList = () => {
 
   useEffect(() => {
 
-    dispatch(fetchChildren(usrId));
+    dispatch(fetchChildAndChores());
 
-  }, [dispatch, usrId]);
+  }, [ dispatch ]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete child")) {

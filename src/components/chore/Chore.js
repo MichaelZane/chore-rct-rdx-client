@@ -94,27 +94,34 @@ const Chore = () => {
 
   const chore = useSelector(state => state.chore.chore)
 
-  const [formData, setformData] = useState(chore);
+  const [formData, setformData] = useState({});
+
 
   useEffect(() => {
 
-    console.log("changing chore")
     dispatch(fetchChore(id))
-    if(chore) setformData(chore);
+    
+  },[])
 
-  },[dispatch, id ])
+  useEffect(() => {
+
+    if(chore) {
+      setformData(chore);
+    }
+  }, [chore])
 
   const handleChanges = (e) => {
-    setformData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    setformData(currentState => {
+      return {...currentState,
+      [e.target.name]: e.target.value
+      }
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editChore({id, ...formData}))
-    setformData(null)
+    setformData({})
     navigate("/home")
   }
   const classes = useStyles();
@@ -167,7 +174,7 @@ const Chore = () => {
                 required
                 fullWidth
                 id="name"
-                value={formData.name }
+                value={formData?.name }
                 label="Add Chore Name"
                 autoFocus
                 onChange={handleChanges}
@@ -181,7 +188,7 @@ const Chore = () => {
                 fullWidth
                 margin='normal'
                 id="description"
-                value={ formData.description }
+                value={ formData?.description }
 
                 label="Description"
                 name="description"
@@ -200,7 +207,7 @@ const Chore = () => {
                 label="chore_score"
                 type="text"
                 id="chore_score"
-                value={formData.chore_score }
+                value={formData?.chore_score }
                 onChange={handleChanges}
               />
             

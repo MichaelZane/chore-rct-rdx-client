@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUpChild () {
 
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch()
 
   const [state, setState] = useState({
@@ -49,23 +49,25 @@ export default function SignUpChild () {
     lstname: "",
     username: "",
     password: ""
-
   });
 
-  const changeHandler = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
+  const changeHandler = (e) => {
+    setState(currentState => {
+      return {...currentState, [e.target.name]: e.target.value
+      }
+    });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(addChild(state), history.push("/home"))
-    history.push("/home");
+    dispatch(addChild(state))
     setState({
       fstname: "",
       lstname: "",
       username: "",
       password: "",
-    });
+    })
+    navigate("/home");
   };
 
   const classes = useStyles();

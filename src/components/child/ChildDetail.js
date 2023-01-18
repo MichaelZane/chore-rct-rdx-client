@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 /* Redux */
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,11 +14,12 @@ import TextField from "@material-ui/core/TextField";
 
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-
+import { fetchChildDetails, updateChild, selectChildDetails } from "../../slices/childSlice";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { AccountCircle } from "@material-ui/icons";
 import Copyright from "../Copyright";
+import { CircularProgress } from "@material-ui/core";
 
 /* styling starts here */
 
@@ -75,32 +76,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ChildDetail = () => {
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const { id } = useParams();
 
-  const editChild = useSelector((state) => state.child.child);
-  const getChild = editChild.find((child) => child.id === id);
-  const [child, setChild] = useState({
-  parent_id: getChild.parent_id,
-  fstname: getChild.fstname,
-  lstname: getChild.lstname,
-  username: getChild.username
-  })
+  const child = useSelector(selectChildDetails)
+
+  const [form, setForm] = useState({})
+
+  useEffect(() => {
+
+    dispatch(fetchChildDetails(id))
+
+  }, [])
+
+  useEffect(() => {
+
+    if(child) {
+      setForm(child);
+    }
+  }, [child])
 
   const handleChanges = (e) => {
-    setChild({
-      ...child,
-      [e.target.name]: e.target.value,
+    setForm(currentState => {
+      return {...currentState,
+      [e.target.name]: e.target.value 
+      }
     });
   };
   
   const submitHandler = (e) => {
     e.preventDefault();
     if(child)
-    dispatch();
+    dispatch(updateChild({id, ...form}));
+    setForm({})
     navigate("/home");
   };
 
@@ -109,7 +121,7 @@ const ChildDetail = () => {
   return (
     <Container maxWidth="sm" className={classes.container}>
       <CssBaseline />
-
+      {child ?
       <Card raised={true} className={classes.root}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -126,7 +138,7 @@ const ChildDetail = () => {
               variant="outlined"
               fullWidth
               id="fstname"
-              value={child.fstname}
+              value={form?.fstname}
               label="First Name"
               autoFocus
               onChange={handleChanges}
@@ -138,7 +150,7 @@ const ChildDetail = () => {
               margin="normal"
               fullWidth
               id="lstname"
-              value={child.lstname}
+              value={form?.lstname}
               label="Last Name"
               name="lstname"
               autoComplete="lstname"
@@ -153,7 +165,7 @@ const ChildDetail = () => {
               label="Username"
               type="text"
               id="username"
-              value={child.username}
+              value={form?.username}
               autoComplete="current-username"
               onChange={handleChanges}
             />
@@ -181,6 +193,8 @@ const ChildDetail = () => {
           </Box>
         </div>
       </Card>
+      : <CircularProgress />
+    }
     </Container>
   );
 };

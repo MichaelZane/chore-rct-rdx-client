@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
 
-  const history = useNavigate()
+  const navigate = useNavigate()
   
   const logout = (e) => {
     e.preventDefault();
     localStorage.clear();
-    history.push("/login");
+    navigate("/");
   };
  
   const classes = useStyles();

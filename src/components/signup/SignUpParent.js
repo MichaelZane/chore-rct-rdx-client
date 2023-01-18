@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,8 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../Copyright";
-import { useDispatch } from "react-redux";
-import register from "../../slices/registerSlice";
+import { register, clearError, selectError, selectLoading } from "../../slices/registerSlice";
 
 // Styling Sign Up Form
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 //   Function Starts Here
 
-export default function Register(props) {
+export default function Register() {
   const [regstr, setRegstr] = useState({
     fname: "",
     lname: "",
@@ -62,17 +62,20 @@ export default function Register(props) {
     password: "",
   });
 
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
 
   const changeHandler = (e) => {
-    setRegstr({ ...regstr, [e.target.name]: e.target.value });
+    setRegstr(currentState => {
+    return {...currentState , [e.target.name]: e.target.value } 
+    })
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(register(regstr));
-
     setRegstr({
       fname: "",
       lname: "",
@@ -80,8 +83,7 @@ export default function Register(props) {
       username: "",
       password: "",
     });
-
-    props.history.push("/login");
+    navigate("/login");
   };
   const classes = useStyles();
 
@@ -96,6 +98,7 @@ export default function Register(props) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {error && <div>{error}</div>}
           <form className={classes.form} onSubmit={submitHandler} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -143,12 +146,11 @@ export default function Register(props) {
                   variant="outlined"
                   required
                   fullWidth
-                  name="username"
-                  label="Username"
-                  type="text"
                   id="username"
                   value={regstr.username}
-                  autoComplete="current-username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
                   onChange={changeHandler}
                 />
               </Grid>
@@ -167,21 +169,20 @@ export default function Register(props) {
                 />
               </Grid>
             </Grid>
-
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={loading}
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="center">
+            <Grid container justify="flex-end">
               <Grid item>
-                <Link to="/Login">
-                  Already have an account?{" "}
-                  <h4 className={classes.signin}>Sign in here.</h4>
+                <Link to="/login" variant="body2">
+                  Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
@@ -193,6 +194,4 @@ export default function Register(props) {
       </Container>
     </div>
   );
-};
-
- 
+}

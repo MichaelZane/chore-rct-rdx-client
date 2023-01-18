@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from 'axios';
 
 export const fetchChildren = createAsyncThunk(
   'children/fetchChildren',
-  async (userId, { dispatch }) => {
+  async (userId) => {
     try {
       const res = await axiosWithAuth().get(`/api/auth/parent/${userId}`);     
       return res.data;
@@ -15,7 +16,7 @@ export const fetchChildren = createAsyncThunk(
 
 export const fetchChildAndChores = createAsyncThunk(
   'children/fetchChildren',
-  async (usrId, dispatch) => {
+  async (usrId) => {
     try {
       const res = await axiosWithAuth().get(`/api/chore/chores/${usrId}`);
       return res.data;
@@ -27,7 +28,7 @@ export const fetchChildAndChores = createAsyncThunk(
 
 export const fetchChildDetails = createAsyncThunk(
   'children/fetchChildDetails',
-  async (childId, { dispatch }) => {
+  async (childId) => {
     try {
       const res = await axiosWithAuth().get(`/api/auth/child/justchild/${childId}`);
       return res.data;
@@ -38,18 +39,22 @@ export const fetchChildDetails = createAsyncThunk(
 );
 export const addChild = createAsyncThunk(
   'children/addChild',
-  async (child, { dispatch }) => {
+  async ( child ) => {
+    if (!child) {
+      throw new Error('child is undefined');
+    }
     try {
-      const res = await axiosWithAuth().post('/api/auth/register/child', child);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register/child`, child);
       return res.data;
     } catch (err) {
+      console.error(err.message)
       throw err;
     }
-  }
-);
+  });
+  
 export const getChild = createAsyncThunk(
   'children/getChild',
-  async (childId, { dispatch, thunkAPI }) => {
+  async (childId, { thunkAPI }) => {
     try {
       const res = await axiosWithAuth().get(`/api/auth/register/child/${childId}`);
       return res.data;
@@ -61,7 +66,7 @@ export const getChild = createAsyncThunk(
 
 export const getChildDetails = createAsyncThunk(
   'children/getChildDetails',
-  async (childId, { dispatch, thunkAPI }) => {
+  async (childId, { thunkAPI }) => {
     try {
       const res = await axiosWithAuth().get(`/api/auth/child/justchild/${childId}`);
       localStorage.setItem("childId", res.data.child.id);
@@ -74,9 +79,9 @@ export const getChildDetails = createAsyncThunk(
 
 export const updateChild = createAsyncThunk(
   "child/updateChild",
-  async (id, thunkAPI) => {
+  async (form, thunkAPI) => {
     try {
-      const response = await axiosWithAuth().put(`/api/auth/child/${id}`);
+      const response = await axiosWithAuth().put(`/api/auth/child/${form.id}`, form);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -86,7 +91,7 @@ export const updateChild = createAsyncThunk(
 
 export const deleteChild = createAsyncThunk(
   "children/deleteChild",
-  async (childId, { dispatch }) => {
+  async (childId) => {
     try {
       await axiosWithAuth().delete(`/api/auth/child/${childId}`);
       return childId;
@@ -164,17 +169,6 @@ const childSlice = createSlice({
         state.error = error;
         state.status = 'failed';
         })
-        // .addCase(fetchChildAndChores.pending, (state) => {
-        //   state.status = "loading";
-        // })
-        // .addCase(fetchChildAndChores.fulfilled, (state, { payload }) => {
-        //   state.children = payload;
-        //   state.status = "succeeded";
-        // })
-        // .addCase(fetchChildAndChores.rejected, (state, { error }) => {
-        //   state.status = "failed";
-        //   state.error = error.message;
-        // })
     },
   });
         
@@ -182,7 +176,7 @@ const childSlice = createSlice({
 
   // Selectors
   export const selectChildren = (state) => state.child.children;
-  export const selectChildDetails = (state) => state.child.children.childDetails;
+  export const selectChildDetails = (state) => state.child.childDetails;
   export const selectChildrenAndChores = (state) => state.child.children
   export const selectLoading = (state) => state.child.children.status === 'loading';
   export const selectError = (state) => state.child.children.error;

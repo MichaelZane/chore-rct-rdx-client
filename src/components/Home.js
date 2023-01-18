@@ -2,7 +2,7 @@
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 /* Redux */
-import ChildList from "./ChildList";
+import ChildList from "../components/child/ChildList";
 /* Router */
 import { Link, useNavigate } from "react-router-dom";
 

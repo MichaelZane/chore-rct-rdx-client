@@ -9,9 +9,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import addChild from "../slices/childSlice";
+import addChild from "../../slices/childSlice";
 import { AccountCircle } from "@material-ui/icons";
-import Copyright from "./Copyright";
+import Copyright from "../Copyright";
 import { useDispatch } from "react-redux";
 
 // Styling Sign Up Form

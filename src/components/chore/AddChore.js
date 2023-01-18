@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addChores } from "../slices/choreSlice";
+import { addChores } from "../../slices/choreSlice";
 
 /* MUI */
 import Container from '@material-ui/core/Container'
@@ -15,7 +15,7 @@ import Card from "@material-ui/core/Card";
 /* Cloudinary Bucket */
 import { Image } from 'cloudinary-react';
 
-import Select from "./Select"
+import Select from "../Select"
 
 /* Styling */
 

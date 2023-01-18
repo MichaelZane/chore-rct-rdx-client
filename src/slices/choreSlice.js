@@ -2,13 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 export const getChores = createAsyncThunk("chores/getChores", async (id) => {
-
   const response = await axiosWithAuth().get(`/api/chore/chores/${id}`);
   return response.data;
 });
 
 export const fetchChore = createAsyncThunk("chore/fetchChore", async (id) => {
-  const response = await axiosWithAuth().get(`/api/singlechore/${id}`);
+  const response = await axiosWithAuth().get(`/api/chore/singlechore/${id}`);
   return response.data;
 });
 
@@ -21,12 +20,12 @@ export const addChores = createAsyncThunk("chores/addChores", async (chore) => {
   }
 });
 
-export const editChore = createAsyncThunk("chore/editChore", async (chore) => {
+export const editChore = createAsyncThunk("chore/editChore", async (formData, thunkAPI) => {
   try {
-    const { data } = await axiosWithAuth().put(`/api/chore/${chore.id}`, chore);
-    return data;
+    const res = await axiosWithAuth().put(`/api/chore/${formData.id}`, formData);
+    return res.data;
   } catch (error) {
-    throw error.response.data;
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
@@ -41,6 +40,7 @@ export const deleteChore = createAsyncThunk("chore/deleteChore", async (id) => {
 
 const initialState = {
   chores: [],
+  chore: null,
   status: null,
   error: null,
 };
@@ -50,8 +50,8 @@ const choreSlice = createSlice({
   initialState,
   reducers: {
     resetChore: (state) => {
-      state.chores = []
-      }
+      state.chores = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -82,7 +82,7 @@ const choreSlice = createSlice({
       })
       .addCase(fetchChore.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.chores = action.payload;
+        state.chore = action.payload;
       })
       .addCase(fetchChore.rejected, (state, action) => {
         state.status = "failed";
@@ -93,7 +93,9 @@ const choreSlice = createSlice({
       })
       .addCase(deleteChore.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.chores = state.chores.filter((chore) => chore.id !== action.payload);
+        state.chores = state.chores.filter(
+          (chore) => chore.id !== action.payload
+        );
       })
       .addCase(deleteChore.rejected, (state, { error }) => {
         state.status = "error";
@@ -108,5 +110,10 @@ export const { resetChore } = choreSlice.actions;
 export const selectChores = (state) => state.chore.chores;
 export const selectLoading = (state) => state.chore.chores.status === "loading";
 export const selectError = (state) => state.chore.chores.error;
+// export const selectChoreById = (state, id) => {
+//   const allChores = selectChores(state);
+//   return allChores.find((chore) => chore.id === id);
+// }
+
 
 export default choreSlice.reducer;

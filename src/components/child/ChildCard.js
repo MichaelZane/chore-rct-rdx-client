@@ -6,13 +6,10 @@ import { Link } from "react-router-dom";
 import CardContent from "@material-ui/core/CardContent";
 import { FaTimes } from "react-icons/fa";
 import Avatar from "@material-ui/core/Avatar";
-import ChoreList from "./ChoreList";
+import ChoreList from "../chore/ChoreList";
 import moment from "moment"
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { useSelector } from "react-redux";
-import { selectChores } from "../slices/choreSlice";
-
 
 // styles start here
 
@@ -81,14 +78,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Child = ({ childId, handleDelete, fstname, username }) => {
-
-  const choreList = useSelector(selectChores);
-
-  const childChores = choreList.filter((chore) => chore.child_id === childId);
+const Child = ({ childId, handleDelete, fstname, username, chores, parentId }) => {
 
   const classes = useStyles();
-
 
   return (
     <Container maxWidth="sm" className={classes.container}>
@@ -129,7 +121,7 @@ const Child = ({ childId, handleDelete, fstname, username }) => {
         <Typography className={classes.day} >Today is {moment().format("dddd")}</Typography>
         <CardContent className={classes.chores}>
           <Typography className={classes.todo}> {fstname}'s Chores: </Typography>
-          <ChoreList choreList={childChores}  />
+          <ChoreList chores={chores}  />
         </CardContent>
       </Card>
     </Container>

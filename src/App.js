@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import SignUpParent from "./components/SignUpParent";
-import SignUpChild from "./components/SignUpChild";
+import SignUpParent from "./components/signup/SignUpParent";
+import SignUpChild from "./components/signup/SignUpChild";
 import AppEntry from "./components/AppEntry";
-import Login from "./components/Login";
-import ChildLogin from "./components/ChildLogin";
-import AddChore from "./components/AddChore";
-import UpdateChore from "./components/UpdateChore";
-import ChildList from "./components/ChildList";
-import Child from "./components/ChildCard";
-import ChildDetail from "./components/ChildDetail";
-import ChoreList from "./components/ChoreList";
-import Chore from "./components/Chore";
+import Login from "./components/signin/Login";
+import ChildLogin from "./components/signin/ChildLogin";
+import AddChore from "./components/chore/AddChore";
+import UpdateChore from "./components/chore/UpdateChore";
+import ChildList from "./components/child/ChildList";
+import Child from "./components/child/ChildCard";
+import ChildDetail from "./components/child/ChildDetail";
+import ChoreList from "./components/chore/ChoreList";
+import Chore from "./components/chore/Chore";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import Home from "./components/Home";
-import UpdateChild from "./components/UpdateChild";
+import UpdateChild from "./components/child/UpdateChild";
 
 const App = () => {
   const token = localStorage.getItem('token');

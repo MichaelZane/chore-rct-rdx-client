@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 
 /* Redux */
 
-
-
 /* MUI */
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,22 +21,19 @@ const useStyles = makeStyles({
 
 /* ChoreList */
 
-const ChoreList = ({ choreList }) => {
+const ChoreList = ({ chores }) => {
  
   const classes = useStyles();
-  // const { id } = useParams()
-
 
   
   return (
     <div className="chore-wrap">
-      {choreList ? (
-        choreList  
+      {chores ? (
+        chores  
           .map((chore) => (
             
             <li className={classes.check}  key={chore.id} type="none">
-              <Checkbox
-                 
+              <Checkbox                
                 checked={false}             
                 color="default"
                 inputProps={{ "aria-label": "checkbox with default color" }}

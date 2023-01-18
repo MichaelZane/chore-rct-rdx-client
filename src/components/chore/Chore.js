@@ -14,8 +14,8 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
-import { getChores, selectChores } from "../slices/choreSlice";
+import { useEffect } from "react";
+import { fetchChore, editChore } from "../../slices/choreSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,44 +85,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Chore = () => {
-  const inputRef = useRef()
 
   const { id } = useParams()
 
   const dispatch = useDispatch()
 
-  const history = useNavigate()
+  const navigate = useNavigate()
 
-  const getChore = useSelector(selectChores)
+  const chore = useSelector(state => state.chore.chore)
 
-  const editChore = getChore.find((child) => child.id === id);
-
-  const [chore, setChore] = useState({
-    name: editChore.name,
-    description: editChore.description,
-    chore_score: editChore.chore_score,
-    child_id: 1,
-    
-  });
+  const [formData, setformData] = useState(chore);
 
   useEffect(() => {
-    dispatch(getChore())
-  })
+
+    console.log("changing chore")
+    dispatch(fetchChore(id))
+    if(chore) setformData(chore);
+
+  },[dispatch, id ])
 
   const handleChanges = (e) => {
-    setChore({
-      ...chore,
+    setformData({
+      ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(editChore({id, ...formData}))
+    setformData(null)
+    navigate("/home")
   }
   const classes = useStyles();
 
   return (
+    
     <Container maxWidth='sm' className={classes.container} >
+      {chore ?
       <Card className={classes.root}  raised={true} >
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -167,7 +167,7 @@ const Chore = () => {
                 required
                 fullWidth
                 id="name"
-                value={chore.name}
+                value={formData.name }
                 label="Add Chore Name"
                 autoFocus
                 onChange={handleChanges}
@@ -181,7 +181,8 @@ const Chore = () => {
                 fullWidth
                 margin='normal'
                 id="description"
-                value={chore.description}
+                value={ formData.description }
+
                 label="Description"
                 name="description"
                 autoComplete="description"
@@ -199,7 +200,7 @@ const Chore = () => {
                 label="chore_score"
                 type="text"
                 id="chore_score"
-                value={chore.chore_score}
+                value={formData.chore_score }
                 onChange={handleChanges}
               />
             
@@ -235,40 +236,28 @@ const Chore = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => history.push("/home")}
+            onClick={() => navigate("/home")}
           >
             Cancel
           </Button>
         </form>
       </div>
       </Card>
+      : <i className="fa fa-spinner" aria-hidden="true"></i>
+      }
     </Container>
   );
 };
 export default Chore
-// <div>
-//   <strong>{chore.name}</strong>
-//   <p>{chore.photo_obj}</p>
-//   <p>{chore.bonus_pts}</p>
-//   <p>{chore.chore_score}</p>
-//   <p>{chore.clean_strk}</p>
-//   <p>{chore.comments}</p>
-//   <p>{chore.completed}</p>
-//   <p>{chore.description}</p>
-//   <p>{chore.due_date}</p>
-
-// </div>
-
 /* 
-bonus_pts: null
-child_id: 1
-chore_score: 10
-clean_strk: null
-comments: null
-completed: false
-description: "test #1"
-due_date: null
-id: 1
-name: "a chore #1"
-photo_obj: null
+  id: null,
+  name: "",
+  bonus_pts: null,
+  description: "",
+  comments: "",
+  child_id: "",
+  chore_score: null,
+  clean_strk: null,
+  completed: false,
+  due_date: null,
 */

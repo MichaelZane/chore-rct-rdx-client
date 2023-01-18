@@ -5,8 +5,7 @@ export const fetchChildren = createAsyncThunk(
   'children/fetchChildren',
   async (userId, { dispatch }) => {
     try {
-      const res = await axiosWithAuth().get(`/api/auth/parent/${userId}`);
-      
+      const res = await axiosWithAuth().get(`/api/auth/parent/${userId}`);     
       return res.data;
     } catch (err) {
       throw err.response.data;
@@ -16,9 +15,9 @@ export const fetchChildren = createAsyncThunk(
 
 export const fetchChildAndChores = createAsyncThunk(
   'children/fetchChildren',
-  async (dispatch) => {
+  async (usrId, dispatch) => {
     try {
-      const res = await axiosWithAuth().get(`/api/chore/chores`);
+      const res = await axiosWithAuth().get(`/api/chore/chores/${usrId}`);
       return res.data;
     } catch (err) {
       throw err.response.data;

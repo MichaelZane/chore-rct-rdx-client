@@ -101,6 +101,7 @@ export default function Login() {
     setLogForm({ ...logForm, [event.target.name]: event.target.value });
   };
   const user = {username: logForm.username, password: logForm.password};
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(user))

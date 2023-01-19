@@ -6,7 +6,7 @@ export const PrivateRoute = ({
   redirectPath = '/',
   children
  }) => {
-
+  
   if(!token) {
     return <Navigate to={redirectPath} replace />
   }

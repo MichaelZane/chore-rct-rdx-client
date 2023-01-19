@@ -16,7 +16,6 @@ const ChildList = () => {
   useEffect(() => {
 
     dispatch(fetchChildAndChores(usrId));
-    console.log("Children Loaded")
     
   }, [ dispatch, usrId ]);
 

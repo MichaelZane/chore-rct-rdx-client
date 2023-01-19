@@ -74,6 +74,7 @@ export default function Register() {
   };
 
   const submitHandler = (e) => {
+    console.log("REGISTER OBJECT", regstr)
     e.preventDefault();
     dispatch(register(regstr));
     setRegstr({
@@ -179,7 +180,17 @@ export default function Register() {
             >
               Sign Up
             </Button>
-            <Grid container justify="flex-end">
+            <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => navigate("/")}
+          >
+            Cancel
+          </Button>
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">
                   Already have an account? Sign in

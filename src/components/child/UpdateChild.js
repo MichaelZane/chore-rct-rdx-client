@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 //   Function Starts Here
 
 const UpdateChild = props => {
+  console.log("PPPROOPSS>>>", props)
   const {id} = useParams();
 
   const [state, setState] = useState({

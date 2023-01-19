@@ -39,7 +39,7 @@ export const fetchChildDetails = createAsyncThunk(
 );
 export const addChild = createAsyncThunk(
   'children/addChild',
-  async ( child ) => {
+  async (child) => {
     if (!child) {
       throw new Error('child is undefined');
     }

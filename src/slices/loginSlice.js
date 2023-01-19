@@ -3,7 +3,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const login = createAsyncThunk(
   "login/login",
-  async (user, { dispatch }) => {
+  async (user) => {
     try {
       const res = await axiosWithAuth().post("/api/auth/login", user);
       
@@ -12,7 +12,7 @@ export const login = createAsyncThunk(
 
       return res.data;
     } catch (err) {
-      throw err.response.data;
+      throw err.res.data;
     }
   }
 );
@@ -22,7 +22,6 @@ const initialState = {
   status: null,
   error: null,
   token: "",
-  userInfo: ""
 };
 
 const loginSlice = createSlice({
@@ -37,7 +36,6 @@ const loginSlice = createSlice({
       .addCase(login.fulfilled, (state, { payload }) => {
         state.userId = payload.user_id;
         state.token = payload.token;
-        state.userInfo = payload;
         state.status = "success";
       })
       .addCase(login.rejected, (state, { error }) => {
@@ -50,7 +48,6 @@ const loginSlice = createSlice({
 export const selectLogin = (state) => state.login;
 export const selectUserId = (state) => state.login.userId;
 export const selectToken = (state) => state.login.token;
-export const selectUserInfo = (state) => state.login.userInfo;
 export const selectLoginLoading = (state) => state.login.status === 'loading';
 export const selectLoginError = (state) => state.login.error;
 

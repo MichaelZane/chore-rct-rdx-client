@@ -50,7 +50,7 @@ export default function SignUpChild () {
     username: "",
     password: ""
   });
-
+  console.log(state)
   const changeHandler = (e) => {
     setState(currentState => {
       return {...currentState, [e.target.name]: e.target.value
@@ -60,15 +60,14 @@ export default function SignUpChild () {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(addChild(state))
-    setState({
-      fstname: "",
-      lstname: "",
-      username: "",
-      password: "",
-    })
+    if (!state) {
+      throw new Error("state is undefined");
+    }
+    dispatch(addChild(state));
+    setState({});
     navigate("/home");
   };
+  
 
   const classes = useStyles();
 
@@ -112,7 +111,6 @@ export default function SignUpChild () {
                 onChange={changeHandler}
               />
             </Grid>
-
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -142,7 +140,6 @@ export default function SignUpChild () {
               />
             </Grid>
           </Grid>
-
           <Button
             type="submit"
             fullWidth
@@ -152,6 +149,16 @@ export default function SignUpChild () {
           >
             Add Child
           </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => navigate("/home")}
+          >
+            Cancel
+          </Button>
         </form>
       </div>
       <Box mt={5}>
@@ -160,4 +167,3 @@ export default function SignUpChild () {
     </Container>
   );
 };
-

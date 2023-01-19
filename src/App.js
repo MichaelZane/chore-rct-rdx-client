@@ -14,11 +14,10 @@ import Chore from "./components/chore/Chore";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import Home from "./components/Home";
 import UpdateChild from "./components/child/UpdateChild";
-import { selectToken } from "./slices/loginSlice";
-import { useSelector} from "react-redux";
 
 const App = () => {
-  const token = useSelector(selectToken)
+
+  const token = localStorage.getItem("userId")
   
   return (
     <Routes>
@@ -28,15 +27,15 @@ const App = () => {
       <Route path="/childLogin" element={<ChildLogin/>} />
       <Route element={<PrivateRoute token={token} />} >
         <Route path="/home" element={<Home token={token} />}/>
-        <Route path="/childList" element={<ChildList/>}/>
+        <Route path="/childList" element={<ChildList token={token} />}/>
         <Route path="/signUpChild" element={<SignUpChild token={token} />}/>
         <Route path="/child/:id" element={<Child/>} />
-        <Route path="/childdetail/:id" element={<ChildDetail />}/>
+        <Route path="/childdetail/:id" element={<ChildDetail token={token} />}/>
         <Route path="/updatechild/:id" element={<UpdateChild/>}/>
-        <Route path="/chore/:id" element={<Chore/>}/>
-        <Route path="/choreList/:id" element={<ChoreList/>}/>
-        <Route path="/addchore" element={<AddChore/>}/>
-        <Route path="/updateChore" element={<UpdateChore/>}/>
+        <Route path="/chore/:id" element={<Chore token={token} />}/>
+        <Route path="/choreList/:id" element={<ChoreList token={token} />}/>
+        <Route path="/addchore" element={<AddChore token={token} />}/>
+        <Route path="/updateChore" element={<UpdateChore token={token} />}/>
       </Route>
     </Routes>
   );

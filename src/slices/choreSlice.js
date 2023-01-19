@@ -31,7 +31,7 @@ export const editChore = createAsyncThunk("chore/editChore", async (formData, th
 
 export const deleteChore = createAsyncThunk("chore/deleteChore", async (id) => {
   try {
-    const response = await axiosWithAuth().delete(`/api/chore/${id}`);
+    const response = await axiosWithAuth().delete(`/api/chore/delete/${id}`);
     return response.data;
   } catch (error) {
     throw error.response.data;

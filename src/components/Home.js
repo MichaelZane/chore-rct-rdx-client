@@ -50,10 +50,6 @@ const Home = () => {
             Add Child
           </Button>
         </Link>
-        <Link to={"/addchore"}>
-          <Button className={classes.Button} variant="outlined">Add Chore</Button>
-        </Link>
-
         <Button className={classes.Button} onClick={logout} variant="outlined">
           LogOut
         </Button>

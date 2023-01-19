@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { FaTimes } from "react-icons/fa";
 import Avatar from "@material-ui/core/Avatar";
 import ChoreList from "../chore/ChoreList";
-import moment from "moment"
+import moment from "moment";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
@@ -15,20 +15,21 @@ import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 220,
+    width: 300,
     height: "100%",
     margin: 30,
-    borderTopLeftRadius: 50/50,
+    borderTopLeftRadius: 50 / 50,
     borderRadius: 15,
     background: "rgba(255,255,255,0.1)",
     position: "relative",
     overflow: "hidden",
     backdropFilter: "blur(1px)",
-    color: "whitesmoke",//"rgb(0, 94, 144)",
+    color: "whitesmoke", //"rgb(0, 94, 144)",
     boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
     borderTop: "1px solid rgba(255, 255, 255, 0.5)",
     borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
-    textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90" 
+    textShadow:
+      "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90",
     // WebkitTextStrokeColor: "rgb(0, 94, 144)"
   },
   container: {
@@ -64,10 +65,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   link: {
-    color: "whitesmoke",//"rgb(0, 94, 144)",
+    color: "whitesmoke", //"rgb(0, 94, 144)",
     fontSize: 35,
     textDecoration: "none",
-    // textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90" 
+    // textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90"
   },
   media: {
     height: 0,
@@ -78,8 +79,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Child = ({ childId, handleDelete, fstname, username, chores, parentId }) => {
-
+const ChildCard = ({
+  childId,
+  handleDelete,
+  fstname,
+  username,
+  chores,
+  parentId,
+}) => {
   const classes = useStyles();
 
   return (
@@ -89,6 +96,11 @@ const Child = ({ childId, handleDelete, fstname, username, chores, parentId }) =
           <Button onClick={() => handleDelete(childId)}>
             <FaTimes />
           </Button>
+          <Link to={"/addchore"} state={{childId: childId}} >
+            <Button className={classes.Button} variant="outlined">
+              Add Chore
+            </Button>
+          </Link>
         </Typography>
 
         <CardHeader
@@ -104,10 +116,9 @@ const Child = ({ childId, handleDelete, fstname, username, chores, parentId }) =
           titleTypographyProps={{ align: "center" }}
           title={
             <Link
-              
               underline="hover"
               className={classes.link}
-              to={`/childdetail/${childId}`}             
+              to={`/childdetail/${childId}`}
             >
               {fstname}
 
@@ -115,17 +126,26 @@ const Child = ({ childId, handleDelete, fstname, username, chores, parentId }) =
             </Link>
           }
           //todo move this into theme and pass it the theme
-          subheaderTypographyProps={{ variant: "h5", color: "rgb(0, 94, 144)", align: "center" }}
+          subheaderTypographyProps={{
+            variant: "h5",
+            color: "rgb(0, 94, 144)",
+            align: "center",
+          }}
           subheader={username}
         />
-        <Typography className={classes.day} >Today is {moment().format("dddd")}</Typography>
+        <Typography className={classes.day}>
+          Today is {moment().format("dddd")}
+        </Typography>
         <CardContent className={classes.chores}>
-          <Typography className={classes.todo}> {fstname}'s Chores: </Typography>
-          <ChoreList chores={chores}  />
+          <Typography className={classes.todo}>
+            {" "}
+            {fstname}'s Chores:{" "}
+          </Typography>
+          <ChoreList chores={chores} />
         </CardContent>
       </Card>
     </Container>
   );
 };
 
-export default Child;
+export default ChildCard;

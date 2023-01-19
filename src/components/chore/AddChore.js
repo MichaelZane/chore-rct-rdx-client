@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { addChores } from "../../slices/choreSlice";
-
 /* MUI */
 import Container from '@material-ui/core/Container'
 import Avatar from "@material-ui/core/Avatar";
@@ -105,7 +104,8 @@ export default function AddChore() {
   });
 
   const dispatch = useDispatch();
-
+  const location = useLocation()
+  const { childId } = location.state
 
   useEffect(() => {
     if(image) {
@@ -152,8 +152,9 @@ export default function AddChore() {
       const res = await fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options);
       const data = await res.json();
       setUrl(data.public_id);
-
       dispatch(addChores(chore));
+      navigate("/home")
+      reset()
     } catch (err) {
       return console.error(err);
     }

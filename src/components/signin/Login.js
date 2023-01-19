@@ -17,7 +17,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
-import { useThunkDispatch } from "../../store";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/loginSlice";
 

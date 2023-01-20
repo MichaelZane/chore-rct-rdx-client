@@ -1,6 +1,6 @@
 /* MUI */
-import { Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, Typography } from "@mui/material";
+import { makeStyles } from "@mui/materialstyles";
 /* Redux */
 import ChildList from "../components/child/ChildList";
 /* Router */

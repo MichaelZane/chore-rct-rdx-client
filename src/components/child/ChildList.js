@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import ChildCard from "./ChildCard";
 import { selectChildrenAndChores, fetchChildAndChores, selectLoading, selectError, deleteChild } from '../../slices/childSlice'
 

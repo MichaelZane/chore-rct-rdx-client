@@ -1,15 +1,15 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+import { makeStyles } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
 import { Link } from "react-router-dom";
-import CardContent from "@material-ui/core/CardContent";
+import CardContent from "@mui/material/CardContent";
 import { FaTimes } from "react-icons/fa";
-import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@mui/material/Avatar";
 import ChoreList from "../chore/ChoreList";
 import moment from "moment";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 // styles start here
 

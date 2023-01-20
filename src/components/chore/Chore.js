@@ -1,17 +1,17 @@
 import React, { useState } from "react"
 /* MUI */
-import Button from "@material-ui/core/Button";
-import CardContent from "@material-ui/core/CardContent";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import CssBaseline from "@mui/material/CssBaseline";
 import { AccountCircle } from "@material-ui/icons";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Avatar from "@material-ui/core/Avatar";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
 import { FaTimes } from "react-icons/fa";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

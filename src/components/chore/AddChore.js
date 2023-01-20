@@ -12,7 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import Card from "@material-ui/core/Card";
 /* Cloudinary Bucket */
-import { Image } from 'cloudinary-react';
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 
 import Select from "../Select"
 
@@ -95,19 +96,20 @@ export default function AddChore() {
   const [image, setImage] = useState()
   const [url, setUrl] = useState();
   const [alt, setAlt] = useState();
+  const location = useLocation()
+  const { childId } = location.state
   const [chore, setChore] = useState({
     name: "",
     description: "",
     chore_score: "",
-    child_id: 1,
+    child_id: childId,
     imageUrl: "",
   });
 
   const dispatch = useDispatch();
-  const location = useLocation()
-  const { childId } = location.state
 
   useEffect(() => {
+    console.log("New Image")
     if(image) {
       const reader = new FileReader()
       reader.onloadend = () => {
@@ -120,6 +122,7 @@ export default function AddChore() {
   }, [image])
 
     const handleChanges = (e) => {
+      console.log("HandleChanger**")
     setChore({
       ...chore,
       [e.target.name]: e.target.value,
@@ -134,6 +137,10 @@ export default function AddChore() {
         setImage(null)
       }
     }, [])
+
+    const setImageUrl = (url) => {
+      dispatch(addChores({...chore, imageUrl: url }));
+    };    
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -151,10 +158,10 @@ export default function AddChore() {
     try {
       const res = await fetch("https://api.Cloudinary.com/v1_1/mikezs/image/upload", options);
       const data = await res.json();
-      setUrl(data.public_id);
-      dispatch(addChores(chore));
-      navigate("/home")
+      if(res.status === 200) {
+      setImageUrl(data.url)
       reset()
+      } else alert("Creating Chore failed")
     } catch (err) {
       return console.error(err);
     }
@@ -173,7 +180,7 @@ export default function AddChore() {
   const classes = useStyles();
 
   
- 
+  console.log("<<<<CHORE", chore)
   return (
     
     <Container maxWidth='sm' className={classes.container} >
@@ -187,9 +194,9 @@ export default function AddChore() {
         </Typography>
 
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
-        {preview ? (<Image className={classes.images} src={preview} alt={alt} >
+        {preview ? (<AdvancedImage className={classes.images} src={preview} alt={alt} >
          
-        </Image>
+        </AdvancedImage>
         ) : (
           <div className="btn-wrapper">
           <Button className={classes.btn} onClick={(e) => {

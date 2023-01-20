@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AccountCircle } from "@material-ui/icons";
+// import { AccountCircle } from "@material-ui/icons";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
@@ -133,7 +133,7 @@ const Chore = () => {
       <Card className={classes.root}  raised={true} >
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircle />
+          {/* <AccountCircle /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Update Your Chores

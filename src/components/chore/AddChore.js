@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/material/styles";
-import { AccountCircle } from "@material-ui/icons";
+// import { AccountCircle } from "@material-ui/icons";
 import Card from "@mui/material/Card";
 /* Cloudinary Bucket */
 import {AdvancedImage} from '@cloudinary/react';
@@ -187,7 +187,7 @@ export default function AddChore() {
       <Card className={classes.root}  raised={true} >
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircle />
+          {/* <AccountCircle /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Add Your Chores

@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import addChild from "../../slices/childSlice";
-import { AccountCircle } from "@material-ui/icons";
+// import { AccountCircle } from "@material-ui/icons";
 import Copyright from "../Copyright";
 import { useDispatch } from "react-redux";
 
@@ -76,7 +76,7 @@ export default function SignUpChild () {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircle />
+          {/* <AccountCircle /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Add Your Child

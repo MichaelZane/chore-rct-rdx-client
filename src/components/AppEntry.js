@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Button from "@mui/materialButton";
-import Grid from "@mui/materialGrid";
-import { makeStyles } from "@mui/materialstyles";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import { makeStyles } from "@mui/material/styles";
 import logo from "../assets/tracItLogoWhite.png";
 
 const useStyles = makeStyles((theme) => ({

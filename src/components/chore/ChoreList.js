@@ -4,27 +4,27 @@ import { useDispatch } from "react-redux";
 
 /* MUI */
 import Checkbox from "@mui/material/Checkbox";
-import { makeStyles } from "@mui/material/styles";
+// import { makeStyles } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { FaTimes } from "react-icons/fa";
 /* Router */
 import { Link, useNavigate } from "react-router-dom";
 import { deleteChore } from "../../slices/choreSlice";
 
-const useStyles = makeStyles({
-  link: {
-    color: "whitesmoke",
-    fontSize: 12,
-  },
-  check: {
-    textAlign: "left",
-  },
-});
+// const useStyles = makeStyles({
+//   link: {
+//     color: "whitesmoke",
+//     fontSize: 12,
+//   },
+//   check: {
+//     textAlign: "left",
+//   },
+// });
 
 /* ChoreList */
 
 const ChoreList = ({ chores }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const dispatch = useDispatch();
 

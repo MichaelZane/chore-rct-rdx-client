@@ -5,13 +5,6 @@ import ChildList from "../components/child/ChildList";
 /* Router */
 import { Link, useNavigate } from "react-router-dom";
 
-/* MUI styling */
-
-
-  // root: {
-  //   color: "white",
-
-/* Home */
 
 const Home = () => {
   const navigate = useNavigate();

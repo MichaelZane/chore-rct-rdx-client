@@ -52,8 +52,6 @@ export default function Login() {
     navigate("/home") 
   };
 
-  /* OATH GOOGLE */
-
   return (
     <div className="sign-up-wrapper">
       <Container 
@@ -102,7 +100,7 @@ export default function Login() {
                 backgroundColor: theme.palette.secondary.main
               }}
             >
-              {/* <LockOutlinedIcon /> */}
+
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in

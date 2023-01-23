@@ -20,7 +20,7 @@ const App = () => {
   const token = localStorage.getItem("token");
 
   return (
-    <StyledEngineProvider injectFirst>
+
       <Routes>
         <Route exact path="/" element={<AppEntry />} />
         <Route path="/login" element={<Login />} />
@@ -42,7 +42,7 @@ const App = () => {
           <Route path="/updateChore" element={<UpdateChore token={token} />} />
         </Route>
       </Routes>
-    </StyledEngineProvider>
+
   );
 };
 

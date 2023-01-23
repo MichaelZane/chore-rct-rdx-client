@@ -1,22 +1,13 @@
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { makeStyles } from "@mui/material/styles";
 import logo from "../assets/tracItLogoWhite.png";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    color: "white",
-  },
 
-  Button: {
-    color: "rgb(0, 94, 144)",
-    backgroundColor: "primary",
-  },
-}));
+    // color: "white",
+
 
 const AppEntry = () => {
-  const classes = useStyles();
 
   return (
     <div className="app-wrapper">
@@ -31,7 +22,7 @@ const AppEntry = () => {
       >
         <Grid item>
           <Link to="/signUpChild" style={{ textDecoration: "none" }}>
-            <Button className={classes.Button} variant="contained">
+            <Button sx={{ backgroundColor: "transparent", color: "rgb(0, 94, 144)" }} variant="contained">
               I'm a child
             </Button>
           </Link>
@@ -39,7 +30,7 @@ const AppEntry = () => {
         <Grid item>
           <Link to="/signUpParent" style={{ textDecoration: "none" }}>
             <Button
-              className={classes.Button}
+              sx={{ backgroundColor: "transparent", color: "rgb(0, 94, 144)" }}
               variant="contained"
               color="inherit"
             >

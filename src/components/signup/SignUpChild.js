@@ -7,41 +7,17 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import addChild from "../../slices/childSlice";
-
+import { useTheme } from '@mui/material/styles';
 import Copyright from "../Copyright";
 import { useDispatch } from "react-redux";
-
-// Styling Sign Up Form
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-//   Function Starts Here
 
 export default function SignUpChild () {
 
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const theme = useTheme()
 
   const [state, setState] = useState({
     parent_id: localStorage.getItem("userId"),
@@ -67,21 +43,35 @@ export default function SignUpChild () {
     setState({});
     navigate("/home");
   };
-  
-
-  const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div sx={{
+        marginTop: theme.spacing(8),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+        <Avatar 
+          sx={{
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main
+          }}
+        >
           {/* <AccountCircle /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Add Your Child
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form
+        sx={{
+          width: "100%",
+          marginTop: theme.spacing(3)
+        }} 
+        onSubmit={submitHandler} 
+        noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -145,7 +135,9 @@ export default function SignUpChild () {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: theme.spacing(3, 0, 2)
+            }}
           >
             Add Child
           </Button>
@@ -154,9 +146,11 @@ export default function SignUpChild () {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: theme.spacing(3, 0, 2)
+            }}
             onClick={() => navigate("/home")}
-          >
+            >
             Cancel
           </Button>
         </form>

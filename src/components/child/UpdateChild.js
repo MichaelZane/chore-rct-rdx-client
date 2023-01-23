@@ -1,154 +1,153 @@
-import React, {useState} from 'react'
-import {Link, useParams} from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@mui/material/Typography';
-import {makeStyles} from '@mui/material/styles';
-import Container from '@mui/material/Container';
+import React, { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
 
 // Styling Sign Up Form
 
 function Copyright() {
   return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' to='/'>
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" to="/">
         HomeChoreTracker
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
 
-//   Function Starts Here
 
-const UpdateChild = props => {
-  console.log("PPPROOPSS>>>", props)
-  const {id} = useParams();
+const UpdateChild = (props) => {
+  const theme = useTheme();
+  const { id } = useParams();
+  const navigate = useNavigate()
 
   const [state, setState] = useState({
     parent_id: props.parentId,
-    fstname: '',
-    lstname: '',
-    username: '',
-    id: id
+    fstname: "",
+    lstname: "",
+    username: "",
+    id: id,
   });
 
-  const changeHandler = e => {
-    setState({...state, [e.target.name]: e.target.value});
+  const changeHandler = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     props.updateChild(state);
 
     setState({
-      fstname: '',
-      lstname: '',
-      username: '',
-      password: ""
+      fstname: "",
+      lstname: "",
+      username: "",
+      password: "",
     });
 
-    props.history.push('/home');
+    navigate("/home");
   };
 
-  const classes = useStyles();
-
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div
+        sx={{
+          marginTop: theme.spacing(8),
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
+          sx={{
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main,
+          }}
+        >
           {/* <LockOutlinedIcon /> */}
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Update a child
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form
+          sx={{
+            width: "100%", // Fix IE 11 issue.
+            marginTop: theme.spacing(3),
+          }}
+          onSubmit={submitHandler}
+          noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete='fstname'
-                name='fstname'
-                variant='outlined'
+                autoComplete="fstname"
+                name="fstname"
+                variant="outlined"
                 required
                 fullWidth
-                id='fstname'
+                id="fstname"
                 value={state.fstname}
-                label='First Name'
+                label="First Name"
                 autoFocus
                 onChange={changeHandler}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                type='text'
-                variant='outlined'
+                type="text"
+                variant="outlined"
                 required
                 fullWidth
-                id='lstname'
+                id="lstname"
                 value={state.lstname}
-                label='Last Name'
-                name='lstname'
-                autoComplete='lstname'
+                label="Last Name"
+                name="lstname"
+                autoComplete="lstname"
                 onChange={changeHandler}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='username'
-                label='Username'
-                type='text'
-                id='username'
+                name="username"
+                label="Username"
+                type="text"
+                id="username"
                 value={state.username}
-                autoComplete='current-username'
+                autoComplete="current-username"
                 onChange={changeHandler}
               />
             </Grid>
           </Grid>
 
           <Button
-            type='submit'
+            type="submit"
             fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
+            variant="contained"
+            color="primary"
+            sx={{
+              margin: theme.spacing(3, 0, 2)
+            }}
           >
             Update
           </Button>
-          <Grid container justify='flex-end'>
+          <Grid container justify="flex-end">
             <Grid item>
-              <Link to='/childLogin'>Already have an account? Sign in</Link>
+              <Link to="/childLogin">Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </form>
@@ -160,4 +159,4 @@ const UpdateChild = props => {
   );
 };
 
-export default UpdateChild
+export default UpdateChild;

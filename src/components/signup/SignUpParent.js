@@ -9,49 +9,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 // import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/material/styles";
+import { useTheme } from '@mui/material/styles';
 import Container from "@mui/material/Container";
 import Copyright from "../Copyright";
 import { register, clearError, selectError, selectLoading } from "../../slices/registerSlice";
 
-// Styling Sign Up Form
-
-const useStyles = makeStyles((theme) => ({
-  h1: {
-    color: "rgb(0, 94, 144)",
-  },
-  button: {
-    backgroundColor: "hsl(201, 100%, 28.2%)",
-    width: "300px",
-    height: "60px",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    color: "whiteSmoke",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  signin: {
-    textAlign: "center",
-  },
-}));
-
-//   Function Starts Here
 
 export default function Register() {
   const [regstr, setRegstr] = useState({
@@ -61,7 +23,7 @@ export default function Register() {
     username: "",
     password: "",
   });
-
+  const theme = useTheme()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectError);
@@ -86,21 +48,33 @@ export default function Register() {
     });
     navigate("/login");
   };
-  const classes = useStyles();
 
   return (
     <div className="sign-up-wrapper">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+        <div 
+        sx={{marginTop: theme.spacing(8),
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          color: "whiteSmoke",}}>
+          <Avatar 
+            sx={{margin: theme.spacing(1),
+              backgroundColor: theme.palette.
+              secondary.main,}}>
             {/* <LockOutlinedIcon /> */}
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography 
+            sx={{color: "rgb(0, 94, 144)"}} component="h1" variant="h5">
             Sign up
           </Typography>
           {error && <div>{error}</div>}
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
+          <form 
+            sx={{width: "100%",
+            marginTop: theme.spacing(3)}}  
+            onSubmit={submitHandler} 
+            noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -171,31 +145,43 @@ export default function Register() {
               </Grid>
             </Grid>
             <Button
+              sx={{backgroundColor: "hsl(201, 100%, 28.2%)",
+              width: "300px",
+              height: "60px",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+              margin: theme.spacing(3, 0, 2)
+              }}
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
               disabled={loading}
             >
               Sign Up
             </Button>
             <Button
+            sx={{backgroundColor: "hsl(201, 100%, 28.2%)",
+            width: "300px",
+            height: "60px",
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+            margin: theme.spacing(3, 0, 2)
+            }}
             type="button"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
             onClick={() => navigate("/")}
           >
             Cancel
           </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
                 <Link to="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
-              </Grid>
             </Grid>
           </form>
         </div>

@@ -5,7 +5,6 @@ import CardContent from "@mui/material/CardContent";
 import CssBaseline from "@mui/material/CssBaseline";
 // import { AccountCircle } from "@material-ui/icons";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
@@ -16,73 +15,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchChore, editChore } from "../../slices/choreSlice";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "500px",
-    height: "100%",
-    margin: "20px",
-    borderRadius: "15px",
-    backgroundColor: "rgba(255,255,255,0.1)",
-    position: "relative",
-    overflow: "hidden",
-    backdropFilter: "blur(2px)",
-    color: "rgb(0, 94, 144)",
-    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
-    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
-    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
-    label: 'rgb(0, 94, 144)',
-    padding: "20px"
-    
-  },
-  container: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    maxWidth: "1000px",
-    flexWrap: "wrap",
-    zIndex: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 20,
-    margin: 20
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    
-    width: "100%",
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  btn: {
-    width: 200,
-    height: 200,
-    borderRadius: "50%",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: 16,
-    color: "white",
-    border: "none",
-    backgroundColor: "silver"
-
-  },
-  
-  images: {
-    width: "100%"
-  }
-}));
+import { useTheme } from '@mui/material/styles';
 
 const Chore = () => {
 
@@ -91,6 +24,8 @@ const Chore = () => {
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
+
+  const theme = useTheme()
 
   const chore = useSelector(state => state.chore.chore)
 
@@ -124,27 +59,90 @@ const Chore = () => {
     setformData({})
     navigate("/home")
   }
-  const classes = useStyles();
 
   return (
     
-    <Container maxWidth='sm' className={classes.container} >
+    <Container 
+      maxWidth='sm'
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        maxWidth: "1000px",
+        flexWrap: "wrap",
+        zIndex: 1
+      }}
+    >
       {chore ?
-      <Card className={classes.root}  raised={true} >
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <Card   
+        raised={true} 
+        sx={{
+          width: "500px",
+          height: "100%",
+          margin: "20px",
+          borderRadius: "15px",
+          backgroundColor: "rgba(255,255,255,0.1)",
+          position: "relative",
+          overflow: "hidden",
+          backdropFilter: "blur(2px)",
+          color: "rgb(0, 94, 144)",
+          boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+          borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+          label: 'rgb(0, 94, 144)',
+          padding: "20px"
+        }}  
+      >
+      <div 
+        sx={{
+          marginTop: theme.spacing(4),
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: 20,
+          margin: 20
+        }}
+      >
+        <Avatar
+         sx={{
+          margin: theme.spacing(1),
+          backgroundColor: theme.palette.secondary.main,
+         }}
+        >
           {/* <AccountCircle /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Update Your Chores
         </Typography>
 
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
-        {/* {preview ? (<Image className={classes.images} src={preview} alt={alt} >
+        <form  
+          onSubmit={handleSubmit} 
+          noValidate
+          sx={{
+            width: "100%",
+            marginTop: theme.spacing(3)
+          }}
+        >
+        {/* {preview ? (<Image sx={{ width: "100%" }} src={preview} alt={alt} >
          
         </Image> */}
         {/* ) : (
-          <Button className={classes.btn} onClick={(e) => {
+          <Button
+            sx={{
+              width: 200,
+              height: 200,
+              borderRadius: "50%",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 16,
+              color: "white",
+              border: "none",
+              backgroundColor: "silver"
+            }}
+            onClick={(e) => {
             e.preventDefault()
             inputRef.current.click()
           }}
@@ -233,7 +231,9 @@ const Chore = () => {
             variant="contained"
             margin='normal'
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: theme.spacing(3, 0, 2)
+            }}
           >
             Update Chore
           </Button>
@@ -242,7 +242,20 @@ const Chore = () => {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: theme.spacing(3, 0, 2),
+              width: 200,
+              height: 200,
+              borderRadius: "50%",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 16,
+              color: "white",
+              border: "none",
+              backgroundColor: "silver"
+            }}
             onClick={() => navigate("/home")}
           >
             Cancel

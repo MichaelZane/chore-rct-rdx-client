@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,10 +9,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/material/styles";
 import Container from "@mui/material/Container";
+import { useTheme } from '@mui/material/styles';
+import { childLogin } from '../../slices/childLoginSlice'
 
 // Styling Starts Here
 
@@ -26,63 +26,64 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
-const ChildLogin = props => {
-
+const ChildLogin = () => {
   const [form, setForm] = useState({
     username: "",
-    password: ""
-  })
+    password: "",
+  });
 
-  const changeHandler = event => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const changeHandler = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
+  const submitHandler = (e) => {
+    e.preventDefault();
 
-    props.getUserLogin(form);
+    dispatch(childLogin(form));
 
-    props.history.push("/home")
+    navigate("/home");
 
     setForm({
       username: "",
-      password: ""
+      password: "",
     });
   };
 
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div
+        sx={{
+          marginTop: theme.spacing(8),
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
+          sx={{
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main,
+          }}
+        >
           {/* <LockOutlinedIcon /> */}
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form
+          sx={{
+            width: "100%",
+            marginTop: theme.spacing(1),
+          }}
+          onSubmit={submitHandler}
+          noValidate
+        >
           <TextField
             onChange={changeHandler}
             variant="outlined"
@@ -118,9 +119,22 @@ const ChildLogin = props => {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{ margin: theme.spacing(3, 0, 2) }}
           >
             Sign In
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{
+              color: "rgb(0, 94, 144)",
+              margin: theme.spacing(3, 0, 2),
+            }}
+            onClick={() => navigate("/")}
+          >
+            Cancel
           </Button>
           <Grid container>
             <Grid item xs>

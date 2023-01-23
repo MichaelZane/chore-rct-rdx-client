@@ -6,62 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import { makeStyles } from "@mui/material/styles";
 import Container from "@mui/material/Container";
-import { AccountCircle } from "@material-ui/icons";
 import Card from "@mui/material/Card";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 500,
-    height: 750,
-    margin: 30,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    borderRadius: "15px",
-    background: "rgba(255,255,255,0.1)",
-    position: "relative",
-    overflow: "hidden",
-    backdropFilter: "blur(1px)",
-    color: "rgb(0, 94, 144)",
-    boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
-    borderTop: "1px solid rgba(255, 255, 255, 0.5)",
-    borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
-  },
-  container: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-    maxWidth: 1200,
-    flexWrap: "wrap",
-    zIndex: 1,
-    color: "rgb(0, 94, 144)",
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "whiteSmoke",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    padding: 20,
-    width: "100%",
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import { useTheme } from '@mui/material/styles';
 
 function Copyright() {
   return (
@@ -85,21 +32,71 @@ const ChildForm = ({
 }) => {
   const history = useNavigate();
 
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <Container maxWidth="sm" className={classes.container}>
+    <Container 
+      maxWidth="sm" 
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        maxWidth: 1200,
+        flexWrap: "wrap",
+        zIndex: 1,
+        color: "rgb(0, 94, 144)"
+      }}
+    >
       <CssBaseline />
-      <Card raised={true} className={classes.root}>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <AccountCircle />
+      <Card 
+        raised={true} 
+        sx={{
+          width: 500,
+          height: 750,
+          margin: 30,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          borderRadius: "15px",
+          background: "rgba(255,255,255,0.1)",
+          position: "relative",
+          overflow: "hidden",
+          backdropFilter: "blur(1px)",
+          color: "rgb(0, 94, 144)",
+          boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+          borderLeft: "1px solid"
+        }}
+      >
+        <div 
+          sx={{
+            marginTop: theme.spacing(8),
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "whiteSmoke"
+          }}
+        >
+          <Avatar 
+            sx={{
+              margin: theme.spacing(1),
+              backgroundColor: theme.palette.secondary.main
+            }}
+          >
           </Avatar>
           <Typography component="h1" variant="h5">
             Your Child's Details
           </Typography>
           <form
-            className={classes.form}
+            sx={{
+              padding: 20,
+              width: "100%",
+              marginTop: theme.spacing(3)
+            }}
             onSubmit={handleSubmit(submitHandler)}
             noValidate
           >
@@ -163,7 +160,9 @@ const ChildForm = ({
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.submit}
+              sx={{
+                margin: theme.spacing(3, 0, 2)
+              }}
             >
               Update Child
             </Button>
@@ -171,7 +170,9 @@ const ChildForm = ({
               type="button"
               variant="contained"
               color="primary"
-              className={classes.submit}
+              sx={{
+                margin: theme.spacing(3, 0, 2)
+              }}
               onClick={() => history.push("/home")}
             >
               Cancel

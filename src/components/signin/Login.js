@@ -13,13 +13,11 @@ import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { makeStyles, createStyles } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/loginSlice";
-
-// Styling Starts Here
+import { useTheme } from '@mui/material/styles';
 
 function Copyright() {
   return (
@@ -31,59 +29,6 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      width: "500px",
-      height: "750px",
-      margin: "20px",
-      borderRadius: "15px",
-      backgroundColor: "rgba(255,255,255,0.1)",
-      position: "relative",
-      overflow: "hidden",
-      backdropFilter: "blur(2px)",
-      color: "rgb(0, 94, 144)",
-      boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
-      borderTop: "1px solid rgba(255, 255, 255, 0.5)",
-      borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
-      label: "rgb(0, 94, 144)",
-      padding: "20px",
-    },
-    container: {
-      position: "relative",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      maxWidth: "1000px",
-      flexWrap: "wrap",
-      zIndex: 1,
-    },
-    paper: {
-      marginTop: theme.spacing(4),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 20,
-      margin: 20,
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: "100%",
-      marginTop: theme.spacing(1),
-      padding: 20,
-    },
-    Button: {
-      color: "rgb(0, 94, 144)",
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  })
-);
-
 /* LogIn */
 
 export default function Login() {
@@ -94,6 +39,7 @@ export default function Login() {
 
   const dispatch = useDispatch()//useThunkDispatch()
   const navigate = useNavigate()
+  const theme = useTheme()
 
   const changeHandler = (event) => {
     setLogForm({ ...logForm, [event.target.name]: event.target.value });
@@ -103,27 +49,73 @@ export default function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(user))
-    navigate("/home")
-    
+    navigate("/home") 
   };
-
-  const classes = useStyles();
 
   /* OATH GOOGLE */
 
   return (
     <div className="sign-up-wrapper">
-      <Container maxWidth="sm" className={classes.container}>
+      <Container 
+      maxWidth="sm" 
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        maxWidth: "1000px",
+        flexWrap: "wrap",
+        zIndex: 1
+      }}
+      >
         <CssBaseline />
-        <Card className={classes.root} raised={true}>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
+        <Card sx={{
+          width: "500px",
+          height: "750px",
+          margin: "20px",
+          borderRadius: "15px",
+          backgroundColor: "rgba(255,255,255,0.1)",
+          position: "relative",
+          overflow: "hidden",
+          backdropFilter: "blur(2px)",
+          color: "rgb(0, 94, 144)",
+          boxShadow: "20px 20px 50px rgba(0,0,0,0.5)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.5)",
+          borderLeft: "1px solid rgba(255, 255, 255, 0.5)",
+          label: "rgb(0, 94, 144)",
+          padding: "20px"
+          }} 
+          raised={true}>
+          <div 
+          sx={{
+            marginTop: theme.spacing(4),
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: 20,
+            margin: 20
+          }}
+          >
+            <Avatar 
+              sx={{
+                margin: theme.spacing(1),
+                backgroundColor: theme.palette.secondary.main
+              }}
+            >
               {/* <LockOutlinedIcon /> */}
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} onSubmit={submitHandler} noValidate>
+            <form  
+              onSubmit={submitHandler} 
+              noValidate
+              sx={{
+                width: "100%",
+                marginTop: theme.spacing(1),
+                padding: 20
+              }}
+              >
               <TextField
                 variant="outlined"
                 onChange={changeHandler}
@@ -158,7 +150,10 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="outlined"
-                className={classes.submit}
+                sx={{
+                  color: "rgb(0, 94, 144)",
+                  margin: theme.spacing(3, 0, 2)
+                }}
               >
                 Sign In
               </Button>
@@ -168,7 +163,10 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                sx={{
+                  color: "rgb(0, 94, 144)",
+                  margin: theme.spacing(3, 0, 2)
+                }}
                 onClick={() => navigate("/")}
               >
                 Cancel

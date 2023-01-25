@@ -24,23 +24,25 @@ const ChildCard = ({
     <Container 
       maxWidth="sm" 
       sx={{
+        marginTop: "4%",
+        marginBottom: "3%",
         position: "relative",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        maxWidth: "1200px",
-        flexWrap: "wrap",
+        maxWidth: "700px",
+        // flexWrap: "wrap",
         zIndex: 1,
-        // color: "rgb(0, 94, 144)",
+        color: "rgb(0, 94, 144)",
       }}
     >
       <Card 
         sx={{
           width: 300,
-          height: 400,
+          height: "auto",
           // margin: 30,
-          // borderTopLeftRadius: 50 / 50,
-          // borderRadius: 15,
+          borderTopLeftRadius: 50 / 50,
+          borderRadius: 1,
           background: "rgba(255,255,255,0.1)",
           position: "relative",
           overflow: "hidden",
@@ -57,7 +59,7 @@ const ChildCard = ({
         key={childId}  
         raised={true}>
         <Typography>
-          <Button onClick={() => handleDelete(childId)}>
+          <Button color="error" onClick={() => handleDelete(childId)}>
             <FaTimes />
           </Button>
           <Link to={"/addchore"} state={{childId: childId}} >
@@ -89,6 +91,7 @@ const ChildCard = ({
           // }
           titleTypographyProps={{ align: "center" }}
           title={
+          
             <Link
               underline="hover"
               sx={{ 
@@ -96,7 +99,7 @@ const ChildCard = ({
                 //"rgb(0, 94, 144)",
                 fontSize: 35,
                 textDecoration: "none",
-                // textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90"
+                textShadow: "-1px 1px 2px #015E90, 1px 1px 2px #015E90, 1px -1px 0 #015E90, -1px -1px 0 #015E90"
                }}
               to={`/childdetail/${childId}`}
             >
@@ -105,10 +108,10 @@ const ChildCard = ({
               {/* {<span style={{"fontSize": "10px"}} >click to edit</span>} */}
             </Link>
           }
-          //todo move this into theme and pass it the theme
+
           subheaderTypographyProps={{
             variant: "h5",
-            color: "rgb(0, 94, 144)",
+            color: "inherit",
             align: "center",
           }}
           subheader={username}
@@ -120,21 +123,13 @@ const ChildCard = ({
         >
           Today is {moment().format("dddd")}
         </Typography>
-        <CardContent 
-          sx={{
-            // alignItems: "center",
-            color: "whitesmoke",
-            justifyContent: "center",
-            padding: 20,
-            transition: "0.5s",
-          }}
-        >
-          <Typography >
+
+          <Typography sx={{ textAlign: "center" }} >
             {" "}
             {fstname}'s Chores:{" "}
           </Typography>
           <ChoreList chores={chores} />
-        </CardContent>
+
       </Card>
     </Container>
   );

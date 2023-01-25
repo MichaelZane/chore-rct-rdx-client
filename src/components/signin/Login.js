@@ -37,12 +37,14 @@ export default function Login() {
     password: "",
   });
 
-  const dispatch = useDispatch()//useThunkDispatch()
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
+
   const theme = useTheme()
 
-  const changeHandler = (event) => {
-    setLogForm({ ...logForm, [event.target.name]: event.target.value });
+  const changeHandler = (e) => {
+    setLogForm({ ...logForm, [e.target.name]: e.target.value });
   };
   const user = {username: logForm.username, password: logForm.password};
 
@@ -69,7 +71,7 @@ export default function Login() {
         <CssBaseline />
         <Card sx={{
           width: "500px",
-          height: "750px",
+          height: "550px",
           margin: "20px",
           borderRadius: "15px",
           backgroundColor: "rgba(255,255,255,0.1)",
@@ -94,14 +96,13 @@ export default function Login() {
             margin: 20
           }}
           >
-            <Avatar 
+            {/* <Avatar 
               sx={{
                 margin: theme.spacing(1),
                 backgroundColor: theme.palette.secondary.main
               }}
             >
-
-            </Avatar>
+            </Avatar> */}
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -148,6 +149,7 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="outlined"
+                color="inherit"
                 sx={{
                   color: "rgb(0, 94, 144)",
                   margin: theme.spacing(3, 0, 2)
@@ -159,8 +161,8 @@ export default function Login() {
               <Button
                 type="button"
                 fullWidth
-                variant="contained"
-                color="primary"
+                variant="outlined"
+                color="inherit"
                 sx={{
                   color: "rgb(0, 94, 144)",
                   margin: theme.spacing(3, 0, 2)
@@ -174,7 +176,6 @@ export default function Login() {
                 <Grid item xs>
                   <Link to="/">Forgot password?</Link>
                 </Grid>
-
                 <Grid item>
                   <Link to="/">{"Don't have an account? Sign Up"}</Link>
                 </Grid>

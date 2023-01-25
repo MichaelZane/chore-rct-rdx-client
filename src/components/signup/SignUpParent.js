@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,11 +9,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 // import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Copyright from "../Copyright";
-import { register, clearError, selectError, selectLoading } from "../../slices/registerSlice";
-
+import {
+  register,
+  clearError,
+  selectError,
+  selectLoading,
+} from "../../slices/registerSlice";
 
 export default function Register() {
   const [regstr, setRegstr] = useState({
@@ -23,20 +27,20 @@ export default function Register() {
     username: "",
     password: "",
   });
-  const theme = useTheme()
+  const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectError);
   const loading = useSelector(selectLoading);
 
   const changeHandler = (e) => {
-    setRegstr(currentState => {
-    return {...currentState , [e.target.name]: e.target.value } 
-    })
+    setRegstr((currentState) => {
+      return { ...currentState, [e.target.name]: e.target.value };
+    });
   };
 
   const submitHandler = (e) => {
-    console.log("REGISTER OBJECT", regstr)
+    console.log("REGISTER OBJECT", regstr);
     e.preventDefault();
     dispatch(register(regstr));
     setRegstr({
@@ -53,28 +57,35 @@ export default function Register() {
     <div className="sign-up-wrapper">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div 
-        sx={{marginTop: theme.spacing(8),
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          color: "whiteSmoke",}}>
-          <Avatar 
+        <div
+          sx={{
+            marginTop: theme.spacing(8),
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: "whiteSmoke",
+          }}
+        >
+          {/* <Avatar 
             sx={{margin: theme.spacing(1),
-              backgroundColor: theme.palette.
-              secondary.main,}}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
-          <Typography 
-            sx={{color: "rgb(0, 94, 144)"}} component="h1" variant="h5">
+              backgroundColor: theme.palette.secondary.main,}}>
+          </Avatar> */}
+          <Typography
+            sx={{
+              color: "rgb(0, 94, 144)",
+              marginTop: "5%"
+            }}
+            component="h1"
+            variant="h5"
+          >
             Sign up
           </Typography>
           {error && <div>{error}</div>}
-          <form 
-            sx={{width: "100%",
-            marginTop: theme.spacing(3)}}  
-            onSubmit={submitHandler} 
-            noValidate>
+          <form
+            sx={{ width: "100%", marginTop: "10%"}}
+            onSubmit={submitHandler}
+            noValidate
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -145,13 +156,12 @@ export default function Register() {
               </Grid>
             </Grid>
             <Button
-              sx={{backgroundColor: "hsl(201, 100%, 28.2%)",
-              width: "300px",
-              height: "60px",
-              alignItems: "center",
-              justifyContent: "center",
-              display: "flex",
-              margin: theme.spacing(3, 0, 2)
+              sx={{
+                backgroundColor: "hsl(201, 100%, 28.2%)",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+                margin: theme.spacing(3, 0, 2),
               }}
               type="submit"
               fullWidth
@@ -162,26 +172,25 @@ export default function Register() {
               Sign Up
             </Button>
             <Button
-            sx={{backgroundColor: "hsl(201, 100%, 28.2%)",
-            width: "300px",
-            height: "60px",
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-            margin: theme.spacing(3, 0, 2)
-            }}
-            type="button"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/")}
-          >
-            Cancel
-          </Button>
-            <Grid container justifyContent="flex-end">
-                <Link to="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+              sx={{
+                backgroundColor: "hsl(201, 100%, 28.2%)",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+                margin: theme.spacing(3, 0, 2),
+              }}
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/")}
+            >
+              Cancel
+            </Button>
+            <Grid container justifyContent="center">
+              <Link to="/login" variant="body2">
+                Already have an account? Sign in
+              </Link>
             </Grid>
           </form>
         </div>

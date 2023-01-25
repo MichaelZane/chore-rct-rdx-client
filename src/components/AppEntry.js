@@ -3,12 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import logo from "../assets/tracItLogoWhite.png";
 
-
-    // color: "white",
-
-
 const AppEntry = () => {
-
   return (
     <div className="app-wrapper">
       <br />
@@ -22,7 +17,11 @@ const AppEntry = () => {
       >
         <Grid item>
           <Link to="/signUpChild" style={{ textDecoration: "none" }}>
-            <Button sx={{ backgroundColor: "transparent", color: "rgb(0, 94, 144)" }} variant="contained">
+            <Button
+              sx={{ backgroundColor: "transparent", color: "silver" }}
+              variant="contained"
+              color="inherit"
+            >
               I'm a child
             </Button>
           </Link>
@@ -30,7 +29,7 @@ const AppEntry = () => {
         <Grid item>
           <Link to="/signUpParent" style={{ textDecoration: "none" }}>
             <Button
-              sx={{ backgroundColor: "transparent", color: "rgb(0, 94, 144)" }}
+              sx={{ backgroundColor: "transparent", color: "silver" }}
               variant="contained"
               color="inherit"
             >
